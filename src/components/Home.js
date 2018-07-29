@@ -60,7 +60,7 @@ class ActiveUserList extends React.Component {
         <h3>Active Users (for demo use only)</h3>
         <ul>
           {this.state.activeUsers.map(user => {
-            return <li>{user}</li>;
+            return <li key={user + "_li"}>{user}</li>;
           })}
           {/* {this.state.activeUsers} */}
         </ul>

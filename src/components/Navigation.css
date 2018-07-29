@@ -7,9 +7,7 @@
   height: 110;
   margin-bottom: -100px; /*Don't know why I have to do this to fix the oversize navbar :( */
 }
-.linkList {
-  /* list-style: none; */
-}
+
 .linkList li {
   display: inline-block;
 }
