@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { auth } from "../firebase";
 import { SignInLink } from "./SignIn";
+import "./App.css";
 
 import * as routes from "../constants/routes";
 
 const SignUpPage = ({ history }) => {
   return (
-    <div>
+    <div className="pageWrapper">
       <h1>Sign Up Page</h1>
       <SignUpForm history={history} />
       <SignInLink />

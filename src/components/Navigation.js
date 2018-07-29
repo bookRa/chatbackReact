@@ -7,11 +7,13 @@ import "./Navigation.css";
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
-    {authUser => (authUser ? <NavigationAuth /> : <NavigationNonAuth />)}
+    {authUser =>
+      authUser ? <NavigationAuth user={authUser} /> : <NavigationNonAuth />
+    }
   </AuthUserContext.Consumer>
 );
 
-const NavigationAuth = () => (
+const NavigationAuth = props => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
@@ -35,6 +37,7 @@ const NavigationAuth = () => (
         <li>
           <SignOutButton />
         </li>
+        <li>signed in as {props.user.displayName}</li>
       </ul>
     </div>
   </div>
