@@ -36,9 +36,8 @@ class SignUpForm extends Component {
     auth
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        console.log(authUser, username);
-        authUser.user
-          .updateProfile({
+        auth
+          .doUpdateProfile({
             displayName: username
           })
           .then(() => console.log("profile updated with: " + username))

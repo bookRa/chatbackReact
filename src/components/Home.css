@@ -1,3 +1,7 @@
 .homePageWrapper {
   text-align: center;
 }
+
+.activeUserList {
+  border: 5px darkcyan dashed;
+}

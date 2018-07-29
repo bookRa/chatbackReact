@@ -13,3 +13,5 @@ let firebase = window.firebase.initializeApp(config); //loads the firebase from 
 // export const provider = new firebase.firebase_.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
 // export default firebase;
+
+export const database = firebase.database();

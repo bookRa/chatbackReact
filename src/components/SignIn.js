@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { SignUpLink } from "./SignUp";
 import { PasswordForgetLink } from "./PasswordForget";
+import "./App.css";
 
 import { auth } from "../firebase";
 import * as routes from "../constants/routes";
 
 const SignInPage = ({ history }) => {
   return (
-    <div>
+    <div className="pageWrapper">
       <h1>Sign In Page</h1>
       <SignInForm history={history} />
       <PasswordForgetLink />

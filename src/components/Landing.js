@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import "./Landing.css";
-import AuthUserContext from "./AuthUserContext";
 
 const LandingPage = () => {
   return (
-    <AuthUserContext.Consumer>
-      {authUser => (
-        <div className="pageWrapper">
-          <h1>
-            Welcome to Chatback{authUser ? `, ${authUser.displayName}!` : "!"}{" "}
-          </h1>
-          <h2>TODO: Beautiful Landing Page:</h2>
-          <h3>A nicely designed explanation of chatback, and how it works</h3>
-          <h3>Call to action: Sign Up today and get chatting</h3>
-          <Apitest />
-        </div>
-      )}
-    </AuthUserContext.Consumer>
+    <div className="pageWrapper">
+      <h1>Welcome to Chatback! </h1>
+      <h2>TODO: Beautiful Landing Page:</h2>
+      <h3>A nicely designed explanation of chatback, and how it works</h3>
+      <h3>Call to action: Sign Up today and get chatting</h3>
+      <Apitest />
+    </div>
   );
 };
 

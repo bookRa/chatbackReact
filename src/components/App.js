@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React /*, { Component }*/ from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import withAuthentication from "./withAuthentication";
@@ -12,7 +12,7 @@ import HomePage from "./Home";
 import AccountPage from "./Account";
 
 import * as routes from "../constants/routes";
-import { firebase } from "../firebase";
+// import { firebase } from "../firebase";
 
 const App = () => (
   <Router>
