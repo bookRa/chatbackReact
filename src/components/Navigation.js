@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SignOutButton from "./SignOut";
 import AuthUserContext from "./AuthUserContext";
 import * as routes from "../constants/routes";
+import "./Navigation.css";
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -11,32 +12,54 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-  <ul>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.HOME}>Home</Link>
-    </li>
-    <li>
-      <Link to={routes.ACCOUNT}>Account</Link>
-    </li>
-    <li>
-      <SignOutButton />
-    </li>
-  </ul>
+  <div className="navBar">
+    <div className="leftSection">
+      <Link to={routes.LANDING}>
+        <img height="110" src="logo.png" />
+      </Link>
+    </div>
+    <div className="rightSection">
+      <ul className="linkList">
+        <li>
+          <Link className="signBtn" to={routes.HOME}>
+            Start a conversation
+          </Link>
+        </li>
+        <li>
+          <Link className="signBtn" to={routes.ACCOUNT}>
+            {" "}
+            My Account
+          </Link>
+        </li>
+
+        <li>
+          <SignOutButton />
+        </li>
+      </ul>
+    </div>
+  </div>
 );
 const NavigationNonAuth = () => (
-  <ul>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
-    </li>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
-    </li>
-    <li>
-      <Link to={routes.SIGN_UP}>Sign Up</Link>
-    </li>
-  </ul>
+  <div className="navBar">
+    <div className="leftSection">
+      <Link to={routes.LANDING}>
+        <img height="110" src="logo.png" />
+      </Link>
+    </div>
+    <div className="rightSection">
+      <ul className="linkList">
+        <li>
+          <Link className="signBtn" to={routes.SIGN_IN}>
+            Sign In{" "}
+          </Link>
+        </li>
+        <li>
+          <Link className="signBtn" to={routes.SIGN_UP}>
+            Sign Up{" "}
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </div>
 );
 export default Navigation;

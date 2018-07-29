@@ -37,7 +37,7 @@ class PasswordChangeForm extends React.Component {
   };
   render() {
     const { newPass1, newPass2, error } = this.state;
-    const allowed = newPass1 == newPass2;
+    const allowed = newPass1 === newPass2;
     return (
       <form onSubmit={this.handleSubmit}>
         <input

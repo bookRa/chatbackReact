@@ -1,0 +1,21 @@
+.rightSection {
+  position: relative;
+  bottom: 95px;
+  margin-left: 75%;
+}
+.navBar {
+  height: 110;
+}
+.linkList {
+  /* list-style: none; */
+}
+.linkList li {
+  display: inline-block;
+}
+.signBtn {
+  margin: 7px;
+  padding: 5px;
+  background-color: forestgreen;
+  color: aliceblue;
+  border-radius: 5px;
+}

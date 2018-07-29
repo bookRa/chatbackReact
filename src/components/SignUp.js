@@ -35,6 +35,13 @@ class SignUpForm extends Component {
     auth
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        console.log(authUser, username);
+        authUser.user
+          .updateProfile({
+            displayName: username
+          })
+          .then(() => console.log("profile updated with: " + username))
+          .catch(e => console.log("problem with username: " + e));
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(routes.HOME);
       })
@@ -58,7 +65,7 @@ class SignUpForm extends Component {
           value={username}
           onChange={event => this.setState({ username: event.target.value })}
           type="text"
-          placeholder="Full name"
+          placeholder="Choose a Display Name"
         />
         <input
           value={email}
