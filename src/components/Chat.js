@@ -105,7 +105,8 @@ class Chat extends Component {
 	      			{key: "Thank you!", value: "Thank you! ", tooltip: "Thank your partner in your own words"}
 	      		]
 	      	}
-	    ]
+	    ],
+	    //activePrompts: event handler prompts (textarea)
   	}
 
   	sayHi = () => {
