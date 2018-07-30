@@ -2,8 +2,10 @@ import React from "react";
 import "./Home.css";
 import "./App.css";
 import "./Navigation.css";
+import { Link } from "react-router-dom";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
+import * as routes from "../constants/routes";
 
 const HomePage = () => {
   return (
@@ -25,7 +27,9 @@ const HomePage = () => {
             logic to 'start chat' (matching, etc.)
           </h3>
           <ActiveUserList />
-          <Link className='signBtn' to={routes.CHAT}>Enter Chat</Link>
+          <Link className="signBtn" to={routes.CHAT}>
+            Enter Chat
+          </Link>
         </div>
       )}
     </AuthUserContext.Consumer>
