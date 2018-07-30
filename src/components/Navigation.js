@@ -37,6 +37,9 @@ const NavigationNonAuth = () => (
     <li>
       <Link to={routes.SIGN_UP}>Sign Up</Link>
     </li>
+    <li>
+      <Link to={routes.CHAT}>Chat</Link>
+    </li>
   </ul>
 );
 export default Navigation;
