@@ -1,5 +1,153 @@
 body {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
   font-family: sans-serif;
+}
+
+.chat {
+	height: 70vh;
+}
+
+.chat > * {
+	background-color: #51B587;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	width: 100%;
+}
+
+#chatText {
+	border-radius: 0;
+  	font-size: 20px;
+  	height: 60px;
+}
+
+.chatWindow {
+	flex: 1;
+}
+
+.mainWindow {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	background: linear-gradient(#F5FFFD, #ECFFF3, #E4FFF8, #D7F7F3);
+	display: flex;
+	color: #51B587;
+  	height: 100%;
+}
+
+.moodHelper {
+	background-color: #fff;
+	color: #51B587;
+	font-size: x-large;
+	padding-top: 21px;
+	padding-bottom: 21px;
+}
+
+.navbar {
+	background-color: #264D4D;
+	font-weight: bold;
+	padding-top: 21px;
+    padding-bottom: 16px;
+    font-size: 30px;
+}
+
+.ribbon {
+	background-color: #51B587;
+	height: 48px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 6px;
+	text-align: left;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.stageHandler {
+	border: none;
+	border-radius: 0;
+	font-size: x-large;
+	padding-top: 30px;
+	padding-bottom: 22px;
+}
+
+.markerContainer {
+  display: flex;
+  margin: auto;
+  width: 100%;
+}
+
+.space {
+  flex-grow: 1;
+  width: 99%;
+}
+
+.slider-left, .slider-right {
+  font-size: 20px;
+  text-align: center;
+}
+
+.moodRange {
+  background: #fff;
+  border: 2px solid #87B998;
+  border-radius: 15px;
+  height: 15px;
+  width: 100%;
+  transition: opacity .2s;
+  -webkit-appearance: none;
+  -webkit-transition: .2s;
+}
+
+.moodRange:hover {
+  opacity: 1;
+}
+
+.moodRange::-moz-range-thumb {
+  background: #87B998;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: -3px 0px 6px -2px gray;
+  cursor: pointer;
+  height: 30px;
+  margin-bottom: 100px;
+  width: 30px;
+}
+
+.moodRange::-webkit-slider-thumb {
+  appearance: none;
+  background: #87B998;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: -3px 0px 6px -2px gray;
+  cursor: pointer;
+  height: 30px;
+  -webkit-appearance: none;
+  width: 30px;
+}
+
+.slidecontainer {
+  margin: auto;
+  margin-top: 20vh;
+  width: 90%;
+}
+
+.hidden {
+	display: none;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.ribbonButton {
+  background-color: #fff;
+  color: #555555;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.prompt {
+  display: inline-block;
 }

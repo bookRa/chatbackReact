@@ -7,6 +7,7 @@ import Navigation from "./Navigation";
 import LandingPage from "./Landing";
 import SignUpPage from "./SignUp";
 import SignInPage from "./SignIn";
+import ChatAgent from "./Chat";
 import PasswordForgetPage from "./PasswordForget";
 import HomePage from "./Home";
 import AccountPage from "./Account";
@@ -24,6 +25,7 @@ const App = () => (
       <Route exact path={routes.LANDING} component={() => <LandingPage />} />
       <Route exact path={routes.SIGN_UP} component={() => <SignUpPage />} />
       <Route exact path={routes.SIGN_IN} component={() => <SignInPage />} />
+      <Route exact path={routes.CHAT} component={() => <ChatAgent />} />
       <Route
         exact
         path={routes.PASSWORD_FORGET}

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 import "./App.css";
+import "./Navigation.css";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
 
@@ -24,6 +25,7 @@ const HomePage = () => {
             logic to 'start chat' (matching, etc.)
           </h3>
           <ActiveUserList />
+          <Link className='signBtn' to={routes.CHAT}>Enter Chat</Link>
         </div>
       )}
     </AuthUserContext.Consumer>
