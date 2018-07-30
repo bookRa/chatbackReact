@@ -112,10 +112,6 @@ class Chat extends Component {
     	console.log("Hi");
   	}
 
-  	jQuery('[data-toggle="tooltip"]').tooltip({
-      trigger : 'hover'
-    });
-
   	render() {
 	    return (
 	    	<div className="chat">
