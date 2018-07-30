@@ -1,5 +1,5 @@
 import React from "react";
-import { firebase } from "../firebase";
+import { firebase, db } from "../firebase";
 import AuthUserContext from "./AuthUserContext";
 
 const withAuthentication = Component => {
@@ -10,11 +10,23 @@ const withAuthentication = Component => {
         authUser: null
       };
     }
+    handleUser(user) {
+      this.setState({ authUser: user });
+      db.addToActiveUsers({
+        uid: user.uid,
+        userName: user.displayName || "unknown"
+      });
+      db.removeFromActiveUsersOnDisconnect({ uid: user.uid });
+    }
+    handleLogout() {
+      if (this.state.authUser) {
+        db.removeUserOnLogout(this.state.authUser.uid);
+        this.setState({ authUser: null });
+      }
+    }
     componentDidMount() {
       firebase.auth.onAuthStateChanged(authUser => {
-        authUser
-          ? this.setState({ authUser: authUser })
-          : this.setState({ authUser: null });
+        authUser ? this.handleUser(authUser) : this.handleLogout();
       });
     }
 

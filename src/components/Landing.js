@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import "./Landing.css";
 
 const LandingPage = () => {
   return (
-    <div>
-      <h1>Landing Page</h1>
-      <h2>Test Chatback API</h2>
+    <div className="pageWrapper">
+      <h1>Welcome to Chatback! </h1>
+      <h2>TODO: Beautiful Landing Page:</h2>
+      <h3>A nicely designed explanation of chatback, and how it works</h3>
+      <h3>Call to action: Sign Up today and get chatting</h3>
       <Apitest />
     </div>
   );
@@ -38,7 +41,8 @@ class Apitest extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="apiTest">
+        <h2>Test Chatback API</h2>
         <button onClick={this.handleClick}>Click to get API response</button>
         <span>
           {" "}

@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { auth } from "../firebase";
 import { SignInLink } from "./SignIn";
+import "./App.css";
 
 import * as routes from "../constants/routes";
 
 const SignUpPage = ({ history }) => {
   return (
-    <div>
+    <div className="pageWrapper">
       <h1>Sign Up Page</h1>
       <SignUpForm history={history} />
       <SignInLink />
@@ -35,6 +36,12 @@ class SignUpForm extends Component {
     auth
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        auth
+          .doUpdateProfile({
+            displayName: username
+          })
+          .then(() => console.log("profile updated with: " + username))
+          .catch(e => console.log("problem with username: " + e));
         this.setState(() => ({ ...INITIAL_STATE }));
         history.push(routes.HOME);
       })
@@ -58,7 +65,7 @@ class SignUpForm extends Component {
           value={username}
           onChange={event => this.setState({ username: event.target.value })}
           type="text"
-          placeholder="Full name"
+          placeholder="Choose a Display Name"
         />
         <input
           value={email}
