@@ -1,4 +1,5 @@
 import React from "react";
+import withAuthorization from "./withAuthorization";
 import { PasswordChangeForm } from "./PasswordChange";
 import "./App.css";
 import AuthUserContext from "./AuthUserContext";
@@ -72,4 +73,6 @@ class UserNameForm extends React.Component {
   }
 }
 
-export default AccountPage;
+const authCondition = authUser => !!authUser;
+
+export default withAuthorization(authCondition)(AccountPage);
