@@ -1,24 +1,30 @@
 import React from "react";
 import { PasswordChangeForm } from "./PasswordChange";
 import "./App.css";
-// import AuthUserContext from "./AuthUserContext";
+import AuthUserContext from "./AuthUserContext";
 import { auth } from "../firebase";
 
 const AccountPage = () => {
   return (
-    // <AuthUserContext.Consumer>
-    <div className="pageWrapper">
-      <h1>Account Page</h1>
-      <h2>Change Username</h2>
-      <UserNameForm />
-      <h2>Change Password</h2>
-      <PasswordChangeForm />
-      <h3>
-        TODO: Make these options dropdown panels; User picture; User
-        'preferences'; User 'about me'
-      </h3>
-    </div>
-    //</AuthUserContext.Consumer>
+    <AuthUserContext.Consumer>
+      {authUser =>
+        authUser ? (
+          <div className="pageWrapper">
+            <h1>Account Page for {authUser.displayName || authUser.email}</h1>
+            <h2>Change Username</h2>
+            <UserNameForm />
+            <h2>Change Password</h2>
+            <PasswordChangeForm />
+            <h3>
+              TODO: Make these options dropdown panels; User picture; User
+              'preferences'; User 'about me'
+            </h3>
+          </div>
+        ) : (
+          <h1>Loading User</h1>
+        )
+      }
+    </AuthUserContext.Consumer>
   );
 };
 
