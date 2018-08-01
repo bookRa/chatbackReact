@@ -2,6 +2,10 @@ import React from "react";
 import "./Home.css";
 import "./App.css";
 import "./Navigation.css";
+
+// import withAuthorization from "./withAuthorization";
+import withAuthorization from "./withAuthorization";
+
 import { Link } from "react-router-dom";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
@@ -29,10 +33,15 @@ const HomePage = () => {
           <ActiveUserList />
           <Link className="signBtn" to={routes.CHAT}>
             Enter Chat
-          </Link>
+          </Link>{" "}
+          {/*TODO: This will be an auto-redirect when two users are matched*/}
         </div>
       )}
     </AuthUserContext.Consumer>
+    // <div>
+    //   <h1>Home Page</h1>
+    //   <p>The Home Page is accessible by every signedin User</p>
+    // </div>
   );
 };
 
@@ -75,6 +84,8 @@ class ActiveUserList extends React.Component {
   }
 }
 
-export default HomePage;
+const authCondition = authUser => !!authUser;
 
+export default withAuthorization(authCondition)(HomePage);
+/* (authCondition) */
 //TODO: Username is not getting picked up directly after a new user is created.  A refresh is needed for username to display in Active Users and the "signed in as ..." note. Can probably fix by explicitly setting the authstate.user.displayname.

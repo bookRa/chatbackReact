@@ -12,7 +12,7 @@ const buttonContainer = props =>
         key={props.btns[index].key}
         value={props.btns[index].value}
         title={props.btns[index].tooltip}
-        onClick={() => console.log("clicked")} //props.clicked(index)}
+        clickfunc={() => props.clicked(index)}
         data-toggle="tooltip"
       />
     );
