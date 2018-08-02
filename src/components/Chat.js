@@ -110,8 +110,10 @@ class Chat extends Component {
   	}
 
   	sayHi = () => {
-    	console.log("Hi");
-  	}
+    	var textarea = document.getElementById("chatText");
+    	console.log(textarea);
+    	textarea.value = this.value;
+    }
 
   	render() {
 	    return (

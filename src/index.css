@@ -89,6 +89,31 @@ body {
   text-align: center;
 }
 
+#splashPage > h1, h2, p, form, button {
+  color: #264D4D;
+  margin-bottom: 40px;
+}
+
+#splashPage > p {
+  font-size: 20px;
+}
+
+#email-form, #subscribe {
+  width: 30%;
+}
+
+#subscribe {
+  background-color: #264D4D;
+  border-radius: 20px;
+  color: #fff;
+  height: 40px;
+  font-size: 15px;
+}
+
+#subscribe:hover {
+  cursor: pointer;
+}
+
 .moodRange {
   background: #fff;
   border: 2px solid #87B998;
