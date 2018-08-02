@@ -3,7 +3,7 @@ import React from "react";
 
 const ribbonButton = props => {
   return (
-    <button onClick={props.clickfunc} className="ribbonButton btn">
+    <button onClick={props.clickfunc} className="ribbonButton btn" value={props.value}>
       {props.name}
     </button>
   );
