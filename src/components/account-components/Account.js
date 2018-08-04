@@ -17,7 +17,7 @@ const AccountPage = () => {
             <UserNameForm />
             <h2>Change Password</h2>
             <PasswordChangeForm />
-            {/* <BioForm /> */}
+            <BioForm />
             <h3>
               TODO: Make these options dropdown panels; User picture; User
               'preferences'; User 'about me'
