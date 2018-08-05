@@ -35,3 +35,8 @@ export const showActiveUsers = cb => {
 export const updateProfile = (uid, profileObj) => {
   return profileRef.child(uid).set(profileObj);
 };
+
+//returns user profile
+export const getUserProfile = uid => {
+  return profileRef.child(uid).once("value");
+};
