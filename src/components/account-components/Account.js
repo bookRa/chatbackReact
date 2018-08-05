@@ -20,7 +20,7 @@ const AccountPage = () => {
             <BioForm userId={authUser.uid} />
             <h3>
               TODO: Make these options dropdown panels; User picture; User
-              'preferences'; User 'about me'
+              'about me'
             </h3>
           </div>
         ) : (
@@ -39,6 +39,7 @@ class UserNameForm extends React.Component {
       statusUpdate: ""
     };
   }
+
   handleSubmit = e => {
     e.preventDefault();
     auth
