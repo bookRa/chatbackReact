@@ -1,9 +1,0 @@
-.mainWindow {
-	display: flex;
-	flex-direction: column;
-	flex-shrink: 0;
-	background: linear-gradient(#F5FFFD, #ECFFF3, #E4FFF8, #D7F7F3);
-	display: flex;
-	color: #51B587;
-  	height: 100%;
-}
