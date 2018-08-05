@@ -2,3 +2,6 @@ fieldset {
   width: max-content;
   display: inline-block;
 }
+label {
+  position: initial !important;
+}
