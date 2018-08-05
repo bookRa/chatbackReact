@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./chat-components/Navbar";
 import MainWindow from "./chat-components/MainWindow";
 import StageHandler from "./chat-components/StageHandler";
+import "./Chat.css";
 
 class Chat extends Component {
 	state = {

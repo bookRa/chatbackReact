@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from 'react-bootstrap';
+import "./SplashPage.css";
 
 const splashPage = () => {
   return (
