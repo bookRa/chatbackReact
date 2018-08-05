@@ -1,0 +1,21 @@
+.ribbon {
+	background-color: #51B587;
+	height: 48px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 6px;
+	text-align: left;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.ribbonButton {
+  background-color: #fff;
+  color: #555555;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.prompt {
+  display: inline-block;
+}

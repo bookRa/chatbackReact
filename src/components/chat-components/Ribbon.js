@@ -1,6 +1,6 @@
 import React from 'react';
 import ButtonContainer from './ButtonContainer';
-//import classes from './Ribbon.css';
+import './Ribbon.css';
 
 var i = 0;
 
