@@ -105,12 +105,15 @@ class Chat extends Component {
 	      			{key: "Thank you!", value: "Thank you! ", tooltip: "Thank your partner in your own words"}
 	      		]
 	      	}
-	    ]
+	    ],
+	    //activePrompts: event handler prompts (textarea)
   	}
 
   	sayHi = () => {
-    	console.log("Hi");
-  	}
+    	var textarea = document.getElementById("chatText");
+    	console.log(textarea);
+    	textarea.value = this.value;
+    }
 
   	render() {
 	    return (

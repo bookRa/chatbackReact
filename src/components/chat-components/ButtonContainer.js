@@ -4,7 +4,6 @@ import RibbonButton from "./RibbonButton";
 
 const buttonContainer = props =>
   props.btns.map((btn, index) => {
-    console.log(props.clicked);
     return (
       <RibbonButton
         className="ribbonButton"
