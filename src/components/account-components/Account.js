@@ -12,12 +12,12 @@ const AccountPage = () => {
       {authUser =>
         authUser ? (
           <div className="pageWrapper">
-            <h1>Account Page 4: {authUser.displayName || authUser.email}</h1>
+            <h1>Account Page for: {authUser.displayName || authUser.email}</h1>
             <h2>Change Username</h2>
             <UserNameForm />
             <h2>Change Password</h2>
             <PasswordChangeForm />
-            <BioForm />
+            <BioForm userId={authUser.uid} />
             <h3>
               TODO: Make these options dropdown panels; User picture; User
               'preferences'; User 'about me'

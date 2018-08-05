@@ -1,6 +1,7 @@
 import { database as db } from "./firebase";
 
 let activeUserRef = db.ref("activeUsers/");
+let profileRef = db.ref("userProfiles/");
 
 //this is the function that will store an active user in the fb db
 
@@ -28,4 +29,9 @@ export const showActiveUsers = cb => {
   return activeUserRef.on("value", snapshot => {
     cb(snapshot.val());
   });
+};
+
+//updates user profile
+export const updateProfile = (uid, profileObj) => {
+  return profileRef.child(uid).set(profileObj);
 };
