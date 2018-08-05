@@ -27,5 +27,5 @@ const splashPage = () => {
     </div>
   );
 };
-
+//asda
 export default splashPage;
