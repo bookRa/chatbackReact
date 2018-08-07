@@ -88,7 +88,7 @@ input         {
 input:focus     { outline:none; }
 
 /* LABEL ======================================= */
-label          {
+#email         {
   color:#999; 
   font-size:18px;
   font-weight:normal;
@@ -102,7 +102,7 @@ label          {
 }
 
 /* active state */
-input:focus ~ label, input:valid ~ label    {
+input:focus ~ #email, input:valid ~ #email    {
   top:-20px;
   font-size:14px;
   color:#5264AE;

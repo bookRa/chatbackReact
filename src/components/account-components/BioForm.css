@@ -3,5 +3,5 @@ fieldset {
   display: inline-block;
 }
 label {
-  position: initial !important;
+  position: initial;
 }

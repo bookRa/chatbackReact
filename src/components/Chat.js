@@ -116,6 +116,7 @@ class Chat extends Component {
 	      	}
 	    ],
 	    //activePrompts: event handler prompts (textarea)
+	    //convoState: 
   	}
 
   	addText = (event) => {
@@ -164,6 +165,10 @@ class Chat extends Component {
 			if (msg !== "") {
 				// append message to chat window (right side)
 				this.appendMessage(msg);
+				if (msg.toLowerCase().search("concern") !== -1 &&
+		            msg.toLowerCase().search("you") === -1) {
+		            ;
+		        }
 				// send message to server
 				// socket.emit("send message", msg);
 				textarea.value = "";
