@@ -10,7 +10,7 @@ import SignInPage from "./SignIn";
 import ChatAgent from "./Chat";
 import PasswordForgetPage from "./PasswordForget";
 import HomePage from "./Home";
-import AccountPage from "./Account";
+import { AccountPage } from "./account-components";
 
 import * as routes from "../constants/routes";
 // import { firebase } from "../firebase";
