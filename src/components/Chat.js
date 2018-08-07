@@ -120,16 +120,16 @@ class Chat extends Component {
 
   	addText = (event) => {
   		var button = event.target;
-  		var tooltip = button.querySelector("span");
-  		if (tooltip.classList.contains("invisible")) {
-  			tooltip.classList.remove("invisible");
-  		} else {
-  			var textarea = document.getElementById("chatText");
-    		
-    		button.classList.add("hidden");
-    		textarea.value += button.value;
-  		}
-    	
+  		if (button.classList.contains("ribbonButton")) {
+	  		var tooltip = button.querySelector("span");
+	  		if (tooltip.classList.contains("invisible")) {
+	  			tooltip.classList.remove("invisible");
+	  		} else {
+	  			var textarea = document.getElementById("chatText");
+	    		button.classList.add("hidden");
+	    		textarea.value += button.value;
+	  		}
+    	}
     }
 
     enterChat = (event) => {
