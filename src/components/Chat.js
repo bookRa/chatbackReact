@@ -7,7 +7,12 @@ import "./Chat.css";
 class Chat extends Component {
 	state = {
 	    prompts: [
+	    	{key: 'concerns', btns: [
+	      			{key: "I'm concerned...", value: "I'm concerned that ", tooltip: "Share a concern that's causing stress, worry, or low mood"}
+	      		]
+	      	},
 	      	{key: 'thoughts', btns: [
+	      			{key: "I'm thinking...", value: "I'm thinking ", tooltip: "Find a type of thought that fits your state of mind"},
 	      			{key: "an all or nothing thought", value: "an all or nothing thought that ", tooltip: "Simplifying into two extremes (e.g. either all good/all bad)"},
 	      			{key: "a blaming thought", value: "a blaming thought thought ", tooltip: "Faulting a single source for all the trouble"},
 	      			{key: "a mind reading thought", value: "a mind reading thought that ", tooltip: "Assuming you know people’s reasons or judgments"},
@@ -17,6 +22,7 @@ class Chat extends Component {
 	      		]
 	      	},
 	      	{key: 'feelings', btns: [
+	      			{key: "I'm feeling...", value: "I'm feeling ", tooltip: "Find the feelings caused by your thoughts"},
 	      			{key: "angry", value: "angry "},
 		      		{key: "anxious", value: "anxious "},
 		      		{key: "apathetic", value: "apathetic "},
@@ -58,6 +64,7 @@ class Chat extends Component {
 	      		]
 	      	},
 	      	{key: 'wants', btns: [
+	      			{key: "I want to feel...", value: "I want to feel ", tooltip: "Find the feelings that you want your thoughts to cause"},
 		      		{key: "amused", value: "amused "},
 		      		{key: "appreciated", value: "appreciated "},
 		      		{key: "aware", value: "aware "},
@@ -97,6 +104,7 @@ class Chat extends Component {
 	      		]
 	      	},
 	      	{key: 'strategies', btns: [
+	      			{key: "I'll try...'", value: "I'll try ", tooltip: "Share one thing you'll try"},
 	      			{key: "an action strategy", value: "an action strategy of ", tooltip: "A plan, behavior, timeline, or difference in your body"},
 	      			{key: "a mindful strategy", value: "a mindful strategy of ", tooltip: "A new thought, reflection, or state of mind"},
 	      			{key: "a social strategy", value: "a social strategy of ", tooltip: "Reaching out to supportive people, or changing your social scene"}
@@ -110,18 +118,65 @@ class Chat extends Component {
 	    //activePrompts: event handler prompts (textarea)
   	}
 
-  	sayHi = () => {
-    	var textarea = document.getElementById("chatText");
-    	console.log(textarea);
-    	textarea.value = this.value;
+  	addText = (event) => {
+  		var button = event.target;
+  		var tooltip = button.querySelector("span");
+  		if (tooltip.classList.contains("invisible")) {
+  			tooltip.classList.remove("invisible");
+  		} else {
+  			var textarea = document.getElementById("chatText");
+    		
+    		button.classList.add("hidden");
+    		textarea.value += button.value;
+  		}
+    	
     }
+
+    enterChat = (event) => {
+    	var moodHelper = document.getElementById("moodHelper");
+    	var preMoodSlider = document.getElementById("preMoodSlider");
+    	var textarea = document.getElementById("chatText");
+    	var ribbon = document.getElementById("ribbon");
+    	if (!moodHelper.classList.contains("hidden")) {
+    		moodHelper.classList.add("hidden");
+    		preMoodSlider.classList.add("hidden");
+    		event.target.classList.add("hidden");
+    		textarea.classList.remove("hidden");
+    		ribbon.classList.remove("hidden");
+    	}
+    }
+
+    appendMessage = (data) => {
+	    //data = splitString(data, "");
+	    var chatWindow = document.getElementById("chatWindow");
+	    var msg = document.createElement("div");
+	    msg.classList.add("message");
+	    msg.innerHTML = data;
+	    chatWindow.appendChild(msg);
+	    //chatWindow.scrollTop = chatWindow.scrollHeight;
+	}
+
+	sendMessage = (event) => {
+		var textarea = document.getElementById("chatText");
+		if (event.which === 13 && event.shiftKey === false) {
+      		event.preventDefault();
+      		var msg = textarea.value;
+			if (msg !== "") {
+				// append message to chat window (right side)
+				this.appendMessage(msg);
+				// send message to server
+				// socket.emit("send message", msg);
+				textarea.value = "";
+			}
+      	}
+	}
 
   	render() {
 	    return (
 	    	<div className="chat">
 	        	<Navbar />
-	        	<MainWindow prompts={this.state.prompts} clicked={this.sayHi}/>
-	        	<StageHandler />
+	        	<MainWindow prompts={this.state.prompts} clicked={this.addText} enter={(e) => this.sendMessage(e)}/>
+	        	<StageHandler clicked={this.enterChat}/>
 	        </div>
 	    );
     	//return React.createElement('div', {classkey: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App!!!'));

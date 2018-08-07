@@ -6,16 +6,16 @@ const mainWindow = (props) => {
 	console.log(props.clicked)
 	return (
 		<div className="mainWindow">
-			<div className="moodHelper">
+			<div id="moodHelper">
 				How troubled do you feel?
 			</div>
-			<div className="chatWindow">
-				<Slider />
+			<div id="chatWindow">
+				<Slider id="preMoodSlider"/>
 			</div>
-			<div className="ribbon">
-				<Ribbon  prompts={props.prompts} clicked={props.clicked}/>
+			<div id="ribbon" className="ribbon hidden">
+				<Ribbon  prompts={props.prompts} clicked={(e) => props.clicked(e)}/>
 			</div>
-			<textarea id="chatText"></textarea>
+			<textarea id="chatText" className="hidden" onKeyDown={props.enter}></textarea>
 		</div>
 	)
 };

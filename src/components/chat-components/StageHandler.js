@@ -1,8 +1,8 @@
 import React from 'react';
 
-const stageHandler = () => {
+const stageHandler = (props) => {
 	return (
-		<div className="stageHandler">
+		<div className="stageHandler" onClick={props.clicked}>
 			Next
 		</div>
 	)

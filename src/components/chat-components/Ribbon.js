@@ -6,9 +6,9 @@ var i = 0;
 
 const ribbon = (props) => props.prompts.map((prompt, index) => {
 	console.log(i);
+	console.log(index);
 	var classNames = ["prompt"];
-	if (i === 1) {
-
+	if (i > 6) {
 		classNames = ["prompt", "hidden"];
 		console.log(classNames);
 	}

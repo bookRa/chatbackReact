@@ -1,9 +1,9 @@
 import React from 'react';
 import "./Slider.css";
 
-const slider = () => {
+const slider = (props) => {
 	return (
-		<div className="slider">
+		<div id={props.id} className="slider">
 			<div className="slidecontainer">
   				<input type="range" min="0" max="999" defaultValue="499" className="moodRange"/>
 			</div>
