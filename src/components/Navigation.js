@@ -4,6 +4,8 @@ import SignOutButton from "./SignOut";
 import AuthUserContext from "./AuthUserContext";
 import * as routes from "../constants/routes";
 import "./Navigation.css";
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -15,11 +17,15 @@ const Navigation = () => (
 
 const NavigationAuth = props => (
   <div className="navBar">
+    
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img alt="CB logo" height="110" src="logo.png" />
+        <img alt="CB logo" className="logo" src="logo.png" />
       </Link>
     </div>
+    <Link to={routes.LANDING}>
+      <span className="big-title">Chatback</span>
+    </Link>
     <div className="rightSection">
       <ul className="linkList">
         <li>
@@ -33,11 +39,10 @@ const NavigationAuth = props => (
             My Account
           </Link>
         </li>
-
         <li>
           <SignOutButton />
         </li>
-        <li>signed in as {props.user.displayName}</li>
+        <li id="signedIn">signed in as {props.user.displayName}</li>
       </ul>
     </div>
   </div>
@@ -46,10 +51,13 @@ const NavigationNonAuth = () => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img alt="CB logo" height="110" src="logo.png" />
+        <img className="logo" alt="CB logo" src="logo.png" />
       </Link>
     </div>
-    <div className="rightSection">
+    <Link to={routes.LANDING}>
+      <span className="big-title">Chatback</span>
+    </Link>
+    <div id="rightSection" className="rightSection">
       <ul className="linkList">
         <li>
           <Link className="signBtn" to={routes.SIGN_IN}>

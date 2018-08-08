@@ -1,7 +1,11 @@
 fieldset {
   width: max-content;
   display: inline-block;
+  margin-top: 30px;
 }
 label {
   position: initial;
+}
+#profileUpdate {
+	margin-top: 46px;
 }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "./chat-components/Navbar";
 import MainWindow from "./chat-components/MainWindow";
 import StageHandler from "./chat-components/StageHandler";
 import "./Chat.css";
@@ -179,8 +178,7 @@ class Chat extends Component {
   	render() {
 	    return (
 	    	<div className="chat">
-	        	<Navbar />
-	        	<MainWindow prompts={this.state.prompts} clicked={this.addText} enter={(e) => this.sendMessage(e)}/>
+	    		<MainWindow prompts={this.state.prompts} clicked={this.addText} enter={(e) => this.sendMessage(e)}/>
 	        	<StageHandler clicked={this.enterChat}/>
 	        </div>
 	    );

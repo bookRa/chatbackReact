@@ -31,7 +31,7 @@
   background-color: #EAFFFA;
 }
 
-#splashPage > h1, h2, p, form, button {
+#splashPage > h1, #splashPage > h2, #splashPage > p, #splashPage > form {
   color: #264D4D;
 }
 
@@ -44,10 +44,9 @@
 }
 
 
-#splashPage > h1, #color-bar, h2, form, button {
+#splashPage > h1, #color-bar, #splashPage > h2, #splashPage > form, #splashPage > button {
   margin-bottom: 30px;
 }
-
 
 #splashPage > p {
   font-size: 20px;
@@ -57,38 +56,43 @@
   width: 30%;
 }
 
-#subscribe {
+#subscribe, #enterChat, .form-button {
   background-color: #264D4D;
   border: transparent;
   border-radius: 20px;
   box-shadow: 0 2px 7px 0 #8D8A84;
   color: #fff;
   height: 40px;
-  font-size: 15px;
+  font-size: 16px;
+  min-width: 200px;
+  margin-bottom: 20px;
 }
 
-#subscribe:hover {
+#subscribe:hover, .form-button:hover, #enterChat:hover {
   cursor: pointer;
   background-color: #3BAF82;
+  text-decoration: underline;
 }
 
-.group        {
-  display: inline-block;
+.group {
   position:relative;
   width: 30%;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
-input         {
+input[type=text], input[type=password], input[type=number] {
   font-size:18px;
   padding:10px 10px 10px 7px;
   display:block;
-  width: 96%;
+  width: 95%;
   border:none;
   border-bottom:1px solid #757575;
 }
 input:focus     { outline:none; }
 
 /* LABEL ======================================= */
-#email         {
+.form-label         {
   color:#999; 
   font-size:18px;
   font-weight:normal;
@@ -102,14 +106,14 @@ input:focus     { outline:none; }
 }
 
 /* active state */
-input:focus ~ #email, input:valid ~ #email    {
+input:focus ~ .form-label, input:valid ~ .form-label    {
   top:-20px;
   font-size:14px;
   color:#5264AE;
 }
 
 /* BOTTOM BARS ================================= */
-.bar  { position:relative; display:block; width: 100%; }
+.bar  { position:relative; display:block; width: 98%; }
 .bar:before, .bar:after   {
   content:'';
   height:2px; 

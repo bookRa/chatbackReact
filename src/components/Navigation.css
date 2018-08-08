@@ -1,20 +1,68 @@
-.rightSection {
-  position: relative;
-  bottom: 95px;
-  margin-left: 75%;
-}
+
 .navBar {
-  height: 110;
-  margin-bottom: -100px; /*Don't know why I have to do this to fix the oversize navbar :( */
+  background-color: #264D4D;
+  align-items: center;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
 }
 
 .linkList li {
   display: inline-block;
 }
 .signBtn {
+  font-size: 16px;
   margin: 7px;
-  padding: 5px;
-  background-color: forestgreen;
-  color: aliceblue;
+  padding: 8px 12px;
+  background-color: #fff;
+  color: black;
   border-radius: 5px;
+  border: 1px solid transparent;
+}
+
+
+a:active, .signBtn:active {
+  color: purple;
+}
+a:visited, .signBtn:visited {
+  color: purple;
+}
+a:hover, .signBtn:hover {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.big-title {
+  font-size: 30px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.linkList {
+  padding: 0;
+  float: right;
+}
+
+.logo {
+  height: 70px;
+}
+
+.leftSection {
+  width: 40%;
+}
+.rightSection {
+  width: 40%;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  margin-bottom: 60px;
+}
+
+#signedIn {
+  margin-left: 7px;
+  margin-right: 14px;
 }

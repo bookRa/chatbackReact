@@ -21,7 +21,7 @@ const splashPage = () => {
 		      <input type="text" required />
 		      <span className="highlight"></span>
 		      <span className="bar"></span>
-		      <label id="email">enter email</label>
+		      <label className="form-label">Enter Email</label>
 		    </div>
 		  </form>
 		<Button id="subscribe">Subscribe</Button>
