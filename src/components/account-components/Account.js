@@ -3,7 +3,7 @@ import withAuthorization from "../withAuthorization";
 import { PasswordChangeForm } from "./PasswordChange";
 import "../App.css";
 import AuthUserContext from "../AuthUserContext";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import BioForm from "./BioForm.js";
 import { users } from "../../api";
 
@@ -19,7 +19,7 @@ const AccountPage = () => {
             <h2>Change Password</h2>
             <PasswordChangeForm />
             <BioForm userId={authUser.uid} />
-            <APItest />
+            <APItest userId={authUser.uid} />
             <h3>
               TODO: Make these options dropdown panels; User picture; User
               'about me'
@@ -79,10 +79,11 @@ class UserNameForm extends React.Component {
 }
 
 class APItest extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // state = {};
-  // }
+  constructor(props) {
+    super(props);
+    this.state = { userId: this.props.userId };
+    console.log(props.userId);
+  }
   testPost = event => {
     users
       .testFunc()
@@ -91,10 +92,17 @@ class APItest extends React.Component {
   };
 
   testGet = event => {
+    // const { uid } = this.state;
     users
-      .testGet()
+      .testGet(this.state.userId)
       .then(res => console.log(res))
       .catch(e => console.log(e));
+  };
+
+  testMsg = event => {
+    event.preventDefault();
+    // console.log("Test Message Poste!...?");
+    db.postMsg("Hello World", this.state.userId);
   };
 
   render() {
@@ -104,9 +112,9 @@ class APItest extends React.Component {
         <button value="POST" onClick={this.testPost}>
           POST{" "}
         </button>
-        <button value="GET" onClick={users.testGet}>
+        <button value="GET" onClick={this.testMsg}>
           {" "}
-          GET{" "}
+          Send a Msg{" "}
         </button>
       </div>
     );
