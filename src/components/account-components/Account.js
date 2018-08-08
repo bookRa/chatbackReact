@@ -3,7 +3,7 @@ import withAuthorization from "../withAuthorization";
 import { PasswordChangeForm } from "./PasswordChange";
 import "../App.css";
 import AuthUserContext from "../AuthUserContext";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import BioForm from "./BioForm.js";
 import { users } from "../../api";
 
@@ -99,16 +99,22 @@ class APItest extends React.Component {
       .catch(e => console.log(e));
   };
 
+  testMsg = event => {
+    event.preventDefault();
+    // console.log("Test Message Poste!...?");
+    db.postMsg("Hello World", this.state.userId);
+  };
+
   render() {
     return (
       <div>
         <h3>Test API backend calls:</h3>
-        {/* <button value="POST" onClick={this.testPost}>
+        <button value="POST" onClick={this.testPost}>
           POST{" "}
-        </button> */}
-        <button value="GET" onClick={this.testGet}>
+        </button>
+        <button value="GET" onClick={this.testMsg}>
           {" "}
-          GET{" "}
+          Send a Msg{" "}
         </button>
       </div>
     );

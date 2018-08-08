@@ -51,17 +51,18 @@ const DEV_CONVO_ID = "dev_chat_01"; //Hardcoded convo id for dev purposes
 //Pushes message to a conversation thread. Also appends that message to a user's chat history.
 export const postMsg = (msg, id) => {
   let rightNow = Date.now();
-  convoRef
-    .child(DEV_CONVO_ID)
-    .push({
+  var pushMsgRef = convoRef.child(DEV_CONVO_ID).push(
+    {
       sender: id,
       time: rightNow,
       msg: msg
-    })
-    .then(pushID => {
-      profileRef.child("chatHistory").push({
-        time: rightNow,
-        msg: msg
-      });
-    });
+    },
+    () => {
+      profileRef.child(id + "/chatHistory/" + pushMsgRef.key).set("true");
+    }
+  );
+  // let msgObj = {};
+  // msgObj[pushMsgRef.key] = true;
+  // console.log(msgObj);
+  // profileRef.child(id + "/chatHistory").push(msgObj);
 };
