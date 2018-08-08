@@ -54,7 +54,7 @@ export default class BioForm extends React.Component {
   render() {
     return (
       <div>
-        <h2>Tell a bit about yourself!</h2>
+        <h2>Tell us a bit about yourself!</h2>
         <p>It will help us find you the best match</p>
         <form onChange={this.formChange} onSubmit={this.handleSubmit}>
           <fieldset>
