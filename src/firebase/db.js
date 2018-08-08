@@ -61,8 +61,4 @@ export const postMsg = (msg, id) => {
       profileRef.child(id + "/chatHistory/" + pushMsgRef.key).set("true");
     }
   );
-  // let msgObj = {};
-  // msgObj[pushMsgRef.key] = true;
-  // console.log(msgObj);
-  // profileRef.child(id + "/chatHistory").push(msgObj);
 };
