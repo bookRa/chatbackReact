@@ -60,23 +60,33 @@ class SignInForm extends Component {
     const isInvalid = password === "" || email === "";
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={e => {
-            this.setState({ email: e.target.value });
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => {
-            this.setState({ password: e.target.value });
-          }}
-        />
-        <button disabled={isInvalid} type="submit">
+        <div className="group">      
+          <input
+            type="text"
+            value={email}
+            onChange={e => {
+              this.setState({ email: e.target.value });
+            }}
+            required
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">Email</label>
+        </div>
+        <div className="group">      
+          <input
+            type="password"
+            value={password}
+            onChange={e => {
+              this.setState({ password: e.target.value });
+            }}
+            required
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">Password</label>
+        </div>
+        <button className="form-button" disabled={isInvalid} type="submit">
           {" "}
           Sign In{" "}
         </button>

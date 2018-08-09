@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "./chat-components/Navbar";
 import MainWindow from "./chat-components/MainWindow";
 import StageHandler from "./chat-components/StageHandler";
 import "./Chat.css";
@@ -116,20 +115,21 @@ class Chat extends Component {
 	      	}
 	    ],
 	    //activePrompts: event handler prompts (textarea)
+	    //convoState: 
   	}
 
   	addText = (event) => {
   		var button = event.target;
-  		var tooltip = button.querySelector("span");
-  		if (tooltip.classList.contains("invisible")) {
-  			tooltip.classList.remove("invisible");
-  		} else {
-  			var textarea = document.getElementById("chatText");
-    		
-    		button.classList.add("hidden");
-    		textarea.value += button.value;
-  		}
-    	
+  		if (button.classList.contains("ribbonButton")) {
+	  		var tooltip = button.querySelector("span");
+	  		if (tooltip.classList.contains("invisible")) {
+	  			tooltip.classList.remove("invisible");
+	  		} else {
+	  			var textarea = document.getElementById("chatText");
+	    		button.classList.add("hidden");
+	    		textarea.value += button.value;
+	  		}
+    	}
     }
 
     enterChat = (event) => {
@@ -164,6 +164,10 @@ class Chat extends Component {
 			if (msg !== "") {
 				// append message to chat window (right side)
 				this.appendMessage(msg);
+				if (msg.toLowerCase().search("concern") !== -1 &&
+		            msg.toLowerCase().search("you") === -1) {
+		            ;
+		        }
 				// send message to server
 				// socket.emit("send message", msg);
 				textarea.value = "";
@@ -174,8 +178,7 @@ class Chat extends Component {
   	render() {
 	    return (
 	    	<div className="chat">
-	        	<Navbar />
-	        	<MainWindow prompts={this.state.prompts} clicked={this.addText} enter={(e) => this.sendMessage(e)}/>
+	    		<MainWindow prompts={this.state.prompts} clicked={this.addText} enter={(e) => this.sendMessage(e)}/>
 	        	<StageHandler clicked={this.enterChat}/>
 	        </div>
 	    );

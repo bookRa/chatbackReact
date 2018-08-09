@@ -54,7 +54,7 @@ export default class BioForm extends React.Component {
   render() {
     return (
       <div>
-        <h2>Tell a bit about yourself!</h2>
+        <h2>Tell us a bit about yourself!</h2>
         <p>It will help us find you the best match</p>
         <form onChange={this.formChange} onSubmit={this.handleSubmit}>
           <fieldset>
@@ -84,16 +84,16 @@ export default class BioForm extends React.Component {
             />
             <label htmlFor="non-binary">non-binary</label>
           </fieldset>
+          <br />
           <fieldset>
             <legend> Preferred Gender of Conversation Partner </legend>
-
             <input
               type="checkbox"
               id="pref-dc"
               name="prefGender"
               checked={!!this.state.prefGender["pref-dc"]}
             />
-            <label htmlFor="pref-dc">I don't care</label>
+            <label htmlFor="pref-dc">no preference</label>
 
             <input
               type="checkbox"
@@ -130,8 +130,7 @@ export default class BioForm extends React.Component {
             />
           </fieldset>
           <br />
-          <br />
-          <input type="submit" value="Update Profile" />
+          <button id="profileUpdate" className="form-button">Update Profile</button>
         </form>
       </div>
     );
