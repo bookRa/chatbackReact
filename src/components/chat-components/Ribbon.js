@@ -3,6 +3,11 @@ import ButtonContainer from './ButtonContainer';
 import './Ribbon.css';
 
 var i = 0;
+/*for(int i = 0; i < 6; i++) 
+	{
+		classNames = ["prompt", "hidden"];
+		console.log(classNames);
+	}*/
 
 const ribbon = (props) => props.prompts.map((prompt, index) => {
 	console.log(i);
@@ -14,7 +19,7 @@ const ribbon = (props) => props.prompts.map((prompt, index) => {
 	}
 	i++;
   	return (
-	  	<div className={classNames.join(" ")} key={props.prompts[index].key}>
+	  	<div id={props.prompts[index].key} className={classNames.join(" ")} key={props.prompts[index].key}>
 	  		<ButtonContainer
 	  			clicked={props.clicked}
 	  			btns={props.prompts[index].btns}

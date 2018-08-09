@@ -78,32 +78,56 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          value={username}
-          onChange={event => this.setState({ username: event.target.value })}
-          type="text"
-          placeholder="Choose a Display Name"
-        />
-        <input
-          value={email}
-          onChange={event => this.setState({ email: event.target.value })}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={passwordOne}
-          onChange={event => this.setState({ passwordOne: event.target.value })}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          value={passwordTwo}
-          onChange={event => this.setState({ passwordTwo: event.target.value })}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign up
+        <div className="group">      
+          <input
+            value={username}
+            onChange={event => this.setState({ username: event.target.value })}
+            type="text"
+            required
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">Choose a Display Name</label>
+        </div>
+        <div className="group">      
+          <input
+            value={email}
+            onChange={event => this.setState({ email: event.target.value })}
+            type="text"
+            required
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">Email Address</label>
+        </div>
+        <div className="group">      
+          <input
+            value={passwordOne}
+            onChange={event => this.setState({ passwordOne: event.target.value })}
+            type="password"
+            required
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">Password</label>
+        </div>
+        <div className="group">      
+          <input
+            value={passwordTwo}
+            onChange={event => this.setState({ passwordTwo: event.target.value })}
+            type="password"
+            required
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">Confirm Password</label>
+        </div>
+        
+        
+        
+        
+        <button className="form-button" disabled={isInvalid} type="submit">
+          Sign Up
         </button>
         {error && <p>{error.message}</p>}
       </form>

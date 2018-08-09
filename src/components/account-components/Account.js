@@ -64,15 +64,21 @@ class UserNameForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <p className="statusUpdate">{this.state.statusUpdate}</p>
-        <input
-          value={this.state.newUName}
-          type="text"
-          placeholder="new Username"
-          onChange={e => {
-            this.setState({ newUName: e.target.value });
-          }}
-        />
-        <button disabled={this.state.newUName === ""}>Submit</button>
+        <div className="group">
+          <input
+            value={this.state.newUName}
+            type="text"
+            required
+            onChange={e => {
+              this.setState({ newUName: e.target.value });
+            }}
+          />
+          <span className="highlight"></span>
+          <span className="bar"></span>
+          <label className="form-label">New Username</label>
+        </div>
+        
+        <button className="form-button" disabled={this.state.newUName === ""}>Submit Username</button>
       </form>
     );
   }

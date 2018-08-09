@@ -31,9 +31,11 @@ const HomePage = () => {
             logic to 'start chat' (matching, etc.)
           </h3>
           <ActiveUserList />
-          <Link className="signBtn" to={routes.CHAT}>
-            Enter Chat
-          </Link>{" "}
+          <button id="enterChat">
+            <Link id="enterChatInner" className="signBtn" to={routes.CHAT}>
+              Enter Chat
+            </Link>{" "}
+          </button>
           {/*TODO: This will be an auto-redirect when two users are matched*/}
         </div>
       )}

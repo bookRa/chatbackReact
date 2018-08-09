@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "./chat-components/Navbar";
 import MainWindow from "./chat-components/MainWindow";
 import StageHandler from "./chat-components/StageHandler";
 import "./Chat.css";
@@ -8,6 +7,7 @@ import { db } from "../firebase";
 import { auth } from "../firebase/firebase"; //Just TEMPORARY DO NOT EXPOSE AUTH() TO THIS COMPONENT
 
 class Chat extends Component {
+
   /* Kyler: This prompts collection has to be stored in a seperate file, in ./constants for now */
   state = {
     prompts: [
@@ -246,6 +246,7 @@ class Chat extends Component {
     chatWindow.appendChild(msg);
     //chatWindow.scrollTop = chatWindow.scrollHeight;
   };
+
 
   sendMessage = event => {
     var textarea = document.getElementById("chatText");

@@ -11,9 +11,7 @@ const SignOutButton = ({ history }) => {
         auth.doSignOut();
         history.push(routes.LANDING);
       }}
-    >
-      Sign Out
-    </button>
+    >Sign Out</button>
   );
 };
 
