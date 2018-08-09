@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { auth } from "../firebase";
 import { SignInLink } from "./SignIn";
+import { users } from "../api";
 import "./App.css";
 
 import * as routes from "../constants/routes";
@@ -33,9 +34,12 @@ class SignUpForm extends Component {
     event.preventDefault();
     const { username, email, passwordOne } = this.state;
     const { history } = this.props;
+    let tempUID;
     auth
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        tempUID = authUser.user.uid;
+        console.log("added to fb: uid " + tempUID);
         auth
           .doUpdateProfile({
             displayName: username
@@ -48,6 +52,19 @@ class SignUpForm extends Component {
       .catch(error => {
         this.setState({ error: error });
       });
+    // From here, create user to serve to JAVA API
+    let userObj = {
+      id: Math.ceil(Math.random() * 100),
+      gender: "Female",
+      preferredGenderOfPartner: "Female",
+      age: 100,
+      username: username,
+      uid: tempUID
+    };
+    users
+      .testFunc(userObj)
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   };
 
   render() {

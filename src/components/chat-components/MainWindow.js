@@ -1,23 +1,35 @@
-import React from 'react';
-import Ribbon from './Ribbon';
-import Slider from './Slider';
+import React from "react";
+import Ribbon from "./Ribbon";
+import Slider from "./Slider";
 
-const mainWindow = (props) => {
-	console.log(props.clicked)
-	return (
-		<div className="mainWindow">
-			<div id="moodHelper">
-				How troubled do you feel?
-			</div>
-			<div id="chatWindow">
-				<Slider id="preMoodSlider"/>
-			</div>
-			<div id="ribbon" className="ribbon hidden">
-				<Ribbon  prompts={props.prompts} clicked={(e) => props.clicked(e)}/>
-			</div>
-			<textarea id="chatText" className="hidden" onKeyDown={props.enter}></textarea>
-		</div>
-	)
+const mainWindow = props => {
+  console.log(props.clicked);
+  return (
+    <div className="mainWindow">
+      <div id="moodHelper">How troubled do you feel?</div>
+      <div id="chatWindow">
+        <Slider id="preMoodSlider" />
+        {props.messages ? (
+          Object.keys(props.messages).map((key, index) => {
+            // console.log(key, index);
+            return (
+              <div key={key}>
+                {props.messages[key].senderName}: {props.messages[key].msg}
+              </div>
+            );
+          })
+        ) : (
+          <div>Nothing here yet</div>
+        )}
+      </div>
+      <div id="ribbon" className="ribbon hidden">
+        <Ribbon prompts={props.prompts} clicked={e => props.clicked(e)} />
+      </div>
+      <textarea id="chatText" className="hidden" onKeyDown={props.enter} />
+    </div>
+  );
 };
 
 export default mainWindow;
+
+// REcap: I have it set up where state is gathering the messages from dev_chat_id on the db. then it's mapping each of those msgs to a div, and throwing it into mainwindow. Now I have to change the append message so that it plays nicely with this.
