@@ -49,11 +49,12 @@ export const getUserProfile = uid => {
 const DEV_CONVO_ID = "dev_chat_01"; //Hardcoded convo id for dev purposes
 
 //Pushes message to a conversation thread. Also appends that message to a user's chat history.
-export const postMsg = (msg, id) => {
+export const postMsg = (msg, id, name) => {
   let rightNow = Date.now();
   var pushMsgRef = convoRef.child(DEV_CONVO_ID).push(
     {
       sender: id,
+      senderName: name, //This will have to be changed in the future to dynamically update based on changed displayNames
       time: rightNow,
       msg: msg
     },
@@ -61,4 +62,8 @@ export const postMsg = (msg, id) => {
       profileRef.child(id + "/chatHistory/" + pushMsgRef.key).set("true");
     }
   );
+};
+
+export const convoSubscribe = (id, cb) => {
+  convoRef.child(id + "/").on("value", cb);
 };
