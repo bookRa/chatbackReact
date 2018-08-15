@@ -11,6 +11,7 @@ import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
 import * as routes from "../constants/routes";
 import { convo } from "../api";
+import Chat from "./Chat";
 
 const HomePage = ({ match }) => {
   return (
@@ -117,8 +118,9 @@ class NewConvo extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: "/convo",
+            pathname: "/chat", //routes.CHAT,
             state: { convoId: this.state.gotId }
+            // render= {(props) => <Chat {...props} convo= {this.state.gotId} />}
           }}
         />
       );

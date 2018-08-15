@@ -1,3 +1,4 @@
+/* This is a test case component, not for real use */
 import React from "react";
 import AuthUserContext from "./AuthUserContext";
 
