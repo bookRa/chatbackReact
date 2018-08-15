@@ -2,8 +2,9 @@ const axios = require("axios");
 
 // An asynch method to get ConvoID
 export const getConvoId = () => {
+  console.log("requesting convo...");
   return axios.post("https://chatbackfullstacktest.herokuapp.com/match", {
-    self: "omar",
+    self: "testMan",
     partner: null,
     conversation: null
   });

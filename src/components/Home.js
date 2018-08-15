@@ -103,8 +103,10 @@ class NewConvo extends React.Component {
     convo
       .getConvoId() //.then(res => console.log(res));
       .then(res => {
+        console.log("got response:");
+        console.log(res);
         this.setState({ gotId: res.data.conversation });
-        console.log(this.state.gotId);
+        console.log("got convo ID" + this.state.gotId);
       });
   };
 
