@@ -6,12 +6,13 @@ import "./Navigation.css";
 // import withAuthorization from "./withAuthorization";
 import withAuthorization from "./withAuthorization";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
 import * as routes from "../constants/routes";
+import { convo } from "../api";
 
-const HomePage = () => {
+const HomePage = ({ match }) => {
   return (
     <AuthUserContext.Consumer>
       {authUser => (
@@ -36,7 +37,8 @@ const HomePage = () => {
               Enter Chat
             </Link>{" "}
           </button>
-          {/*TODO: This will be an auto-redirect when two users are matched*/}
+          <br />
+          <NewConvo />
         </div>
       )}
     </AuthUserContext.Consumer>
@@ -81,6 +83,49 @@ class ActiveUserList extends React.Component {
           })}
           {/* {this.state.activeUsers} */}
         </ul>
+      </div>
+    );
+  }
+}
+
+class NewConvo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gotId: false
+    };
+  }
+
+  goToConvo = () => {
+    this.setState({ gotId: "fetching" });
+
+    // console.log(this.state.gotId);
+    convo
+      .getConvoId() //.then(res => console.log(res));
+      .then(res => {
+        this.setState({ gotId: res.data.conversation });
+        console.log(this.state.gotId);
+      });
+  };
+
+  render() {
+    if (this.state.gotId == "fetching") {
+      return <p> Working on Matching...</p>;
+    } else if (this.state.gotId) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/convo",
+            state: { convoId: this.state.gotId }
+          }}
+        />
+      );
+    }
+    return (
+      <div>
+        <button className="signBtn" onClick={this.goToConvo}>
+          Start Convo
+        </button>
       </div>
     );
   }

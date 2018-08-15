@@ -1,7 +1,8 @@
 // import { axios } from "axios";
 const axios = require("axios");
 
-export const testFunc = userObj => {
+export const testPost = userObj => {
+  console.log(userObj);
   return axios.post(
     "https://chatbackfullstacktest.herokuapp.com/users",
     userObj
