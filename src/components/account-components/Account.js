@@ -6,6 +6,7 @@ import AuthUserContext from "../AuthUserContext";
 import { auth, db } from "../../firebase";
 import BioForm from "./BioForm.js";
 import { users } from "../../api";
+import FormField from "../FormField";
 
 const AccountPage = () => {
   return (
@@ -64,20 +65,13 @@ class UserNameForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <p className="statusUpdate">{this.state.statusUpdate}</p>
-        <div className="group">
-          <input
-            value={this.state.newUName}
-            type="text"
-            required
-            onChange={e => {
-              this.setState({ newUName: e.target.value });
-            }}
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">New Username</label>
-        </div>
-        
+        <FormField
+          type="text"
+          value={this.state.newUName}
+          onChange={e => {this.setState({ newUName: e.target.value });}}
+          label="New Username"
+          req={true}
+        />
         <button className="form-button" disabled={this.state.newUName === ""}>Submit Username</button>
       </form>
     );

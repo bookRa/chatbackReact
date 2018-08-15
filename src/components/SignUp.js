@@ -4,6 +4,7 @@ import { auth } from "../firebase";
 import { SignInLink } from "./SignIn";
 import { users } from "../api";
 import "./App.css";
+import FormField from "./FormField";
 
 import * as routes from "../constants/routes";
 
@@ -78,54 +79,35 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <div className="group">      
-          <input
-            value={username}
-            onChange={event => this.setState({ username: event.target.value })}
-            type="text"
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Choose a Display Name</label>
-        </div>
-        <div className="group">      
-          <input
-            value={email}
-            onChange={event => this.setState({ email: event.target.value })}
-            type="text"
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Email Address</label>
-        </div>
-        <div className="group">      
-          <input
-            value={passwordOne}
-            onChange={event => this.setState({ passwordOne: event.target.value })}
-            type="password"
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Password</label>
-        </div>
-        <div className="group">      
-          <input
-            value={passwordTwo}
-            onChange={event => this.setState({ passwordTwo: event.target.value })}
-            type="password"
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Confirm Password</label>
-        </div>
-        
-        
-        
-        
+        <FormField
+          type="text"
+          value={username}
+          onChange={event => this.setState({ username: event.target.value })}
+          label="Choose a Display Name"
+          focus={true}
+          req={true}
+        />
+        <FormField
+          type="text"
+          value={email}
+          onChange={event => this.setState({ email: event.target.value })}
+          label="Email Address"
+          req={true}
+        />
+        <FormField
+          type="password"
+          value={passwordOne}
+          onChange={event => this.setState({ passwordOne: event.target.value })}
+          label="Password"
+          req={true}
+        />
+        <FormField
+          type="password"
+          value={passwordTwo}
+          onChange={event => this.setState({ passwordTwo: event.target.value })}
+          label="Confirm Password"
+          req={true}
+        /> 
         <button className="form-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from 'react-bootstrap';
 import "./SplashPage.css";
+import FormField from './FormField';
 
 const splashPage = () => {
   return (
@@ -17,13 +18,14 @@ const splashPage = () => {
       	<h2>One-on-one guided chats for genuine moments with others like you.</h2>
       	<p>Get relief and gain valuable insights when you need it, wherever you need it.</p>
 		<form>
-		    <div className="group">      
-		      <input type="text" required />
-		      <span className="highlight"></span>
-		      <span className="bar"></span>
-		      <label className="form-label">Enter Email</label>
-		    </div>
-		  </form>
+      <FormField
+        type="text"
+        label="Enter Email"
+        focus={true}
+        req={true}
+      />
+	  </form>
+
 		<Button id="subscribe">Subscribe</Button>
     </div>
   );

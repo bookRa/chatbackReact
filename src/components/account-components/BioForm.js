@@ -2,6 +2,7 @@ import React from "react";
 import "./BioForm.css";
 import { db } from "../../firebase";
 
+
 const INITIAL_STATE = {
   myGender: "",
   prefGender: {},

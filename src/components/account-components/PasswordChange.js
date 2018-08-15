@@ -1,5 +1,6 @@
 import React from "react";
 import { auth } from "../../firebase";
+import FormField from "../FormField";
 
 const PasswordChangePage = () => {
   return (
@@ -40,29 +41,20 @@ class PasswordChangeForm extends React.Component {
     const allowed = newPass1 === newPass2;
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="group">
-          <input
-            type="text"
-            value={newPass1}
-            onChange={e => this.setState({ newPass1: e.target.value })}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Enter New Password</label>
-        </div>
-        <div className="group">
-          <input
-            type="text"
-            value={newPass2}
-            onChange={e => this.setState({ newPass2: e.target.value })}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Confirm New Password</label>
-        </div>
-        
+        <FormField
+          type="text"
+          value={newPass1}
+          onChange={e => this.setState({ newPass1: e.target.value })}
+          label="Enter New Password"
+          req={true}
+        />
+        <FormField
+          type="text"
+          value={newPass2}
+          onChange={e => this.setState({ newPass2: e.target.value })}
+          label="Confirm New Password"
+          req={true}
+        /> 
         
         <button className="form-button" disabled={!allowed} type="submit">
           Submit Password
