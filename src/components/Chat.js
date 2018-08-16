@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MainWindow from "./chat-components/MainWindow";
 //import StageHandler from "./chat-components/StageHandler";
+import { withRouter } from "react-router-dom";
 import { PROMPTS } from "../constants/prompts";
 import "./Chat.css";
 import AuthUserContext from "./AuthUserContext";
@@ -16,7 +17,7 @@ class Chat extends Component {
     // let myConvId = props.location.state.convoId
     // ? this.props.location.convoId
     // : "dev_chat_02";
-    let myConvId = undefined;
+    let myConvId = props.location.state.convoId;
     this.state = {
       prompts: PROMPTS,
       convoId: myConvId || "dev_chat_02",
@@ -44,8 +45,8 @@ class Chat extends Component {
     var button = event.target;
     if (button.classList.contains("ribbonButton")) {
       var tooltip = button.querySelector("span");
-      console.log(button);
-      console.log(tooltip.classList);
+      // console.log(button);
+      // console.log(tooltip.classList);
       if (tooltip.classList.contains("invisible") && tooltip.innerHTML !== "") {
         tooltip.classList.remove("invisible");
       } else {
@@ -162,4 +163,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default withRouter(Chat);

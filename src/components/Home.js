@@ -34,12 +34,20 @@ const HomePage = ({ match }) => {
           </h3>
           <ActiveUserList />
           <button id="enterChat">
-            <Link id="enterChatInner" className="signBtn" to={routes.CHAT}>
+            <Link
+              id="enterChatInner"
+              className="signBtn"
+              to={{
+                pathname: routes.CHAT,
+                state: { convoId: "dev_chat_02" }
+              }}
+            >
               Enter Chat
             </Link>{" "}
           </button>
           <br />
           <NewConvo />
+          <SpecificConvo />
         </div>
       )}
     </AuthUserContext.Consumer>
@@ -106,8 +114,8 @@ class NewConvo extends React.Component {
       .then(res => {
         console.log("got response:");
         console.log(res);
+        console.log("got convo ID: " + res.data.conversation);
         this.setState({ gotId: res.data.conversation });
-        console.log("got convo ID" + this.state.gotId);
       });
   };
 
@@ -130,6 +138,40 @@ class NewConvo extends React.Component {
         <button className="signBtn" onClick={this.goToConvo}>
           Start Convo
         </button>
+      </div>
+    );
+  }
+}
+
+class SpecificConvo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      convoId: undefined
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h4>Or enter a specific chat ID</h4>
+        <input
+          type="text"
+          placeholder="enter convoID"
+          onChange={e => this.setState({ convoId: e.target.value })}
+        />
+        {/* <button id="enterSpecificChat"> */}
+        <Link
+          id="enterSpecificChatInner"
+          className="signBtn"
+          to={{
+            pathname: routes.CHAT,
+            state: { convoId: this.state.convoId }
+          }}
+        >
+          Enter Chat
+        </Link>
+        {/* </button> */}
       </div>
     );
   }

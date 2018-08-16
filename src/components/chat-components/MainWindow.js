@@ -4,19 +4,22 @@ import ChatBubble from "./ChatBubble";
 //import Slider from "./Slider";
 
 const mainWindow = props => {
-  console.log(props.clicked);
+  // console.log(props.clicked);
   //<Slider id="preMoodSlider" />
   //<div id="moodHelper">How troubled do you feel?</div>
   return (
     <div className="mainWindow">
-      
       <div id="chatWindow">
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
             // console.log(key, index);
             return (
-              <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
-              </ChatBubble>
+              <ChatBubble
+                username={props.messages[key].senderName}
+                message={props.messages[key].msg}
+                key={key}
+                class="message"
+              />
             );
           })
         ) : (
@@ -24,7 +27,12 @@ const mainWindow = props => {
         )}
       </div>
       <div id="ribbon" className="ribbon">
-        <Ribbon prompts={props.prompts} activePrompts={props.activePrompts} finishedPrompts={props.finishedPrompts} clicked={e => props.clicked(e)} />
+        <Ribbon
+          prompts={props.prompts}
+          activePrompts={props.activePrompts}
+          finishedPrompts={props.finishedPrompts}
+          clicked={e => props.clicked(e)}
+        />
       </div>
       <textarea id="chatText" onKeyDown={props.enter} />
     </div>
