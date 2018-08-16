@@ -13,7 +13,8 @@ const formField = (props) => {
 	          <span className="highlight"></span>
 	          <span className="bar"></span>
 	          <label className="form-label">{props.label}</label>
-	          <span id="form-error">{props.error}</span>
+	          <span className="ps-strength"></span>
+	          <span className="form-error">{props.error}</span>
         </div>
 	)
 };

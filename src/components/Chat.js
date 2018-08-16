@@ -13,6 +13,7 @@ class Chat extends Component {
     prompts: [
       {
         key: "concerns",
+        keyword: "concern",
         btns: [
           {
             key: "I'm concerned...",
@@ -23,6 +24,7 @@ class Chat extends Component {
       },
       {
         key: "thoughts",
+        keyword: "think",
         btns: [
           {
             key: "I'm thinking...",
@@ -65,6 +67,7 @@ class Chat extends Component {
       },
       {
         key: "feelings",
+        keyword: "feel",
         btns: [
           {
             key: "I'm feeling...",
@@ -113,6 +116,7 @@ class Chat extends Component {
       },
       {
         key: "wants",
+        keyword: "feel",
         btns: [
           {
             key: "I want to feel...",
@@ -159,6 +163,7 @@ class Chat extends Component {
       },
       {
         key: "strategies",
+        keyword: "try",
         btns: [
           {
             key: "I'll try...",
@@ -260,21 +265,21 @@ class Chat extends Component {
         db.postMsg(msg, this.state.user.uid, this.state.user.displayName);
 
         //repetitive logic below-- could be made more dynamic?
-        if (msg.includes("concern") && !this.state.finishedPrompts.includes("concerns")) {
-          this.state.finishedPrompts.push("concerns");
-          this.state.activePrompts.push("thoughts");
-        } else if ((msg.includes("thought") || msg.includes("think")) && !this.state.finishedPrompts.includes("thoughts")) {
-          this.state.finishedPrompts.push("thoughts");
-          this.state.activePrompts.push("feelings");
-        } else if (msg.includes("feel") && !this.state.finishedPrompts.includes("feelings")) {
-          this.state.finishedPrompts.push("feelings");
-          this.state.activePrompts.push("wants");
-        } else if (msg.includes("feel") && !this.state.finishedPrompts.includes("wants")) {
-          this.state.finishedPrompts.push("wants");
-          this.state.activePrompts.push("strategies");
-        } else if (msg.includes("try") && !this.state.finishedPrompts.includes("strategies")) {
-          this.state.finishedPrompts.push("strategies");
-          this.state.activePrompts.push("closer");
+        if (msg.includes(this.state.prompts[0].keyword) && !this.state.finishedPrompts.includes(this.state.prompts[0].key)) {
+          this.state.finishedPrompts.push(this.state.prompts[0].key);
+          this.state.activePrompts.push(this.state.prompts[1].key);
+        } else if (msg.includes(this.state.prompts[1].keyword) && !this.state.finishedPrompts.includes(this.state.prompts[1].key)) {
+          this.state.finishedPrompts.push(this.state.prompts[1].key);
+          this.state.activePrompts.push(this.state.prompts[2].key);
+        } else if (this.state.prompts[2].keyword && !this.state.finishedPrompts.includes(this.state.prompts[2].key)) {
+          this.state.finishedPrompts.push(this.state.prompts[2].key);
+          this.state.activePrompts.push(this.state.prompts[3].key);
+        } else if (this.state.prompts[3].keyword && !this.state.finishedPrompts.includes(this.state.prompts[3].key)) {
+          this.state.finishedPrompts.push(this.state.prompts[3].key);
+          this.state.activePrompts.push(this.state.prompts[4].key);
+        } else if (this.state.prompts[4].keyword && !this.state.finishedPrompts.includes(this.state.prompts[4].key)) {
+          this.state.finishedPrompts.push(this.state.prompts[4].key);
+          this.state.activePrompts.push(this.state.prompts[5].key);
         } else if (this.state.finishedPrompts.length === this.state.prompts.length - 1) {
           this.state.finishedPrompts.push("closer");
         }

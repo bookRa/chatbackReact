@@ -9,7 +9,6 @@ const mainWindow = props => {
   //<div id="moodHelper">How troubled do you feel?</div>
   return (
     <div className="mainWindow">
-      
       <div id="chatWindow">
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
