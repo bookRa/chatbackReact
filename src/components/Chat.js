@@ -281,7 +281,7 @@ class Chat extends Component {
           this.state.finishedPrompts.push(this.state.prompts[4].key);
           this.state.activePrompts.push(this.state.prompts[5].key);
         } else if (this.state.finishedPrompts.length === this.state.prompts.length - 1) {
-          this.state.finishedPrompts.push("closer");
+          this.state.finishedPrompts.push(this.state.prompts[5].key);
         }
         // append message to chat window (right side)
         // this.appendMessage(msg);
