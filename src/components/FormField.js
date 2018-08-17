@@ -25,6 +25,7 @@ function detectPwStrength(e) {
 	}
 	length = curLength;
 }
+
 const formField = (props) => {
 	return (
 		<div className="group">
