@@ -289,7 +289,7 @@ class Chat extends Component {
         // socket.emit("send message", msg);
         textarea.value = "";
       }
-    } else if (event.which === 8) {
+    } else if (event.which === 8 || event.which === 46) {
       var buttons = document.querySelectorAll(".ribbonButton.hidden");
       for (var i = 0; i < buttons.length; i++) {
         var button = buttons[i];

@@ -44,9 +44,8 @@ a:hover {
   text-decoration: underline;
 }
 .big-title {
-  font-size: 30px;
   color: #fff;
-  font-weight: bold;
+  margin: 0;
 }
 
 .logo {
@@ -74,10 +73,6 @@ a:hover {
 
 a {
   text-decoration: none;
-}
-
-h1 {
-  margin-bottom: 60px;
 }
 
 .hamburger {

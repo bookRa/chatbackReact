@@ -16,20 +16,22 @@ const HomePage = () => {
     <AuthUserContext.Consumer>
       {authUser => (
         <div className="pageWrapper">
-          {authUser ? (
-            <h1>Hello, {authUser.displayName}!</h1>
-          ) : (
-            <h1>"Hello!"}</h1>
-          )}
-          <h2>This is the "Chat Lobby"</h2>
-          <h3>
-            We can ask here, "How are you feeling?" and begin connecting you to
-            a partner
-          </h3>
-          <h3>
-            TODO: Collect pre-chat data, logging, create button and business
-            logic to 'start chat' (matching, etc.)
-          </h3>
+          <div className="textContainer">
+            {authUser ? (
+              <h2>Hello, {authUser.displayName}!</h2>
+            ) : (
+              <h2>Hello!</h2>
+            )}
+            <h3>This is the "Chat Lobby"</h3>
+            <h4>
+              We can ask here, "How are you feeling?" and begin connecting you to
+              a partner
+            </h4>
+            <h4>
+              TODO: Collect pre-chat data, logging, create button and business
+              logic to 'start chat' (matching, etc.)
+            </h4>
+          </div>
           <ActiveUserList />
           <button id="enterChat">
             <Link id="enterChatInner" className="signBtn" to={routes.CHAT}>

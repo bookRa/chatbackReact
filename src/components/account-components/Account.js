@@ -14,20 +14,20 @@ const AccountPage = () => {
       {authUser =>
         authUser ? (
           <div className="pageWrapper">
-            <h1>Account Page for: {authUser.displayName || authUser.email}</h1>
-            <h2>Change Username</h2>
+            <h2>Account Page for: {authUser.displayName || authUser.email}</h2>
+            <h3>Change Username</h3>
             <UserNameForm />
-            <h2>Change Password</h2>
+            <h3>Change Password</h3>
             <PasswordChangeForm />
             <BioForm userId={authUser.uid} />
             <APItest userId={authUser.uid} />
-            <h3>
+            <h4>
               TODO: Make these options dropdown panels; User picture; User
               'about me'
-            </h3>
+            </h4>
           </div>
         ) : (
-          <h1>Loading User</h1>
+          <h2>Loading User...</h2>
         )
       }
     </AuthUserContext.Consumer>
@@ -70,6 +70,7 @@ class UserNameForm extends React.Component {
           value={this.state.newUName}
           onChange={e => {this.setState({ newUName: e.target.value });}}
           label="New Username"
+          helper="You can use letters, numbers & symbols"
           req={true}
         />
         <button className="form-button" disabled={this.state.newUName === ""}>Submit Username</button>

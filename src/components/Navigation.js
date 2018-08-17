@@ -43,7 +43,7 @@ const NavigationAuth = props => (
       </Link>
     </div>
     <Link to={routes.LANDING}>
-      <span className="big-title">Chatback</span>
+      <h1 className="big-title">Chatback</h1>
     </Link>
     <div className="rightSection">
       <div className="dropdown">
@@ -54,8 +54,7 @@ const NavigationAuth = props => (
             Start a conversation
           </Link>
           <Link className="menu-item" to={routes.ACCOUNT}>
-            {" "}
-            My Account
+            My account
           </Link>
           <SignOutButton />  
         </div>
@@ -72,17 +71,17 @@ const NavigationNonAuth = () => (
       </Link>
     </div>
     <Link to={routes.LANDING}>
-      <span className="big-title">Chatback</span>
+      <h1 className="big-title">Chatback</h1>
     </Link>
     <div id="rightSection" className="rightSection">
       <div className="dropdown">
         <FontAwesomeIcon icon={faBars} className="hamburger" tabIndex="0" onClick={showDropdown} onKeyDown={e => enterDropdown(e)} />
         <div className="dropdown-content">
           <Link className="menu-item" to={routes.SIGN_IN}>
-            Sign In{" "}
+            Sign in
           </Link>
           <Link className="menu-item" to={routes.SIGN_UP}>
-            Sign Up{" "}
+            Sign up
           </Link>
         </div>
       </div>

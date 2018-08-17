@@ -11,9 +11,10 @@ import * as routes from "../constants/routes";
 const SignUpPage = ({ history }) => {
   return (
     <div className="pageWrapper">
-      <h1>Sign Up Page</h1>
+      <h2>Facing troubles together is better, <br/> create an account to have chats that actually bring relief </h2>
       <SignUpForm history={history} />
       <SignInLink />
+      <PolicyLink />
     </div>
   );
 };
@@ -84,6 +85,7 @@ class SignUpForm extends Component {
           value={username}
           onChange={event => this.setState({ username: event.target.value })}
           label="Choose a Display Name"
+          helper="You can use letters, numbers & symbols"
           focus={true}
           req={true}
         />
@@ -99,6 +101,8 @@ class SignUpForm extends Component {
           value={passwordOne}
           onChange={event => this.setState({ passwordOne: event.target.value })}
           label="Password"
+          helper="Use 6 or more characters with a mix of letters, numbers & symbols"
+          bar={true}
           req={true}
         />
         <FormField
@@ -126,6 +130,16 @@ const SignUpLink = () => {
     </p>
   );
 };
+
+const PolicyLink = () => {
+  return (
+    <p>
+      Please read our
+      {"  "}
+      <a href="/">Privacy Policy</a>
+    </p>
+  )
+}
 
 export default withRouter(SignUpPage);
 

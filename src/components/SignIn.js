@@ -11,7 +11,7 @@ import * as routes from "../constants/routes";
 const SignInPage = ({ history }) => {
   return (
     <div className="pageWrapper">
-      <h1>Sign In Page</h1>
+      <h2>Sign in with your email address</h2>
       <SignInForm history={history} />
       <PasswordForgetLink />
       <SignUpLink />

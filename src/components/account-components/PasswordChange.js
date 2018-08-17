@@ -46,6 +46,8 @@ class PasswordChangeForm extends React.Component {
           value={newPass1}
           onChange={e => this.setState({ newPass1: e.target.value })}
           label="Enter New Password"
+          helper="Use 6 or more characters with a mix of letters, numbers & symbols"
+          bar={true}
           req={true}
         />
         <FormField
