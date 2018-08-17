@@ -15,21 +15,39 @@ const Navigation = () => (
   </AuthUserContext.Consumer>
 );
 
+function showDropdown() {
+  var content = document.querySelector(".dropdown-content");
+  content.classList.toggle("show");
+}
 
+function enterDropdown(e) {
+  if (e.which === 13 && e.shiftKey === false) {
+    showDropdown();
+  }
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.hamburger') && event.target.tagName !== "path") {
+    var content = document.querySelector(".dropdown-content");
+    if (content.classList.contains('show')) {
+      content.classList.remove('show');
+    }
+  }
+}
 
 const NavigationAuth = props => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img alt="CB logo" className="logo" src="logo.png" />
+        <img alt="CB logo" className="logo" src="logo.png"/>
       </Link>
     </div>
     <Link to={routes.LANDING}>
       <span className="big-title">Chatback</span>
     </Link>
     <div className="rightSection">
-      <div class="dropdown">
-        <FontAwesomeIcon id="hamburger" icon={faBars} className="dropdown"  />
+      <div className="dropdown">
+        <FontAwesomeIcon icon={faBars} className="hamburger" tabIndex="0" onClick={showDropdown} onKeyDown={e => enterDropdown(e)} />
         <div className="dropdown-content">
           <span id="signedIn" className="menu-item">signed in as {props.user.displayName}</span>
           <Link className="menu-item" to={routes.HOME}>
@@ -50,25 +68,24 @@ const NavigationNonAuth = () => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img className="logo" alt="CB logo" src="logo.png" />
+        <img className="logo" alt="CB logo" src="logo.png"/>
       </Link>
     </div>
     <Link to={routes.LANDING}>
       <span className="big-title">Chatback</span>
     </Link>
     <div id="rightSection" className="rightSection">
-      <ul className="linkList">
-        <li>
-          <Link className="signBtn" to={routes.SIGN_IN}>
+      <div className="dropdown">
+        <FontAwesomeIcon icon={faBars} className="hamburger" tabIndex="0" onClick={showDropdown} onKeyDown={e => enterDropdown(e)} />
+        <div className="dropdown-content">
+          <Link className="menu-item" to={routes.SIGN_IN}>
             Sign In{" "}
           </Link>
-        </li>
-        <li>
-          <Link className="signBtn" to={routes.SIGN_UP}>
+          <Link className="menu-item" to={routes.SIGN_UP}>
             Sign Up{" "}
           </Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 );

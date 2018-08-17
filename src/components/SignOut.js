@@ -5,13 +5,14 @@ import * as routes from "../constants/routes";
 
 const SignOutButton = ({ history }) => {
   return (
-    <button
+    <span
+    	id="signOut"
 		className="menu-item"
 		onClick={() => {
 			auth.doSignOut();
 			history.push(routes.LANDING);
 		}}
-    >Sign Out</button>
+    >Sign Out</span>
   );
 };
 

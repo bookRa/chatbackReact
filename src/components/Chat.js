@@ -264,7 +264,7 @@ class Chat extends Component {
       if (msg !== "") {
         db.postMsg(msg, this.state.user.uid, this.state.user.displayName);
 
-        //repetitive logic below-- could be made more dynamic?
+        //repetitive prompt progression logic below-- could be made more dynamic?
         if (msg.includes(this.state.prompts[0].keyword) && !this.state.finishedPrompts.includes(this.state.prompts[0].key)) {
           this.state.finishedPrompts.push(this.state.prompts[0].key);
           this.state.activePrompts.push(this.state.prompts[1].key);
