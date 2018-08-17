@@ -119,8 +119,10 @@ a.menu-item {
 
 .menu-item:hover {
   background-color: #EAFFFA;
+  text-decoration: underline;
 }
 
-.menu-item:active {
-  text-decoration: underline;
+.dropdown-divider {
+  height: 1px;
+  background-color: #86FFC8;
 }
