@@ -17,11 +17,12 @@ const mainWindow = props => {
               <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
               </ChatBubble>
             );
-          })
+          }).reverse()
         ) : (
           <div>Nothing here yet</div>
         )}
       </div>
+      
       <div id="ribbon" className="ribbon">
         <Ribbon prompts={props.prompts} activePrompts={props.activePrompts} finishedPrompts={props.finishedPrompts} clicked={e => props.clicked(e)} />
       </div>

@@ -24,6 +24,8 @@
 #signedIn {
   font-style: italic;
   color: #22b14c;
+  word-wrap: break-word;
+  max-width: 10rem;
 }
 
 #signedIn:hover {
@@ -99,10 +101,6 @@ a {
 
 .dropdown, .hamburger {
   float: right;
-}
-
-.dropdown {
-  width: 100px;
 }
 
 .show {display: block;}

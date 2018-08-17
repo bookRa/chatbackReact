@@ -14,23 +14,21 @@ class Chat extends Component {
       {
         key: "concerns",
         keyword: "concern",
-        btns: [
-          {
-            key: "I'm concerned...",
-            value: "I'm concerned that ",
-            tooltip: "Share a concern that's causing stress, worry, or low mood"
-          }
-        ]
+        mainBtn: {
+          key: "I'm concerned...",
+          value: "I'm concerned that ",
+          tooltip: "Share a concern that's causing stress, worry, or low mood"
+        }
       },
       {
         key: "thoughts",
         keyword: "think",
-        btns: [
-          {
+        mainBtn: {
             key: "I'm thinking...",
             value: "I'm thinking ",
             tooltip: "Find a type of thought that fits your state of mind"
-          },
+        },
+        btns: [
           {
             key: "an all or nothing thought",
             value: "an all or nothing thought that ",
@@ -68,12 +66,12 @@ class Chat extends Component {
       {
         key: "feelings",
         keyword: "feel",
+        mainBtn: {
+          key: "I'm feeling...",
+          value: "I'm feeling ",
+          tooltip: "Find the feelings caused by your thoughts"
+        },
         btns: [
-          {
-            key: "I'm feeling...",
-            value: "I'm feeling ",
-            tooltip: "Find the feelings caused by your thoughts"
-          },
           { key: "angry", value: "angry " },
           { key: "anxious", value: "anxious " },
           { key: "apathetic", value: "apathetic " },
@@ -117,12 +115,12 @@ class Chat extends Component {
       {
         key: "wants",
         keyword: "feel",
+        mainBtn: {
+          key: "I want to feel...",
+          value: "I want to feel ",
+          tooltip: "Find the feelings that you want your thoughts to cause"
+        },
         btns: [
-          {
-            key: "I want to feel...",
-            value: "I want to feel ",
-            tooltip: "Find the feelings that you want your thoughts to cause"
-          },
           { key: "amused", value: "amused " },
           { key: "appreciated", value: "appreciated " },
           { key: "aware", value: "aware " },
@@ -164,12 +162,12 @@ class Chat extends Component {
       {
         key: "strategies",
         keyword: "try",
+        mainBtn: {
+          key: "I'll try...",
+          value: "I'll try ",
+          tooltip: "Share one thing you'll try"
+        },
         btns: [
-          {
-            key: "I'll try...",
-            value: "I'll try ",
-            tooltip: "Share one thing you'll try"
-          },
           {
             key: "an action strategy",
             value: "an action strategy of ",
@@ -190,13 +188,11 @@ class Chat extends Component {
       },
       {
         key: "closer",
-        btns: [
-          {
-            key: "Thank you!",
-            value: "Thank you! ",
-            tooltip: "Thank your partner in your own words"
-          }
-        ]
+        mainBtn: {
+          key: "Thank you!",
+          value: "Thank you! ",
+          tooltip: "Thank your partner in your own words"
+        }
       }
     ],
     messages: {},
@@ -219,16 +215,9 @@ class Chat extends Component {
   addText = event => {
     var button = event.target;
     if (button.classList.contains("ribbonButton")) {
-      var tooltip = button.querySelector("span");
-      console.log(button);
-      console.log(tooltip.classList)
-      if (tooltip.classList.contains("invisible") && tooltip.innerHTML !== "") {
-        tooltip.classList.remove("invisible");
-      } else {
         var textarea = document.getElementById("chatText");
         button.classList.add("hidden");
         textarea.value += button.value;
-      }
     }
   };
 
@@ -245,7 +234,7 @@ class Chat extends Component {
       ribbon.classList.remove("hidden");
     }
   };
-
+  /*
   appendMessage = data => {
     //data = splitString(data, "");
     var chatWindow = document.getElementById("chatWindow");
@@ -254,7 +243,7 @@ class Chat extends Component {
     msg.innerHTML = data;
     chatWindow.appendChild(msg);
     //chatWindow.scrollTop = chatWindow.scrollHeight;
-  };
+  };*/
 
   sendMessage = event => {
     var textarea = document.getElementById("chatText");
@@ -263,7 +252,6 @@ class Chat extends Component {
       var msg = textarea.value;
       if (msg !== "") {
         db.postMsg(msg, this.state.user.uid, this.state.user.displayName);
-
         //repetitive prompt progression logic below-- could be made more dynamic?
         if (msg.includes(this.state.prompts[0].keyword) && !this.state.finishedPrompts.includes(this.state.prompts[0].key)) {
           this.state.finishedPrompts.push(this.state.prompts[0].key);
