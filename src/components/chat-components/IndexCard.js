@@ -5,7 +5,10 @@ const indexCard = (props) => {
 	return (
 		<div className="indexCard">
 			{props.btns !== undefined ? (
-	    		<ButtonContainer title={props.title} clicked={props.clicked} btns={props.btns} />
+				<div>
+					<h2>{props.title}</h2>
+		    		<ButtonContainer title={props.title} clicked={props.clicked} btns={props.btns} />
+	    		</div>
 	  		) : (
 	    		<h2>{props.title}</h2>
 	  		)}
