@@ -11,7 +11,7 @@ import * as routes from "../constants/routes";
 const SignUpPage = ({ history }) => {
   return (
     <div className="pageWrapper">
-      <h2>Facing troubles together is better, <br/> create an account to have chats that actually bring relief </h2>
+      <h2>Facing troubles together is better, <br/> create an account for chats that actually bring relief </h2>
       <SignUpForm history={history} />
       <SignInLink />
       <PolicyLink />
