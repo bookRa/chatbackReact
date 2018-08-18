@@ -26,6 +26,7 @@ const ribbon = (props) => {
 						title={prompts[index].mainBtn.tooltip}
 						clickfunc={(e) => props.clicked(e)}
 						clicked={props.clicked}
+						submit={props.submit}
 						btns={prompts[index].btns}
 					/>
 				);

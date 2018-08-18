@@ -22,7 +22,13 @@ const mainWindow = props => {
         )}
       </div>
       <div id="ribbon" className="ribbon">
-        <Ribbon prompts={props.prompts} activePrompts={props.activePrompts} finishedPrompts={props.finishedPrompts} clicked={e => props.clicked(e)} />
+        <Ribbon
+          submit={props.submit}
+          prompts={props.prompts}
+          activePrompts={props.activePrompts}
+          finishedPrompts={props.finishedPrompts}
+          clicked={e => props.clicked(e)}
+        />
       </div>
       <textarea id="chatText" onKeyDown={props.enter} />
     </div>

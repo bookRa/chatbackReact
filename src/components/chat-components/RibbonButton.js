@@ -10,9 +10,9 @@ const ribbonButton = props => {
 	      {props.name}
 	    </button>
 	    {props.btns !== undefined ? (
-    		<IndexCard title={props.title} clicked={props.clicked} btns={props.btns} />
+    		<IndexCard submit={props.submit} title={props.title} clicked={props.clicked} btns={props.btns} />
   		) : (
-    		<IndexCard title={props.title} />
+    		<IndexCard submit={props.submit} title={props.title} />
   		)}
     </div>
   );

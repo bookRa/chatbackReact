@@ -198,7 +198,8 @@ class Chat extends Component {
     messages: {},
     user: {},
     activePrompts: ["concerns"],
-    finishedPrompts: []
+    finishedPrompts: [],
+    selectedButtons: []
   };
 
   //subscribes to the firebase convoid upon loading **ID HARDCODED FOR NOW**
@@ -225,14 +226,17 @@ class Chat extends Component {
     } else if (button.classList.contains("cardButton")) {
       if (button.classList.contains("pressed")) {
         button.classList.remove("pressed");
+        var index = this.state.selectedButtons.indexOf(button.value);
+        this.state.selectedButtons.splice(index, 1);
       } else {
         button.classList.add("pressed");
-        textarea.value += button.value;
+        this.state.selectedButtons.push(button.value);
       }
+      console.log(this.state.selectedButtons)
     }
   };
-
-  enterChat = event => {
+  /*
+  enterChat() {
     var moodHelper = document.getElementById("moodHelper");
     var preMoodSlider = document.getElementById("preMoodSlider");
     var textarea = document.getElementById("chatText");
@@ -245,7 +249,7 @@ class Chat extends Component {
       ribbon.classList.remove("hidden");
     }
   };
-  /*
+  
   appendMessage = data => {
     //data = splitString(data, "");
     var chatWindow = document.getElementById("chatWindow");
@@ -255,6 +259,42 @@ class Chat extends Component {
     chatWindow.appendChild(msg);
     //chatWindow.scrollTop = chatWindow.scrollHeight;
   };*/
+
+  exitIndexCard() {
+    var selectedButtons = document.querySelectorAll(".pressed");
+    for (var i = 0; i < selectedButtons.length; i++) {
+      var button = selectedButtons[i];
+      button.classList.remove("pressed");
+    }
+    var card = document.querySelector(".indexCard");
+    card.classList.add("hidden");
+  }
+
+  submitIndexCard() {
+    this.exitIndexCard();
+    var textarea = document.getElementById("chatText")
+    for (var j = 0; j < this.state.selectedButtons.length; j++) {
+      var value = this.state.selectedButtons[j];
+      if (this.state.selectedButtons.length === 1) {
+        textarea.value += value.toLowerCase();
+      } else if (this.state.selectedButtons.length === 2) {
+        if (j === 0) {
+          textarea.value += value.toLowerCase() + "and ";
+        } else {
+          textarea.value += value.toLowerCase();
+        }
+      } else {
+        if (j < this.state.selectedButtons.length - 2) {
+          textarea.value += value.toLowerCase().substring(0, value.length - 1) + ", ";
+        } else if (j === this.state.selectedButtons.length - 2) {
+          textarea.value += value.toLowerCase().substring(0, value.length - 1) + ", and ";
+        } else {
+          textarea.value += value.toLowerCase();
+        }
+      }
+    }
+    this.setState({selectedButtons: []}); 
+  }
 
   sendMessage = event => {
     var textarea = document.getElementById("chatText");
@@ -311,6 +351,7 @@ class Chat extends Component {
                 activePrompts={this.state.activePrompts}
                 finishedPrompts={this.state.finishedPrompts}
                 clicked={this.addText}
+                submit={e => this.submitIndexCard()}
                 enter={e => this.sendMessage(e)}
               />
             </div>
