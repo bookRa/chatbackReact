@@ -5,7 +5,6 @@ import CardButton from "./CardButton";
 
 const buttonContainer = props =>
   props.btns.map((btn, index) => {
-  	console.log(index)
     return (
 		<CardButton
 			className="ribbonButton"

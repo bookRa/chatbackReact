@@ -1,0 +1,65 @@
+.indexCard {
+	position: absolute;
+	text-align: center;
+	margin-left: auto;
+	color: #fff;
+	top: 72px;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	left: 0;
+	overflow: hidden;
+	right: 0;
+	max-width: 80%;
+	max-height: 45%;
+	border-color: #fff;
+	border-radius: 12px;
+	background-color: black;
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word; 
+	padding: 20px;
+}
+
+.indexContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.buttonContainer {
+	padding: 12px;
+	background: white;
+	overflow-y: auto;
+	max-height: 120px;
+	color: black;
+	margin-top: 12px;
+	display: flex;
+	flex-direction: column;
+}
+
+.cardButton {
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word; 
+	background-color: #fff;
+	text-align: left;
+	font-size: 16px;
+	margin: 3px;
+	width: 98%;
+}
+
+.indexContainer > h2 {
+	margin: 0px;
+	flex-grow: 1;
+}
+
+.pressed {
+  	border: 1px solid #0095ff;
+  	-webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+}

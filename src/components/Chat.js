@@ -30,34 +30,34 @@ class Chat extends Component {
         },
         btns: [
           {
-            key: "an all or nothing thought",
+            key: "An all or nothing thought",
             value: "an all or nothing thought that ",
             tooltip:
               "Simplifying into two extremes (e.g. either all good/all bad)"
           },
           {
-            key: "a blaming thought",
-            value: "a blaming thought thought ",
+            key: "A blaming thought",
+            value: "a blaming thought that ",
             tooltip: "Faulting a single source for all the trouble"
           },
           {
-            key: "a mind reading thought",
+            key: "A mind reading thought",
             value: "a mind reading thought that ",
             tooltip: "Assuming you know people’s reasons or judgments"
           },
           {
-            key: "an overgeneralizing thought",
+            key: "An overgeneralizing thought",
             value: "an overgeneralizing thought that ",
             tooltip:
               "Thinking all incidents will be exactly like the one incident"
           },
           {
-            key: "a personalizing thought",
+            key: "A personalizing thought",
             value: "a personalizing thought that ",
             tooltip: "Thinking a bad outcome results from a bad in you"
           },
           {
-            key: "a worst case scenario thought",
+            key: "A worst case scenario thought",
             value: "a worst case scenario thought that ",
             tooltip: "Believing the worst is going to happen"
           }
@@ -169,17 +169,17 @@ class Chat extends Component {
         },
         btns: [
           {
-            key: "an action strategy",
+            key: "An action strategy",
             value: "an action strategy of ",
             tooltip: "A plan, behavior, timeline, or difference in your body"
           },
           {
-            key: "a mindful strategy",
+            key: "A mindful strategy",
             value: "a mindful strategy of ",
             tooltip: "A new thought, reflection, or state of mind"
           },
           {
-            key: "a social strategy",
+            key: "A social strategy",
             value: "a social strategy of ",
             tooltip:
               "Reaching out to supportive people, or changing your social scene"
@@ -214,10 +214,21 @@ class Chat extends Component {
 
   addText = event => {
     var button = event.target;
+    var textarea = document.getElementById("chatText");
     if (button.classList.contains("ribbonButton")) {
-        var textarea = document.getElementById("chatText");
+        var card = document.querySelector(".indexCard");
+        if (card.classList.contains("hidden")) {
+          card.classList.remove("hidden");
+        }
         button.classList.add("hidden");
         textarea.value += button.value;
+    } else if (button.classList.contains("cardButton")) {
+      if (button.classList.contains("pressed")) {
+        button.classList.remove("pressed");
+      } else {
+        button.classList.add("pressed");
+        textarea.value += button.value;
+      }
     }
   };
 

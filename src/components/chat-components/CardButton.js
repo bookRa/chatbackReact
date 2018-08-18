@@ -4,10 +4,12 @@ import React from "react";
 
 const cardButton = props => {
   return (
-  	<div id={props.activePrompt} className="prompt" key={props.activePrompt}>
-	    <button onClick={props.clickfunc} className="ribbonButton btn" value={props.value}>
-	      {props.name}
-	    </button>
+  	<div className="prompt">
+        {props.title !== undefined ? (
+          <button onClick={props.clickfunc} className="cardButton btn" value={props.value}><b>{props.name}:</b> {props.title}.</button>
+        ) : (
+          <button onClick={props.clickfunc} className="cardButton btn" value={props.value}>{props.name}</button>
+        )}
     </div>
   );
 };

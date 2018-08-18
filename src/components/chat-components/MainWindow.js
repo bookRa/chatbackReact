@@ -4,7 +4,6 @@ import ChatBubble from "./ChatBubble";
 //import Slider from "./Slider";
 
 const mainWindow = props => {
-  console.log(props.clicked);
   //<Slider id="preMoodSlider" />
   //<div id="moodHelper">How troubled do you feel?</div>
   return (
@@ -22,7 +21,6 @@ const mainWindow = props => {
           <div>Nothing here yet</div>
         )}
       </div>
-      
       <div id="ribbon" className="ribbon">
         <Ribbon prompts={props.prompts} activePrompts={props.activePrompts} finishedPrompts={props.finishedPrompts} clicked={e => props.clicked(e)} />
       </div>

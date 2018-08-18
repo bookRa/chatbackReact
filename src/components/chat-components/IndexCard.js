@@ -1,16 +1,21 @@
 import React from 'react';
 import ButtonContainer from './ButtonContainer';
+import "./IndexCard.css"
 
 const indexCard = (props) => {
 	return (
-		<div className="indexCard">
+		<div className="indexCard hidden">
 			{props.btns !== undefined ? (
-				<div>
-					<h2>{props.title}</h2>
-		    		<ButtonContainer title={props.title} clicked={props.clicked} btns={props.btns} />
+				<div className="indexContainer">
+					<h3>{props.title}</h3>
+					<div className="buttonContainer">
+		    			<ButtonContainer title={props.title} clicked={props.clicked} btns={props.btns} />
+		    		</div>
 	    		</div>
 	  		) : (
-	    		<h2>{props.title}</h2>
+	    		<div className="indexContainer">
+	    			<h3>{props.title}</h3>
+	    		</div>
 	  		)}
 		</div>
 	)
