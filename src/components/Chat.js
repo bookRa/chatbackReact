@@ -60,30 +60,6 @@ class Chat extends Component {
       console.log(this.state.selectedButtons);
     }
   };
-  /*
-  enterChat() {
-    var moodHelper = document.getElementById("moodHelper");
-    var preMoodSlider = document.getElementById("preMoodSlider");
-    var textarea = document.getElementById("chatText");
-    var ribbon = document.getElementById("ribbon");
-    if (!moodHelper.classList.contains("hidden")) {
-      moodHelper.classList.add("hidden");
-      preMoodSlider.classList.add("hidden");
-      event.target.classList.add("hidden");
-      textarea.classList.remove("hidden");
-      ribbon.classList.remove("hidden");
-    }
-  };
-  
-  appendMessage = data => {
-    //data = splitString(data, "");
-    var chatWindow = document.getElementById("chatWindow");
-    var msg = document.createElement("div");
-    msg.classList.add("message");
-    msg.innerHTML = data;
-    chatWindow.appendChild(msg);
-    //chatWindow.scrollTop = chatWindow.scrollHeight;
-  };*/
 
   exitIndexCard() {
     var selectedButtons = document.querySelectorAll(".pressed");
@@ -129,7 +105,12 @@ class Chat extends Component {
       event.preventDefault();
       var msg = textarea.value;
       if (msg !== "") {
-        db.postMsg(msg, this.state.user.uid, this.state.user.displayName);
+        db.postMsg(
+          this.state.convoId,
+          msg,
+          this.state.user.uid,
+          this.state.user.displayName
+        );
         //repetitive prompt progression logic below-- could be made more dynamic?
         if (
           msg.includes(this.state.prompts[0].keyword) &&
