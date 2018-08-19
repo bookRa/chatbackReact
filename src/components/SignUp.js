@@ -4,15 +4,20 @@ import { auth } from "../firebase";
 import { SignInLink } from "./SignIn";
 import { users } from "../api";
 import "./App.css";
+import FormField from "./FormField";
 
 import * as routes from "../constants/routes";
 
 const SignUpPage = ({ history }) => {
   return (
     <div className="pageWrapper">
-      <h1>Sign Up Page</h1>
+      <h2>
+        Facing troubles together is better, <br /> create an account for chats
+        that actually bring relief{" "}
+      </h2>
       <SignUpForm history={history} />
       <SignInLink />
+      <PolicyLink />
     </div>
   );
 };
@@ -78,55 +83,38 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <div className="group">
-          <input
-            value={username}
-            onChange={event => this.setState({ username: event.target.value })}
-            type="text"
-            required
-          />
-          <span className="highlight" />
-          <span className="bar" />
-          <label className="form-label">Choose a Display Name</label>
-        </div>
-        <div className="group">
-          <input
-            value={email}
-            onChange={event => this.setState({ email: event.target.value })}
-            type="text"
-            required
-          />
-          <span className="highlight" />
-          <span className="bar" />
-          <label className="form-label">Email Address</label>
-        </div>
-        <div className="group">
-          <input
-            value={passwordOne}
-            onChange={event =>
-              this.setState({ passwordOne: event.target.value })
-            }
-            type="password"
-            required
-          />
-          <span className="highlight" />
-          <span className="bar" />
-          <label className="form-label">Password</label>
-        </div>
-        <div className="group">
-          <input
-            value={passwordTwo}
-            onChange={event =>
-              this.setState({ passwordTwo: event.target.value })
-            }
-            type="password"
-            required
-          />
-          <span className="highlight" />
-          <span className="bar" />
-          <label className="form-label">Confirm Password</label>
-        </div>
-
+        <FormField
+          type="text"
+          value={username}
+          onChange={event => this.setState({ username: event.target.value })}
+          label="Choose a Display Name"
+          helper="You can use letters, numbers & symbols"
+          focus={true}
+          req={true}
+        />
+        <FormField
+          type="text"
+          value={email}
+          onChange={event => this.setState({ email: event.target.value })}
+          label="Email Address"
+          req={true}
+        />
+        <FormField
+          type="password"
+          value={passwordOne}
+          onChange={event => this.setState({ passwordOne: event.target.value })}
+          label="Password"
+          helper="Use 6 or more characters with a mix of letters, numbers & symbols"
+          bar={true}
+          req={true}
+        />
+        <FormField
+          type="password"
+          value={passwordTwo}
+          onChange={event => this.setState({ passwordTwo: event.target.value })}
+          label="Confirm Password"
+          req={true}
+        />
         <button className="form-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>
@@ -142,6 +130,16 @@ const SignUpLink = () => {
       Don't have an account?
       {"  "}
       <Link to={routes.SIGN_UP}> Sign Up </Link>
+    </p>
+  );
+};
+
+const PolicyLink = () => {
+  return (
+    <p>
+      Please read our
+      {"  "}
+      <a href="/">Privacy Policy</a>
     </p>
   );
 };

@@ -4,8 +4,8 @@ import SignOutButton from "./SignOut";
 import AuthUserContext from "./AuthUserContext";
 import * as routes from "../constants/routes";
 import "./Navigation.css";
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -15,35 +15,58 @@ const Navigation = () => (
   </AuthUserContext.Consumer>
 );
 
+function showDropdown() {
+  var content = document.querySelector(".dropdown-content");
+  content.classList.toggle("show");
+}
+
+function enterDropdown(e) {
+  if (e.which === 13 && e.shiftKey === false) {
+    showDropdown();
+  }
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches(".hamburger") && event.target.tagName !== "path") {
+    var content = document.querySelector(".dropdown-content");
+    if (content.classList.contains("show")) {
+      content.classList.remove("show");
+    }
+  }
+};
+
 const NavigationAuth = props => (
   <div className="navBar">
-    
     <div className="leftSection">
       <Link to={routes.LANDING}>
         <img alt="CB logo" className="logo" src="logo.png" />
       </Link>
     </div>
     <Link to={routes.LANDING}>
-      <span className="big-title">Chatback</span>
+      <h1 className="big-title">Chatback</h1>
     </Link>
     <div className="rightSection">
-      <ul className="linkList">
-        <li>
-          <Link className="signBtn" to={routes.HOME}>
+      <div className="dropdown">
+        <FontAwesomeIcon
+          icon={faBars}
+          className="hamburger"
+          tabIndex="0"
+          onClick={showDropdown}
+          onKeyDown={e => enterDropdown(e)}
+        />
+        <div className="dropdown-content">
+          <span id="signedIn" className="menu-item">
+            signed in as {props.user.displayName}
+          </span>
+          <Link className="menu-item" to={routes.HOME}>
             Start a conversation
           </Link>
-        </li>
-        <li>
-          <Link className="signBtn" to={routes.ACCOUNT}>
-            {" "}
-            My Account
+          <Link className="menu-item" to={routes.ACCOUNT}>
+            My account
           </Link>
-        </li>
-        <li>
           <SignOutButton />
-        </li>
-        <li id="signedIn">signed in as {props.user.displayName}</li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -55,21 +78,26 @@ const NavigationNonAuth = () => (
       </Link>
     </div>
     <Link to={routes.LANDING}>
-      <span className="big-title">Chatback</span>
+      <h1 className="big-title">Chatback</h1>
     </Link>
     <div id="rightSection" className="rightSection">
-      <ul className="linkList">
-        <li>
-          <Link className="signBtn" to={routes.SIGN_IN}>
-            Sign In{" "}
+      <div className="dropdown">
+        <FontAwesomeIcon
+          icon={faBars}
+          className="hamburger"
+          tabIndex="0"
+          onClick={showDropdown}
+          onKeyDown={e => enterDropdown(e)}
+        />
+        <div className="dropdown-content">
+          <Link className="menu-item" to={routes.SIGN_IN}>
+            Sign in
           </Link>
-        </li>
-        <li>
-          <Link className="signBtn" to={routes.SIGN_UP}>
-            Sign Up{" "}
+          <Link className="menu-item" to={routes.SIGN_UP}>
+            Sign up
           </Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 );

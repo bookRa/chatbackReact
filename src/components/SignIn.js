@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { SignUpLink } from "./SignUp";
 import { PasswordForgetLink } from "./PasswordForget";
 import "./App.css";
+import FormField from "./FormField";
 
 import { auth } from "../firebase";
 import * as routes from "../constants/routes";
@@ -10,7 +11,7 @@ import * as routes from "../constants/routes";
 const SignInPage = ({ history }) => {
   return (
     <div className="pageWrapper">
-      <h1>Sign In Page</h1>
+      <h2>Sign in with your email address</h2>
       <SignInForm history={history} />
       <PasswordForgetLink />
       <SignUpLink />
@@ -60,32 +61,21 @@ class SignInForm extends Component {
     const isInvalid = password === "" || email === "";
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="group">      
-          <input
-            type="text"
-            value={email}
-            onChange={e => {
-              this.setState({ email: e.target.value });
-            }}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Email</label>
-        </div>
-        <div className="group">      
-          <input
-            type="password"
-            value={password}
-            onChange={e => {
-              this.setState({ password: e.target.value });
-            }}
-            required
-          />
-          <span className="highlight"></span>
-          <span className="bar"></span>
-          <label className="form-label">Password</label>
-        </div>
+        <FormField
+          type="text"
+          value={email}
+          onChange={e => {this.setState({ email: e.target.value });}} 
+          label="Email"
+          focus={true}
+          req={true}
+        />
+        <FormField
+          type="password"
+          value={password}
+          onChange={e => {this.setState({ password: e.target.value });}} 
+          label="Password"
+          req={true}
+        />
         <button className="form-button" disabled={isInvalid} type="submit">
           {" "}
           Sign In{" "}

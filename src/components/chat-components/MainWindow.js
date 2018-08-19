@@ -4,30 +4,32 @@ import ChatBubble from "./ChatBubble";
 //import Slider from "./Slider";
 
 const mainWindow = props => {
-  // console.log(props.clicked);
   //<Slider id="preMoodSlider" />
   //<div id="moodHelper">How troubled do you feel?</div>
   return (
     <div className="mainWindow">
       <div id="chatWindow">
         {props.messages ? (
-          Object.keys(props.messages).map((key, index) => {
-            // console.log(key, index);
-            return (
-              <ChatBubble
-                username={props.messages[key].senderName}
-                message={props.messages[key].msg}
-                key={key}
-                class="message"
-              />
-            );
-          })
+          Object.keys(props.messages)
+            .map((key, index) => {
+              // console.log(key, index);
+              return (
+                <ChatBubble
+                  username={props.messages[key].senderName}
+                  message={props.messages[key].msg}
+                  key={key}
+                  class="message"
+                />
+              );
+            })
+            .reverse()
         ) : (
           <div>Now chatting with {props.partnerName}. Say Hi!</div>
         )}
       </div>
       <div id="ribbon" className="ribbon">
         <Ribbon
+          submit={props.submit}
           prompts={props.prompts}
           activePrompts={props.activePrompts}
           finishedPrompts={props.finishedPrompts}

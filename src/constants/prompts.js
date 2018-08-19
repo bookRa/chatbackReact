@@ -1,49 +1,49 @@
 export const PROMPTS = [
   {
     key: "concerns",
-    btns: [
-      {
-        key: "I'm concerned...",
-        value: "I'm concerned that ",
-        tooltip: "Share a concern that's causing stress, worry, or low mood"
-      }
-    ]
+    keyword: "concern",
+    mainBtn: {
+      key: "I'm concerned...",
+      value: "I'm concerned that ",
+      tooltip: "Share a concern that's causing stress, worry, or low mood"
+    }
   },
   {
     key: "thoughts",
+    keyword: "think",
+    mainBtn: {
+      key: "I'm thinking...",
+      value: "I'm thinking ",
+      tooltip: "Find a type of thought that fits your state of mind"
+    },
     btns: [
       {
-        key: "I'm thinking...",
-        value: "I'm thinking ",
-        tooltip: "Find a type of thought that fits your state of mind"
-      },
-      {
-        key: "an all or nothing thought",
+        key: "An all or nothing thought",
         value: "an all or nothing thought that ",
         tooltip: "Simplifying into two extremes (e.g. either all good/all bad)"
       },
       {
-        key: "a blaming thought",
-        value: "a blaming thought thought ",
+        key: "A blaming thought",
+        value: "a blaming thought that ",
         tooltip: "Faulting a single source for all the trouble"
       },
       {
-        key: "a mind reading thought",
+        key: "A mind reading thought",
         value: "a mind reading thought that ",
         tooltip: "Assuming you know people’s reasons or judgments"
       },
       {
-        key: "an overgeneralizing thought",
+        key: "An overgeneralizing thought",
         value: "an overgeneralizing thought that ",
         tooltip: "Thinking all incidents will be exactly like the one incident"
       },
       {
-        key: "a personalizing thought",
+        key: "A personalizing thought",
         value: "a personalizing thought that ",
         tooltip: "Thinking a bad outcome results from a bad in you"
       },
       {
-        key: "a worst case scenario thought",
+        key: "A worst case scenario thought",
         value: "a worst case scenario thought that ",
         tooltip: "Believing the worst is going to happen"
       }
@@ -51,12 +51,13 @@ export const PROMPTS = [
   },
   {
     key: "feelings",
+    keyword: "feel",
+    mainBtn: {
+      key: "I'm feeling...",
+      value: "I'm feeling ",
+      tooltip: "Find the feelings caused by your thoughts"
+    },
     btns: [
-      {
-        key: "I'm feeling...",
-        value: "I'm feeling ",
-        tooltip: "Find the feelings caused by your thoughts"
-      },
       { key: "angry", value: "angry " },
       { key: "anxious", value: "anxious " },
       { key: "apathetic", value: "apathetic " },
@@ -99,12 +100,13 @@ export const PROMPTS = [
   },
   {
     key: "wants",
+    keyword: "feel",
+    mainBtn: {
+      key: "I want to feel...",
+      value: "I want to feel ",
+      tooltip: "Find the feelings that you want your thoughts to cause"
+    },
     btns: [
-      {
-        key: "I want to feel...",
-        value: "I want to feel ",
-        tooltip: "Find the feelings that you want your thoughts to cause"
-      },
       { key: "amused", value: "amused " },
       { key: "appreciated", value: "appreciated " },
       { key: "aware", value: "aware " },
@@ -145,24 +147,25 @@ export const PROMPTS = [
   },
   {
     key: "strategies",
+    keyword: "try",
+    mainBtn: {
+      key: "I'll try...",
+      value: "I'll try ",
+      tooltip: "Share one thing you'll try"
+    },
     btns: [
       {
-        key: "I'll try...",
-        value: "I'll try ",
-        tooltip: "Share one thing you'll try"
-      },
-      {
-        key: "an action strategy",
+        key: "An action strategy",
         value: "an action strategy of ",
         tooltip: "A plan, behavior, timeline, or difference in your body"
       },
       {
-        key: "a mindful strategy",
+        key: "A mindful strategy",
         value: "a mindful strategy of ",
         tooltip: "A new thought, reflection, or state of mind"
       },
       {
-        key: "a social strategy",
+        key: "A social strategy",
         value: "a social strategy of ",
         tooltip:
           "Reaching out to supportive people, or changing your social scene"
@@ -171,12 +174,10 @@ export const PROMPTS = [
   },
   {
     key: "closer",
-    btns: [
-      {
-        key: "Thank you!",
-        value: "Thank you! ",
-        tooltip: "Thank your partner in your own words"
-      }
-    ]
+    mainBtn: {
+      key: "Thank you!",
+      value: "Thank you! ",
+      tooltip: "Thank your partner in your own words"
+    }
   }
 ];

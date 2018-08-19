@@ -1,35 +1,9 @@
 import React from 'react';
-import ButtonContainer from './ButtonContainer';
+
 import './Ribbon.css';
-
-/*var i = 0;
-	for(int i = 0; i < 6; i++) 
-	{
-		classNames = ["prompt", "hidden"];
-		console.log(classNames);
-	}
-
-const ribbon = (props) => props.prompts.map((prompt, index) => {
-	//console.log(i);
-	console.log(index);
-	var classNames = ["prompt"];
-	if (i > 6) {
-		classNames = ["prompt", "hidden"];
-		console.log(classNames);
-	}
-	i++; 
-  	return (
-	  	<div id={props.prompts[index].key} className={classNames.join(" ")} key={props.prompts[index].key}>
-	  		<ButtonContainer
-	  			clicked={props.clicked}
-	  			btns={props.prompts[index].btns}
-	 		/>
-	 	</div>
- 	)
-}); */
+import RibbonButton from './RibbonButton';
 
 const ribbon = (props) => {
-	var classNames = ["prompt"];
 	var promptContainers = [];
 	var prompts = props.prompts;
 	var activePrompts = props.activePrompts;
@@ -43,9 +17,18 @@ const ribbon = (props) => {
 			if (key === activePrompt) {
 				keyFound = true;
 				promptContainers.push(
-					<div id={activePrompt} className={classNames.join(" ")} key={activePrompt}>
-						<ButtonContainer clicked={props.clicked} btns={prompts[index].btns}/>
-					</div>
+					<RibbonButton
+						activePrompt={activePrompt}
+						className="ribbonButton"
+						name={prompts[index].mainBtn.key}
+						key={prompts[index].mainBtn.key}
+						value={prompts[index].mainBtn.value}
+						title={prompts[index].mainBtn.tooltip}
+						clickfunc={(e) => props.clicked(e)}
+						clicked={props.clicked}
+						submit={props.submit}
+						btns={prompts[index].btns}
+					/>
 				);
 			}
 			index++;

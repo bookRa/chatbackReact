@@ -2,6 +2,7 @@ import React from "react";
 import "./BioForm.css";
 import { db } from "../../firebase";
 
+
 const INITIAL_STATE = {
   myGender: "",
   prefGender: {},
@@ -53,8 +54,8 @@ export default class BioForm extends React.Component {
   // TODO: 3rd party React UI libraries
   render() {
     return (
-      <div>
-        <h2>Tell us a bit about yourself!</h2>
+      <div className="textContainer">
+        <h3>Tell us a bit about yourself!</h3>
         <p>It will help us find you the best match</p>
         <form onChange={this.formChange} onSubmit={this.handleSubmit}>
           <fieldset>

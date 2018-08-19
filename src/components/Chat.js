@@ -21,11 +21,11 @@ class Chat extends Component {
       messages: {},
       user: {},
       activePrompts: ["concerns"],
-      finishedPrompts: []
+      finishedPrompts: [],
+      selectedButtons: []
     };
   }
 
-  //subscribes to the firebase convoid upon loading **ID HARDCODED FOR NOW**
   componentDidMount() {
     this.setState({ user: auth.currentUser });
     console.log("MountedChat");
@@ -40,21 +40,28 @@ class Chat extends Component {
 
   addText = event => {
     var button = event.target;
+    var textarea = document.getElementById("chatText");
     if (button.classList.contains("ribbonButton")) {
-      var tooltip = button.querySelector("span");
-      // console.log(button);
-      // console.log(tooltip.classList);
-      if (tooltip.classList.contains("invisible") && tooltip.innerHTML !== "") {
-        tooltip.classList.remove("invisible");
-      } else {
-        var textarea = document.getElementById("chatText");
-        button.classList.add("hidden");
-        textarea.value += button.value;
+      var card = document.querySelector(".indexCard");
+      if (card.classList.contains("hidden")) {
+        card.classList.remove("hidden");
       }
+      button.classList.add("hidden");
+      textarea.value += button.value;
+    } else if (button.classList.contains("cardButton")) {
+      if (button.classList.contains("pressed")) {
+        button.classList.remove("pressed");
+        var index = this.state.selectedButtons.indexOf(button.value);
+        this.state.selectedButtons.splice(index, 1);
+      } else {
+        button.classList.add("pressed");
+        this.state.selectedButtons.push(button.value);
+      }
+      console.log(this.state.selectedButtons);
     }
   };
-
-  enterChat = event => {
+  /*
+  enterChat() {
     var moodHelper = document.getElementById("moodHelper");
     var preMoodSlider = document.getElementById("preMoodSlider");
     var textarea = document.getElementById("chatText");
@@ -67,6 +74,54 @@ class Chat extends Component {
       ribbon.classList.remove("hidden");
     }
   };
+  
+  appendMessage = data => {
+    //data = splitString(data, "");
+    var chatWindow = document.getElementById("chatWindow");
+    var msg = document.createElement("div");
+    msg.classList.add("message");
+    msg.innerHTML = data;
+    chatWindow.appendChild(msg);
+    //chatWindow.scrollTop = chatWindow.scrollHeight;
+  };*/
+
+  exitIndexCard() {
+    var selectedButtons = document.querySelectorAll(".pressed");
+    for (var i = 0; i < selectedButtons.length; i++) {
+      var button = selectedButtons[i];
+      button.classList.remove("pressed");
+    }
+    var card = document.querySelector(".indexCard");
+    card.classList.add("hidden");
+  }
+
+  submitIndexCard() {
+    this.exitIndexCard();
+    var textarea = document.getElementById("chatText");
+    for (var j = 0; j < this.state.selectedButtons.length; j++) {
+      var value = this.state.selectedButtons[j];
+      if (this.state.selectedButtons.length === 1) {
+        textarea.value += value.toLowerCase();
+      } else if (this.state.selectedButtons.length === 2) {
+        if (j === 0) {
+          textarea.value += value.toLowerCase() + "and ";
+        } else {
+          textarea.value += value.toLowerCase();
+        }
+      } else {
+        if (j < this.state.selectedButtons.length - 2) {
+          textarea.value +=
+            value.toLowerCase().substring(0, value.length - 1) + ", ";
+        } else if (j === this.state.selectedButtons.length - 2) {
+          textarea.value +=
+            value.toLowerCase().substring(0, value.length - 1) + ", and ";
+        } else {
+          textarea.value += value.toLowerCase();
+        }
+      }
+    }
+    this.setState({ selectedButtons: [] });
+  }
 
   sendMessage = event => {
     var textarea = document.getElementById("chatText");
@@ -74,49 +129,43 @@ class Chat extends Component {
       event.preventDefault();
       var msg = textarea.value;
       if (msg !== "") {
-        db.postMsg(
-          this.state.convoId,
-          msg,
-          this.state.user.uid,
-          this.state.user.displayName
-        );
-
-        //repetitive logic below-- could be made more dynamic?
+        db.postMsg(msg, this.state.user.uid, this.state.user.displayName);
+        //repetitive prompt progression logic below-- could be made more dynamic?
         if (
-          msg.includes("concern") &&
-          !this.state.finishedPrompts.includes("concerns")
+          msg.includes(this.state.prompts[0].keyword) &&
+          !this.state.finishedPrompts.includes(this.state.prompts[0].key)
         ) {
-          this.state.finishedPrompts.push("concerns");
-          this.state.activePrompts.push("thoughts");
+          this.state.finishedPrompts.push(this.state.prompts[0].key);
+          this.state.activePrompts.push(this.state.prompts[1].key);
         } else if (
-          (msg.includes("thought") || msg.includes("think")) &&
-          !this.state.finishedPrompts.includes("thoughts")
+          msg.includes(this.state.prompts[1].keyword) &&
+          !this.state.finishedPrompts.includes(this.state.prompts[1].key)
         ) {
-          this.state.finishedPrompts.push("thoughts");
-          this.state.activePrompts.push("feelings");
+          this.state.finishedPrompts.push(this.state.prompts[1].key);
+          this.state.activePrompts.push(this.state.prompts[2].key);
         } else if (
-          msg.includes("feel") &&
-          !this.state.finishedPrompts.includes("feelings")
+          this.state.prompts[2].keyword &&
+          !this.state.finishedPrompts.includes(this.state.prompts[2].key)
         ) {
-          this.state.finishedPrompts.push("feelings");
-          this.state.activePrompts.push("wants");
+          this.state.finishedPrompts.push(this.state.prompts[2].key);
+          this.state.activePrompts.push(this.state.prompts[3].key);
         } else if (
-          msg.includes("feel") &&
-          !this.state.finishedPrompts.includes("wants")
+          this.state.prompts[3].keyword &&
+          !this.state.finishedPrompts.includes(this.state.prompts[3].key)
         ) {
-          this.state.finishedPrompts.push("wants");
-          this.state.activePrompts.push("strategies");
+          this.state.finishedPrompts.push(this.state.prompts[3].key);
+          this.state.activePrompts.push(this.state.prompts[4].key);
         } else if (
-          msg.includes("try") &&
-          !this.state.finishedPrompts.includes("strategies")
+          this.state.prompts[4].keyword &&
+          !this.state.finishedPrompts.includes(this.state.prompts[4].key)
         ) {
-          this.state.finishedPrompts.push("strategies");
-          this.state.activePrompts.push("closer");
+          this.state.finishedPrompts.push(this.state.prompts[4].key);
+          this.state.activePrompts.push(this.state.prompts[5].key);
         } else if (
           this.state.finishedPrompts.length ===
           this.state.prompts.length - 1
         ) {
-          this.state.finishedPrompts.push("closer");
+          this.state.finishedPrompts.push(this.state.prompts[5].key);
         }
         // append message to chat window (right side)
         // this.appendMessage(msg);
@@ -124,7 +173,7 @@ class Chat extends Component {
         // socket.emit("send message", msg);
         textarea.value = "";
       }
-    } else if (event.which === 8) {
+    } else if (event.which === 8 || event.which === 46) {
       var buttons = document.querySelectorAll(".ribbonButton.hidden");
       for (var i = 0; i < buttons.length; i++) {
         var button = buttons[i];
@@ -148,6 +197,7 @@ class Chat extends Component {
                 activePrompts={this.state.activePrompts}
                 finishedPrompts={this.state.finishedPrompts}
                 clicked={this.addText}
+                submit={e => this.submitIndexCard()}
                 enter={e => this.sendMessage(e)}
               />
             </div>

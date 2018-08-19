@@ -1,10 +1,11 @@
 import React from "react";
 import { auth } from "../firebase";
 import { Link } from "react-router-dom";
+import FormField from "./FormField";
 
 const PasswordForgetPage = () => {
   return (
-    <div>
+    <div className="pageWrapper">
       <h1>Password Forget Page</h1>
       <PasswordForgetForm />
     </div>
@@ -39,16 +40,16 @@ class PasswordForgetForm extends React.Component {
     const isInvalid = email === "";
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
+        <FormField
+          type="text"
           value={email}
           onChange={event => this.setState({ email: event.target.value })}
-          type="text"
-          placeholder="Email Address"
+          label="Email Address"
+          req={true}
         />
-        <button disabled={isInvalid} type="submit">
+        <button className="form-button" disabled={isInvalid} type="submit">
           Reset My Password
         </button>
-
         {error && <p>{error.message}</p>}
       </form>
     );

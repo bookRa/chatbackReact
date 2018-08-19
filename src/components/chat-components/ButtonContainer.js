@@ -1,11 +1,12 @@
 import React from "react";
-import RibbonButton from "./RibbonButton";
+import CardButton from "./CardButton";
+
 //import classes from './Ribbon.css';
 
 const buttonContainer = props =>
   props.btns.map((btn, index) => {
     return (
-		<RibbonButton
+		<CardButton
 			className="ribbonButton"
 			name={props.btns[index].key}
 			key={props.btns[index].key}
