@@ -52,7 +52,7 @@ class SignUpForm extends Component {
       .catch(error => {
         this.setState({ error: error });
       });
-    // From here, create user to serve to JAVA API
+    // From here, create user to post to JAVA API
     let userObj = {
       id: Math.ceil(Math.random() * 100),
       gender: "Female",
@@ -61,10 +61,10 @@ class SignUpForm extends Component {
       username: username,
       uid: tempUID
     };
-    users
-      .testFunc(userObj)
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+    // users
+    //   .testFunc(userObj)
+    //   .then(res => console.log(res))
+    //   .catch(error => console.log(error));
   };
 
   render() {
@@ -78,54 +78,55 @@ class SignUpForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <div className="group">      
+        <div className="group">
           <input
             value={username}
             onChange={event => this.setState({ username: event.target.value })}
             type="text"
             required
           />
-          <span className="highlight"></span>
-          <span className="bar"></span>
+          <span className="highlight" />
+          <span className="bar" />
           <label className="form-label">Choose a Display Name</label>
         </div>
-        <div className="group">      
+        <div className="group">
           <input
             value={email}
             onChange={event => this.setState({ email: event.target.value })}
             type="text"
             required
           />
-          <span className="highlight"></span>
-          <span className="bar"></span>
+          <span className="highlight" />
+          <span className="bar" />
           <label className="form-label">Email Address</label>
         </div>
-        <div className="group">      
+        <div className="group">
           <input
             value={passwordOne}
-            onChange={event => this.setState({ passwordOne: event.target.value })}
+            onChange={event =>
+              this.setState({ passwordOne: event.target.value })
+            }
             type="password"
             required
           />
-          <span className="highlight"></span>
-          <span className="bar"></span>
+          <span className="highlight" />
+          <span className="bar" />
           <label className="form-label">Password</label>
         </div>
-        <div className="group">      
+        <div className="group">
           <input
             value={passwordTwo}
-            onChange={event => this.setState({ passwordTwo: event.target.value })}
+            onChange={event =>
+              this.setState({ passwordTwo: event.target.value })
+            }
             type="password"
             required
           />
-          <span className="highlight"></span>
-          <span className="bar"></span>
+          <span className="highlight" />
+          <span className="bar" />
           <label className="form-label">Confirm Password</label>
         </div>
-        
-        
-        
-        
+
         <button className="form-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>

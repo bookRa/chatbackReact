@@ -1,31 +1,40 @@
 import React from "react";
 import Ribbon from "./Ribbon";
-import Slider from "./Slider";
+import ChatBubble from "./ChatBubble";
+//import Slider from "./Slider";
 
 const mainWindow = props => {
-  console.log(props.clicked);
+  // console.log(props.clicked);
+  //<Slider id="preMoodSlider" />
+  //<div id="moodHelper">How troubled do you feel?</div>
   return (
     <div className="mainWindow">
-      <div id="moodHelper">How troubled do you feel?</div>
       <div id="chatWindow">
-        <Slider id="preMoodSlider" />
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
             // console.log(key, index);
             return (
-              <div key={key}>
-                {props.messages[key].senderName}: {props.messages[key].msg}
-              </div>
+              <ChatBubble
+                username={props.messages[key].senderName}
+                message={props.messages[key].msg}
+                key={key}
+                class="message"
+              />
             );
           })
         ) : (
           <div>Nothing here yet</div>
         )}
       </div>
-      <div id="ribbon" className="ribbon hidden">
-        <Ribbon prompts={props.prompts} clicked={e => props.clicked(e)} />
+      <div id="ribbon" className="ribbon">
+        <Ribbon
+          prompts={props.prompts}
+          activePrompts={props.activePrompts}
+          finishedPrompts={props.finishedPrompts}
+          clicked={e => props.clicked(e)}
+        />
       </div>
-      <textarea id="chatText" className="hidden" onKeyDown={props.enter} />
+      <textarea id="chatText" onKeyDown={props.enter} />
     </div>
   );
 };

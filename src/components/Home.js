@@ -6,12 +6,14 @@ import "./Navigation.css";
 // import withAuthorization from "./withAuthorization";
 import withAuthorization from "./withAuthorization";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
 import * as routes from "../constants/routes";
+import { convo } from "../api";
+import Chat from "./Chat";
 
-const HomePage = () => {
+const HomePage = ({ match }) => {
   return (
     <AuthUserContext.Consumer>
       {authUser => (
@@ -32,11 +34,20 @@ const HomePage = () => {
           </h3>
           <ActiveUserList />
           <button id="enterChat">
-            <Link id="enterChatInner" className="signBtn" to={routes.CHAT}>
+            <Link
+              id="enterChatInner"
+              className="signBtn"
+              to={{
+                pathname: routes.CHAT,
+                state: { convoId: "dev_chat_02" }
+              }}
+            >
               Enter Chat
             </Link>{" "}
           </button>
-          {/*TODO: This will be an auto-redirect when two users are matched*/}
+          <br />
+          <NewConvo />
+          <SpecificConvo />
         </div>
       )}
     </AuthUserContext.Consumer>
@@ -81,6 +92,86 @@ class ActiveUserList extends React.Component {
           })}
           {/* {this.state.activeUsers} */}
         </ul>
+      </div>
+    );
+  }
+}
+
+class NewConvo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gotId: false
+    };
+  }
+
+  goToConvo = () => {
+    this.setState({ gotId: "fetching" });
+
+    // console.log(this.state.gotId);
+    convo
+      .getConvoId() //.then(res => console.log(res));
+      .then(res => {
+        console.log("got response:");
+        console.log(res);
+        console.log("got convo ID: " + res.data.conversation);
+        this.setState({ gotId: res.data.conversation });
+      });
+  };
+
+  render() {
+    if (this.state.gotId == "fetching") {
+      return <p> Working on Matching...</p>;
+    } else if (this.state.gotId) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/chat", //routes.CHAT,
+            state: { convoId: this.state.gotId }
+            // render= {(props) => <Chat {...props} convo= {this.state.gotId} />}
+          }}
+        />
+      );
+    }
+    return (
+      <div>
+        <button className="signBtn" onClick={this.goToConvo}>
+          Start Convo
+        </button>
+      </div>
+    );
+  }
+}
+
+class SpecificConvo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      convoId: undefined
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h4>Or enter a specific chat ID</h4>
+        <input
+          type="text"
+          placeholder="enter convoID"
+          onChange={e => this.setState({ convoId: e.target.value })}
+        />
+        {/* <button id="enterSpecificChat"> */}
+        <Link
+          id="enterSpecificChatInner"
+          className="signBtn"
+          to={{
+            pathname: routes.CHAT,
+            state: { convoId: this.state.convoId }
+          }}
+        >
+          Enter Chat
+        </Link>
+        {/* </button> */}
       </div>
     );
   }
