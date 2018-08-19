@@ -4,8 +4,8 @@ import SignOutButton from "./SignOut";
 import AuthUserContext from "./AuthUserContext";
 import * as routes from "../constants/routes";
 import "./Navigation.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => (
   <AuthUserContext.Consumer>
@@ -27,19 +27,19 @@ function enterDropdown(e) {
 }
 
 window.onclick = function(event) {
-  if (!event.target.matches('.hamburger') && event.target.tagName !== "path") {
+  if (!event.target.matches(".hamburger") && event.target.tagName !== "path") {
     var content = document.querySelector(".dropdown-content");
-    if (content.classList.contains('show')) {
-      content.classList.remove('show');
+    if (content.classList.contains("show")) {
+      content.classList.remove("show");
     }
   }
-}
+};
 
 const NavigationAuth = props => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img alt="CB logo" className="logo" src="logo.png"/>
+        <img alt="CB logo" className="logo" src="logo.png" />
       </Link>
     </div>
     <Link to={routes.LANDING}>
@@ -47,19 +47,26 @@ const NavigationAuth = props => (
     </Link>
     <div className="rightSection">
       <div className="dropdown">
-        <FontAwesomeIcon icon={faBars} className="hamburger" tabIndex="0" onClick={showDropdown} onKeyDown={e => enterDropdown(e)} />
+        <FontAwesomeIcon
+          icon={faBars}
+          className="hamburger"
+          tabIndex="0"
+          onClick={showDropdown}
+          onKeyDown={e => enterDropdown(e)}
+        />
         <div className="dropdown-content">
-          <span id="signedIn" className="menu-item">signed in as {props.user.displayName}</span>
+          <span id="signedIn" className="menu-item">
+            signed in as {props.user.displayName}
+          </span>
           <Link className="menu-item" to={routes.HOME}>
             Start a conversation
           </Link>
           <Link className="menu-item" to={routes.ACCOUNT}>
             My account
           </Link>
-          <SignOutButton />  
+          <SignOutButton />
         </div>
       </div>
-      
     </div>
   </div>
 );
@@ -67,7 +74,7 @@ const NavigationNonAuth = () => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img className="logo" alt="CB logo" src="logo.png"/>
+        <img className="logo" alt="CB logo" src="logo.png" />
       </Link>
     </div>
     <Link to={routes.LANDING}>
@@ -75,7 +82,13 @@ const NavigationNonAuth = () => (
     </Link>
     <div id="rightSection" className="rightSection">
       <div className="dropdown">
-        <FontAwesomeIcon icon={faBars} className="hamburger" tabIndex="0" onClick={showDropdown} onKeyDown={e => enterDropdown(e)} />
+        <FontAwesomeIcon
+          icon={faBars}
+          className="hamburger"
+          tabIndex="0"
+          onClick={showDropdown}
+          onKeyDown={e => enterDropdown(e)}
+        />
         <div className="dropdown-content">
           <Link className="menu-item" to={routes.SIGN_IN}>
             Sign in
