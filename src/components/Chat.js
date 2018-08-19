@@ -11,16 +11,13 @@ import { auth } from "../firebase/firebase"; //Just TEMPORARY DO NOT EXPOSE AUTH
 class Chat extends Component {
   constructor(props) {
     super(props);
-    console.log("props");
-    console.log(props);
-    // console.log(this.props);
-    // let myConvId = props.location.state.convoId
-    // ? this.props.location.convoId
-    // : "dev_chat_02";
+    // console.log("props");
+    // console.log(props);
     let myConvId = props.location.state.convoId;
     this.state = {
       prompts: PROMPTS,
       convoId: myConvId || "dev_chat_02",
+      partner: props.location.state.partner,
       messages: {},
       user: {},
       activePrompts: ["concerns"],
@@ -32,8 +29,8 @@ class Chat extends Component {
   componentDidMount() {
     this.setState({ user: auth.currentUser });
     console.log("MountedChat");
-    console.log(this.state.convoId);
-    console.log(this.props);
+    // console.log(this.state.convoId);
+    // console.log(this.props);
     let storeMsgsAsState = snap => {
       this.setState({ messages: snap.val() });
       //   console.log(snap.val());
@@ -145,6 +142,7 @@ class Chat extends Component {
             // <Navbar />
             <div className="chat">
               <MainWindow
+                partnerName={this.state.partner}
                 messages={this.state.messages}
                 prompts={this.state.prompts}
                 activePrompts={this.state.activePrompts}

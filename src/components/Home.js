@@ -42,12 +42,12 @@ const HomePage = ({ match }) => {
                 state: { convoId: "dev_chat_02" }
               }}
             >
-              Enter Chat
+              Enter Dev Chat
             </Link>{" "}
           </button>
           <br />
           <NewConvo />
-          <SpecificConvo />
+          {/* <SpecificConvo /> //Don't need this now because matching is working!*/}
         </div>
       )}
     </AuthUserContext.Consumer>
@@ -106,19 +106,23 @@ class NewConvo extends React.Component {
   }
 
   goToConvo = () => {
-    this.setState({ gotId: "fetching" });
+    this.setState({ gotId: "fetching", partner: undefined });
 
     // console.log(this.state.gotId);
     convo
       .getConvoId() //.then(res => console.log(res));
       .then(res => {
-        console.log("got response:");
-        console.log(res);
+        // console.log("got response:");
+        // console.log(res);
         console.log("got convo ID: " + res.data.conversation);
-        this.setState({ gotId: res.data.conversation });
+        console.log("got partner: " + res.data.partner);
+        this.setState({
+          gotId: res.data.conversation,
+          partner: res.data.partner
+        });
       });
   };
-
+  /* STILL NEEDED: ERROR MESSAGES: What to do on time out, server error, improper auth? etc... */
   render() {
     if (this.state.gotId == "fetching") {
       return <p> Working on Matching...</p>;
@@ -127,7 +131,7 @@ class NewConvo extends React.Component {
         <Redirect
           to={{
             pathname: "/chat", //routes.CHAT,
-            state: { convoId: this.state.gotId }
+            state: { convoId: this.state.gotId, partner: this.state.partner }
             // render= {(props) => <Chat {...props} convo= {this.state.gotId} />}
           }}
         />
@@ -143,39 +147,39 @@ class NewConvo extends React.Component {
   }
 }
 
-class SpecificConvo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      convoId: undefined
-    };
-  }
+// class SpecificConvo extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       convoId: undefined
+//     };
+//   }
 
-  render() {
-    return (
-      <div>
-        <h4>Or enter a specific chat ID</h4>
-        <input
-          type="text"
-          placeholder="enter convoID"
-          onChange={e => this.setState({ convoId: e.target.value })}
-        />
-        {/* <button id="enterSpecificChat"> */}
-        <Link
-          id="enterSpecificChatInner"
-          className="signBtn"
-          to={{
-            pathname: routes.CHAT,
-            state: { convoId: this.state.convoId }
-          }}
-        >
-          Enter Chat
-        </Link>
-        {/* </button> */}
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <h4>Or enter a specific chat ID</h4>
+//         <input
+//           type="text"
+//           placeholder="enter convoID"
+//           onChange={e => this.setState({ convoId: e.target.value })}
+//         />
+//         {/* <button id="enterSpecificChat"> */}
+//         <Link
+//           id="enterSpecificChatInner"
+//           className="signBtn"
+//           to={{
+//             pathname: routes.CHAT,
+//             state: { convoId: this.state.convoId }
+//           }}
+//         >
+//           Enter Chat
+//         </Link>
+//         {/* </button> */}
+//       </div>
+//     );
+//   }
+// }
 
 const authCondition = authUser => !!authUser;
 
