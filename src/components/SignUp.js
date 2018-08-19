@@ -7,6 +7,8 @@ import "./App.css";
 import FormField from "./FormField";
 
 import * as routes from "../constants/routes";
+import "../constants/userNames";
+import { fakeNames } from "../constants/userNames";
 
 const SignUpPage = ({ history }) => {
   return (
@@ -35,6 +37,15 @@ class SignUpForm extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
+  genFakeName = e => {
+    e.preventDefault();
+    let randFirst =
+      fakeNames.first[Math.floor(Math.random() * fakeNames.first.length)];
+    let randSec =
+      fakeNames.second[Math.floor(Math.random() * fakeNames.second.length)];
+    let randN = Math.floor(Math.random() * 100).toString();
+    this.setState({ username: randFirst + randSec + randN });
+  };
   onSubmit = event => {
     event.preventDefault();
     const { username, email, passwordOne } = this.state;
@@ -66,10 +77,6 @@ class SignUpForm extends Component {
       username: username,
       uid: tempUID
     };
-    // users
-    //   .testFunc(userObj)
-    //   .then(res => console.log(res))
-    //   .catch(error => console.log(error));
   };
 
   render() {
@@ -92,6 +99,9 @@ class SignUpForm extends Component {
           focus={true}
           req={true}
         />
+        <button className="form-button" onClick={this.genFakeName}>
+          Or Generate a Random Username!
+        </button>
         <FormField
           type="text"
           value={email}
@@ -118,7 +128,7 @@ class SignUpForm extends Component {
         <button className="form-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>
-        {error && <p>{error.message}</p>}
+        <h6>{error && <p>{error.message}</p>}</h6>
       </form>
     );
   }
