@@ -228,7 +228,7 @@ class Chat extends Component {
     user: {},
     activePrompts: ["concerns"],
     finishedPrompts: [],
-    activeResponses: ["concernsResponse"],
+    activeResponses: [],
     finishedResponses: [],
     selectedButtons: []
   };
