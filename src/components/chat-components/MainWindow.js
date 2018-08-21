@@ -3,19 +3,24 @@ import Ribbon from "./Ribbon";
 import ChatBubble from "./ChatBubble";
 //import Slider from "./Slider";
 
+
 const mainWindow = props => {
-  //<Slider id="preMoodSlider" />
-  //<div id="moodHelper">How troubled do you feel?</div>
   return (
     <div className="mainWindow">
       <div id="chatWindow">
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
-            // console.log(key, index);
-            return (
-              <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
-              </ChatBubble>
-            );
+            if (props.user.displayName === props.messages[key].senderName) {
+              return (
+                <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
+                </ChatBubble>
+              );
+            } else {
+              return (
+                <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="partnerMessage">
+                </ChatBubble>
+              );
+            }
           }).reverse()
         ) : (
           <div>Nothing here yet</div>
@@ -27,6 +32,9 @@ const mainWindow = props => {
           prompts={props.prompts}
           activePrompts={props.activePrompts}
           finishedPrompts={props.finishedPrompts}
+          responses={props.responses}
+          activeResponses={props.activeResponses}
+          finishedResponses={props.finishedResponses}
           clicked={e => props.clicked(e)}
         />
       </div>

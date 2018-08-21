@@ -8,6 +8,10 @@ const ribbon = (props) => {
 	var prompts = props.prompts;
 	var activePrompts = props.activePrompts;
 	var finishedPrompts = props.finishedPrompts;
+	var responses = props.responses;
+
+	var activeResponses = props.activeResponses;
+	var finishedResponses = props.finishedResponses;
 	for (var i = 0; i < activePrompts.length; i++) {
 		var activePrompt = activePrompts[i];
 		var keyFound = false;
@@ -19,19 +23,43 @@ const ribbon = (props) => {
 				promptContainers.push(
 					<RibbonButton
 						activePrompt={activePrompt}
-						className="ribbonButton"
+						classes="promptButton ribbonButton btn"
 						name={prompts[index].mainBtn.key}
 						key={prompts[index].mainBtn.key}
 						value={prompts[index].mainBtn.value}
 						title={prompts[index].mainBtn.tooltip}
-						clickfunc={(e) => props.clicked(e)}
 						clicked={props.clicked}
+						clickfunc={(e) => props.clicked(e)}
 						submit={props.submit}
 						btns={prompts[index].btns}
 					/>
 				);
 			}
 			index++;
+		}
+	}
+	for (var j = 0; j < activeResponses.length; j++) {
+		var activeResponse = activeResponses[j];
+		var responseKeyFound = false;
+		var responseIndex = 0;
+		while (!responseKeyFound && !finishedResponses.includes(activeResponse)) {
+			var responseKey = responses[responseIndex].key;
+			if (responseKey === activeResponse) {
+				responseKeyFound = true;
+				promptContainers.push(
+					<RibbonButton
+						activePrompt={activeResponse}
+						classes="responseButton ribbonButton btn"
+						name={responses[responseIndex].btn.key}
+						key={responses[responseIndex].btn.key}
+						value={responses[responseIndex].btn.value}
+						title={responses[responseIndex].btn.tooltip}
+						clickfunc={(e) => props.clicked(e)}
+						submit={props.submit}
+					/>
+				);
+			}
+			responseIndex++;
 		}
 	}
   	return promptContainers;
