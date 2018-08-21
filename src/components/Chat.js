@@ -246,8 +246,10 @@ class Chat extends Component {
 
   addText = event => {
     var button = event.target;
-    console.log(button)
     var textarea = document.getElementById("chatText");
+    if (button.tagName === "B") {
+      button = event.target.parentElement;
+    }
     if (button.classList.contains("cardButton")) {
       if (button.classList.contains("pressed")) {
         button.classList.remove("pressed");
@@ -297,7 +299,12 @@ class Chat extends Component {
       var button = selectedButtons[i];
       button.classList.remove("pressed");
     }
-    var card = e.target.parentElement;
+    var card = null;
+    if (e.target.classList.contains("submitBtn")) {
+      card = e.target.parentElement.parentElement;
+    } else {
+      card = e.target.parentElement;
+    }
     card.classList.add("hidden");
   }
 
