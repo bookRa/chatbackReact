@@ -26,8 +26,8 @@ const HomePage = ({ match }) => {
             )}
             <h3>This is the "Chat Lobby"</h3>
             <h4>
-              We can ask here, "How are you feeling?" and begin connecting you to
-              a partner
+              We can ask here, "How are you feeling?" and begin connecting you
+              to a partner
             </h4>
             <h4>
               TODO: Collect pre-chat data, logging, create button and business
@@ -48,7 +48,7 @@ const HomePage = ({ match }) => {
             </Link>{" "}
           </button>
           <br />
-          <NewConvo />
+          <NewConvo userName={authUser.displayName} />
           {/* <SpecificConvo /> //Don't need this now because matching is working!*/}
         </div>
       )}
@@ -103,16 +103,17 @@ class NewConvo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gotId: false
+      gotId: false,
+      userName: props.userName
     };
   }
 
   goToConvo = () => {
     this.setState({ gotId: "fetching", partner: undefined });
-
+    // console.log(this.state.userName);
     // console.log(this.state.gotId);
     convo
-      .getConvoId() //.then(res => console.log(res));
+      .getConvoId(this.state.userName) //.then(res => console.log(res));
       .then(res => {
         // console.log("got response:");
         // console.log(res);
