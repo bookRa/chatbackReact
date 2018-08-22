@@ -5,6 +5,7 @@ import ChatBubble from "./ChatBubble";
 
 
 const mainWindow = props => {
+  console.log(props.activeResponses);
   return (
     <div className="mainWindow">
       <div id="chatWindow">
@@ -12,12 +13,12 @@ const mainWindow = props => {
           Object.keys(props.messages).map((key, index) => {
             if (props.user.displayName === props.messages[key].senderName) {
               return (
-                <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
+                <ChatBubble time={props.messages[key].time} username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
                 </ChatBubble>
               );
             } else {
               return (
-                <ChatBubble username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="partnerMessage">
+                <ChatBubble time={props.messages[key].time} username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="partnerMessage">
                 </ChatBubble>
               );
             }

@@ -127,7 +127,7 @@ class NewConvo extends React.Component {
   };
   /* STILL NEEDED: ERROR MESSAGES: What to do on time out, server error, improper auth? etc... */
   render() {
-    if (this.state.gotId == "fetching") {
+    if (this.state.gotId === "fetching") {
       return <p> Working on Matching...</p>;
     } else if (this.state.gotId) {
       return (
@@ -142,7 +142,7 @@ class NewConvo extends React.Component {
     }
     return (
       <div>
-        <button className="signBtn" onClick={this.goToConvo}>
+        <button id="startConvo" className="signBtn" onClick={this.goToConvo}>
           Start Convo
         </button>
       </div>

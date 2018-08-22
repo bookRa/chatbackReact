@@ -3,6 +3,7 @@ import MainWindow from "./chat-components/MainWindow";
 //import StageHandler from "./chat-components/StageHandler";
 import { withRouter } from "react-router-dom";
 import { PROMPTS } from "../constants/prompts";
+import { RESPONSES } from "../constants/responses";
 import "./Chat.css";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
@@ -16,14 +17,17 @@ class Chat extends Component {
     let myConvId = props.location.state.convoId;
     this.state = {
       prompts: PROMPTS,
+      activePrompts: ["concerns"],
+      finishedPrompts: [],
+      responses: RESPONSES,
+      activeResponses: [],
+      finishedResponses: [],
       convoId: myConvId || "dev_chat_02",
       partner: props.location.state.partner,
       messages: {},
       user: {},
-      activePrompts: ["concerns"],
-      finishedPrompts: [],
       selectedButtons: []
-    };
+      };
   }
   /* Kyler: This prompts collection has to be stored in a seperate file, in ./constants for now */
   state = {
@@ -239,7 +243,7 @@ class Chat extends Component {
           value: "You're feeling like ",
           tooltip: "Summarize their feelings in your own words"
         }
-      },
+      }
     ],
     messages: {},
     user: {},

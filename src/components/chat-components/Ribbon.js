@@ -11,6 +11,7 @@ const ribbon = (props) => {
 	var responses = props.responses;
 
 	var activeResponses = props.activeResponses;
+	console.log(props.activeResponses)
 	var finishedResponses = props.finishedResponses;
 	for (var i = 0; i < activePrompts.length; i++) {
 		var activePrompt = activePrompts[i];
