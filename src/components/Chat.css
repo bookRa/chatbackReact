@@ -1,5 +1,5 @@
 .chat {
-	height: 70vh;
+	height: calc(100% - 72px);
 }
 
 .chat > * {
@@ -34,13 +34,12 @@
 }
 
 .mainWindow {
-	display: flex;
 	flex-direction: column;
 	flex-shrink: 0;
 	background: linear-gradient(#F5FFFD, #ECFFF3, #E4FFF8, #D7F7F3);
 	display: flex;
 	color: #51B587;
-  	height: 104%;
+  	height: 100%;
 }
 
 .navbar {
@@ -49,6 +48,10 @@
 	padding-top: 21px;
     padding-bottom: 16px;
     font-size: 30px;
+}
+
+.prompt {
+	display: inline-block;
 }
 
 .hidden {
@@ -75,4 +78,17 @@ textarea {
   padding: 8px 16px;
   text-align: left;
   word-wrap: break-word;
+}
+
+.partnerMessage {
+	align-self: flex-start;
+	background-color: #fff;
+	border-radius: 12px 12px 12px 0;
+	color: black;
+	font-size: 16px;
+	margin: 0 8px 12px 8px;
+	max-width: 70%;
+	padding: 8px 16px;
+	text-align: left;
+	word-wrap: break-word;
 }

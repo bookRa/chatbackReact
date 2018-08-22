@@ -5,14 +5,14 @@ import IndexCard from './IndexCard';
 
 const ribbonButton = props => {
   return (
-  	<div id={props.activePrompt} className="prompt" key={props.activePrompt}>
-	    <button onClick={props.clickfunc} className="ribbonButton btn" value={props.value}>
+  	<div className="prompt" key={props.activePrompt}>
+	    <button id={props.activePrompt} onClick={props.clickfunc} className={props.classes} value={props.value}>
 	      {props.name}
 	    </button>
 	    {props.btns !== undefined ? (
-    		<IndexCard submit={props.submit} title={props.title} clicked={props.clicked} btns={props.btns} />
+    		<IndexCard id={props.activePrompt} submit={props.submit} title={props.title} clicked={props.clicked} btns={props.btns} />
   		) : (
-    		<IndexCard submit={props.submit} title={props.title} />
+    		<IndexCard id={props.activePrompt} submit={props.submit} title={props.title} />
   		)}
     </div>
   );

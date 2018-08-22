@@ -56,7 +56,7 @@
   width: 70%;
 }
 
-#subscribe, #enterChat, .form-button {
+#subscribe, #enterChat, #startConvo, .form-button {
   background-color: #264D4D;
   border: transparent;
   border-radius: 20px;
@@ -68,7 +68,7 @@
   margin-bottom: 20px;
 }
 
-#subscribe:hover, .form-button:hover, #enterChat:hover {
+#subscribe:hover, #startConvo:hover, .form-button:hover, #enterChat:hover {
   cursor: pointer;
   background-color: #3BAF82;
   text-decoration: underline;
