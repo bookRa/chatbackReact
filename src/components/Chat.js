@@ -1,13 +1,32 @@
 import React, { Component } from "react";
 import MainWindow from "./chat-components/MainWindow";
 //import StageHandler from "./chat-components/StageHandler";
+import { withRouter } from "react-router-dom";
+import { PROMPTS } from "../constants/prompts";
 import "./Chat.css";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
 import { auth } from "../firebase/firebase"; //Just TEMPORARY DO NOT EXPOSE AUTH() TO THIS COMPONENT
 
 class Chat extends Component {
+  constructor(props) {
+    super(props);
+    // console.log("props");
+    // console.log(props);
+    let myConvId = props.location.state.convoId;
+    this.state = {
+      prompts: PROMPTS,
+      convoId: myConvId || "dev_chat_02",
+      partner: props.location.state.partner,
+      messages: {},
+      user: {},
+      activePrompts: ["concerns"],
+      finishedPrompts: [],
+      selectedButtons: []
+    };
+  }
 
+<<<<<<< HEAD
   /* Kyler: This prompts collection has to be stored in a seperate file, in ./constants for now */
   state = {
     prompts: [
@@ -234,23 +253,38 @@ class Chat extends Component {
   };
 
   //subscribes to the firebase convoid upon loading **ID HARDCODED FOR NOW**
+=======
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
   componentDidMount() {
     this.setState({ user: auth.currentUser });
     console.log("MountedChat");
+    // console.log(this.state.convoId);
+    // console.log(this.props);
     let storeMsgsAsState = snap => {
       this.setState({ messages: snap.val() });
       //   console.log(snap.val());
     };
-    db.convoSubscribe("dev_chat_01", storeMsgsAsState);
+    db.convoSubscribe(this.state.convoId, storeMsgsAsState);
   }
 
   addText = event => {
     var button = event.target;
     var textarea = document.getElementById("chatText");
+<<<<<<< HEAD
     if (button.tagName === "B") {
       button = event.target.parentElement;
     }
     if (button.classList.contains("cardButton")) {
+=======
+    if (button.classList.contains("ribbonButton")) {
+      var card = document.querySelector(".indexCard");
+      if (card.classList.contains("hidden")) {
+        card.classList.remove("hidden");
+      }
+      button.classList.add("hidden");
+      textarea.value += button.value;
+    } else if (button.classList.contains("cardButton")) {
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
       if (button.classList.contains("pressed")) {
         button.classList.remove("pressed");
         var index = this.state.selectedButtons.indexOf(button.value);
@@ -259,6 +293,7 @@ class Chat extends Component {
         button.classList.add("pressed");
         this.state.selectedButtons.push(button.value);
       }
+<<<<<<< HEAD
     } else {
       var card = document.getElementById(button.id + "Card");
       if (card.classList.contains("hidden")) {
@@ -280,18 +315,11 @@ class Chat extends Component {
       event.target.classList.add("hidden");
       textarea.classList.remove("hidden");
       ribbon.classList.remove("hidden");
+=======
+      console.log(this.state.selectedButtons);
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
     }
   };
-  
-  appendMessage = data => {
-    //data = splitString(data, "");
-    var chatWindow = document.getElementById("chatWindow");
-    var msg = document.createElement("div");
-    msg.classList.add("message");
-    msg.innerHTML = data;
-    chatWindow.appendChild(msg);
-    //chatWindow.scrollTop = chatWindow.scrollHeight;
-  };*/
 
   exitIndexCard(e) {
     var selectedButtons = document.querySelectorAll(".pressed");
@@ -308,9 +336,15 @@ class Chat extends Component {
     card.classList.add("hidden");
   }
 
+<<<<<<< HEAD
   submitIndexCard(e) {
     this.exitIndexCard(e);
     var textarea = document.getElementById("chatText")
+=======
+  submitIndexCard() {
+    this.exitIndexCard();
+    var textarea = document.getElementById("chatText");
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
     for (var j = 0; j < this.state.selectedButtons.length; j++) {
       var value = this.state.selectedButtons[j];
       if (this.state.selectedButtons.length === 1) {
@@ -323,15 +357,17 @@ class Chat extends Component {
         }
       } else {
         if (j < this.state.selectedButtons.length - 2) {
-          textarea.value += value.toLowerCase().substring(0, value.length - 1) + ", ";
+          textarea.value +=
+            value.toLowerCase().substring(0, value.length - 1) + ", ";
         } else if (j === this.state.selectedButtons.length - 2) {
-          textarea.value += value.toLowerCase().substring(0, value.length - 1) + ", and ";
+          textarea.value +=
+            value.toLowerCase().substring(0, value.length - 1) + ", and ";
         } else {
           textarea.value += value.toLowerCase();
         }
       }
     }
-    this.setState({selectedButtons: []}); 
+    this.setState({ selectedButtons: [] });
   }
 
   sendMessage = event => {
@@ -340,39 +376,82 @@ class Chat extends Component {
       event.preventDefault();
       var msg = textarea.value;
       if (msg !== "") {
-        db.postMsg(msg, this.state.user.uid, this.state.user.displayName);
+        db.postMsg(
+          this.state.convoId,
+          msg,
+          this.state.user.uid,
+          this.state.user.displayName
+        );
         //repetitive prompt progression logic below-- could be made more dynamic?
+<<<<<<< HEAD
         var text = msg.toLowerCase();
         if (text.includes(this.state.prompts[0].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[0].key)) {
+=======
+        if (
+          msg.includes(this.state.prompts[0].keyword) &&
+          !this.state.finishedPrompts.includes(this.state.prompts[0].key)
+        ) {
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[0].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[1].key);
+<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[1].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[1].key)) {
+=======
+        } else if (
+          msg.includes(this.state.prompts[1].keyword) &&
+          !this.state.finishedPrompts.includes(this.state.prompts[1].key)
+        ) {
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[1].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[2].key);
+<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[2].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[2].key)) {
+=======
+        } else if (
+          this.state.prompts[2].keyword &&
+          !this.state.finishedPrompts.includes(this.state.prompts[2].key)
+        ) {
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[2].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[3].key);
+<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[3].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[3].key)) {
+=======
+        } else if (
+          this.state.prompts[3].keyword &&
+          !this.state.finishedPrompts.includes(this.state.prompts[3].key)
+        ) {
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[3].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[4].key);
+<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[4].keyword) &&
             !this.state.finishedPrompts.includes(this.state.prompts[4].key)) {
+=======
+        } else if (
+          this.state.prompts[4].keyword &&
+          !this.state.finishedPrompts.includes(this.state.prompts[4].key)
+        ) {
+>>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[4].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[5].key);
-        } else if (this.state.finishedPrompts.length === this.state.prompts.length - 1) {
+        } else if (
+          this.state.finishedPrompts.length ===
+          this.state.prompts.length - 1
+        ) {
           this.state.finishedPrompts.push(this.state.prompts[5].key);
           this.state.activePrompts.splice(0, 1);
         }
@@ -420,6 +499,7 @@ class Chat extends Component {
             // <Navbar />
             <div className="chat">
               <MainWindow
+                partnerName={this.state.partner}
                 messages={this.state.messages}
                 prompts={this.state.prompts}
                 activePrompts={this.state.activePrompts}
@@ -443,4 +523,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default withRouter(Chat);

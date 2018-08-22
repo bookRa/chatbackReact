@@ -23,7 +23,7 @@ const mainWindow = props => {
             }
           }).reverse()
         ) : (
-          <div>Nothing here yet</div>
+          <div>Now chatting with {props.partnerName}. Say Hi!</div>
         )}
       </div>
       <div id="ribbon" className="ribbon">

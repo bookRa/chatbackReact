@@ -68,12 +68,16 @@ class UserNameForm extends React.Component {
         <FormField
           type="text"
           value={this.state.newUName}
-          onChange={e => {this.setState({ newUName: e.target.value });}}
+          onChange={e => {
+            this.setState({ newUName: e.target.value });
+          }}
           label="New Username"
           helper="You can use letters, numbers & symbols"
           req={true}
         />
-        <button className="form-button" disabled={this.state.newUName === ""}>Submit Username</button>
+        <button className="form-button" disabled={this.state.newUName === ""}>
+          Submit Username
+        </button>
       </form>
     );
   }
@@ -86,24 +90,39 @@ class APItest extends React.Component {
     console.log(props.userId);
   }
   testPost = event => {
+    let testUser = {
+      id: 33,
+      gender: "Male",
+      preferredGenderOfPartner: "Male",
+      age: 100,
+      username: "Joe",
+      uid: "dlsfj4980f3hj49031j"
+    };
     users
-      .testFunc()
-      .then(res => console.log(res))
+      .testPost(testUser)
+      .then(res => {
+        console.log("post Response: ");
+        console.log(res);
+      })
       .catch(e => console.log(e));
   };
 
   testGet = event => {
     // const { uid } = this.state;
+    // console.log(this.state.userId);
     users
-      .testGet(this.state.userId)
-      .then(res => console.log(res))
+      .testGet("dlsfj4980f3hj49031j")
+      .then(res => {
+        console.log("get Response: ");
+        console.log(res);
+      })
       .catch(e => console.log(e));
   };
 
   testMsg = event => {
     event.preventDefault();
-    // console.log("Test Message Poste!...?");
-    db.postMsg("Hello World", this.state.userId);
+    console.log("Test Message Poste!...?");
+    // db.postMsg("Hello World", this.state.userId);
   };
 
   render() {
@@ -113,9 +132,9 @@ class APItest extends React.Component {
         <button value="POST" onClick={this.testPost}>
           POST{" "}
         </button>
-        <button value="GET" onClick={this.testMsg}>
+        <button value="GET" onClick={this.testGet}>
           {" "}
-          Send a Msg{" "}
+          Test GET{" "}
         </button>
       </div>
     );

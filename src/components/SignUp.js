@@ -7,11 +7,16 @@ import "./App.css";
 import FormField from "./FormField";
 
 import * as routes from "../constants/routes";
+import "../constants/userNames";
+import { fakeNames } from "../constants/userNames";
 
 const SignUpPage = ({ history }) => {
   return (
     <div className="pageWrapper">
-      <h2>Facing troubles together is better, <br/> create an account for chats that actually bring relief </h2>
+      <h2>
+        Facing troubles together is better, <br /> create an account for chats
+        that actually bring relief{" "}
+      </h2>
       <SignUpForm history={history} />
       <SignInLink />
       <PolicyLink />
@@ -32,6 +37,15 @@ class SignUpForm extends Component {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
+  genFakeName = e => {
+    e.preventDefault();
+    let randFirst =
+      fakeNames.first[Math.floor(Math.random() * fakeNames.first.length)];
+    let randSec =
+      fakeNames.second[Math.floor(Math.random() * fakeNames.second.length)];
+    let randN = Math.floor(Math.random() * 100).toString();
+    this.setState({ username: randFirst + randSec + randN });
+  };
   onSubmit = event => {
     event.preventDefault();
     const { username, email, passwordOne } = this.state;
@@ -54,7 +68,7 @@ class SignUpForm extends Component {
       .catch(error => {
         this.setState({ error: error });
       });
-    // From here, create user to serve to JAVA API
+    // From here, create user to post to JAVA API
     let userObj = {
       id: Math.ceil(Math.random() * 100),
       gender: "Female",
@@ -63,10 +77,6 @@ class SignUpForm extends Component {
       username: username,
       uid: tempUID
     };
-    users
-      .testFunc(userObj)
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
   };
 
   render() {
@@ -89,6 +99,9 @@ class SignUpForm extends Component {
           focus={true}
           req={true}
         />
+        <button className="form-button" onClick={this.genFakeName}>
+          Or Generate a Random Username!
+        </button>
         <FormField
           type="text"
           value={email}
@@ -111,11 +124,11 @@ class SignUpForm extends Component {
           onChange={event => this.setState({ passwordTwo: event.target.value })}
           label="Confirm Password"
           req={true}
-        /> 
+        />
         <button className="form-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>
-        {error && <p>{error.message}</p>}
+        <h6>{error && <p>{error.message}</p>}</h6>
       </form>
     );
   }
@@ -138,8 +151,8 @@ const PolicyLink = () => {
       {"  "}
       <a href="/">Privacy Policy</a>
     </p>
-  )
-}
+  );
+};
 
 export default withRouter(SignUpPage);
 
