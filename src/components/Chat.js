@@ -25,8 +25,6 @@ class Chat extends Component {
       selectedButtons: []
     };
   }
-
-<<<<<<< HEAD
   /* Kyler: This prompts collection has to be stored in a seperate file, in ./constants for now */
   state = {
     prompts: [
@@ -253,8 +251,6 @@ class Chat extends Component {
   };
 
   //subscribes to the firebase convoid upon loading **ID HARDCODED FOR NOW**
-=======
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
   componentDidMount() {
     this.setState({ user: auth.currentUser });
     console.log("MountedChat");
@@ -270,21 +266,10 @@ class Chat extends Component {
   addText = event => {
     var button = event.target;
     var textarea = document.getElementById("chatText");
-<<<<<<< HEAD
     if (button.tagName === "B") {
       button = event.target.parentElement;
     }
     if (button.classList.contains("cardButton")) {
-=======
-    if (button.classList.contains("ribbonButton")) {
-      var card = document.querySelector(".indexCard");
-      if (card.classList.contains("hidden")) {
-        card.classList.remove("hidden");
-      }
-      button.classList.add("hidden");
-      textarea.value += button.value;
-    } else if (button.classList.contains("cardButton")) {
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
       if (button.classList.contains("pressed")) {
         button.classList.remove("pressed");
         var index = this.state.selectedButtons.indexOf(button.value);
@@ -293,7 +278,6 @@ class Chat extends Component {
         button.classList.add("pressed");
         this.state.selectedButtons.push(button.value);
       }
-<<<<<<< HEAD
     } else {
       var card = document.getElementById(button.id + "Card");
       if (card.classList.contains("hidden")) {
@@ -315,11 +299,8 @@ class Chat extends Component {
       event.target.classList.add("hidden");
       textarea.classList.remove("hidden");
       ribbon.classList.remove("hidden");
-=======
-      console.log(this.state.selectedButtons);
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
     }
-  };
+  };*/
 
   exitIndexCard(e) {
     var selectedButtons = document.querySelectorAll(".pressed");
@@ -336,15 +317,9 @@ class Chat extends Component {
     card.classList.add("hidden");
   }
 
-<<<<<<< HEAD
   submitIndexCard(e) {
     this.exitIndexCard(e);
     var textarea = document.getElementById("chatText")
-=======
-  submitIndexCard() {
-    this.exitIndexCard();
-    var textarea = document.getElementById("chatText");
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
     for (var j = 0; j < this.state.selectedButtons.length; j++) {
       var value = this.state.selectedButtons[j];
       if (this.state.selectedButtons.length === 1) {
@@ -383,75 +358,37 @@ class Chat extends Component {
           this.state.user.displayName
         );
         //repetitive prompt progression logic below-- could be made more dynamic?
-<<<<<<< HEAD
         var text = msg.toLowerCase();
         if (text.includes(this.state.prompts[0].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[0].key)) {
-=======
-        if (
-          msg.includes(this.state.prompts[0].keyword) &&
-          !this.state.finishedPrompts.includes(this.state.prompts[0].key)
-        ) {
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[0].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[1].key);
-<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[1].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[1].key)) {
-=======
-        } else if (
-          msg.includes(this.state.prompts[1].keyword) &&
-          !this.state.finishedPrompts.includes(this.state.prompts[1].key)
-        ) {
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[1].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[2].key);
-<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[2].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[2].key)) {
-=======
-        } else if (
-          this.state.prompts[2].keyword &&
-          !this.state.finishedPrompts.includes(this.state.prompts[2].key)
-        ) {
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[2].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[3].key);
-<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[3].keyword) &&
             !text.includes("you") &&
             !this.state.finishedPrompts.includes(this.state.prompts[3].key)) {
-=======
-        } else if (
-          this.state.prompts[3].keyword &&
-          !this.state.finishedPrompts.includes(this.state.prompts[3].key)
-        ) {
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[3].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[4].key);
-<<<<<<< HEAD
         } else if (text.includes(this.state.prompts[4].keyword) &&
             !this.state.finishedPrompts.includes(this.state.prompts[4].key)) {
-=======
-        } else if (
-          this.state.prompts[4].keyword &&
-          !this.state.finishedPrompts.includes(this.state.prompts[4].key)
-        ) {
->>>>>>> 47484377c4bc7da72c2a00325213493c2df02a64
           this.state.finishedPrompts.push(this.state.prompts[4].key);
           this.state.activePrompts.splice(0, 1);
           this.state.activePrompts.push(this.state.prompts[5].key);
-        } else if (
-          this.state.finishedPrompts.length ===
-          this.state.prompts.length - 1
-        ) {
+        } else if (this.state.finishedPrompts.length === this.state.prompts.length - 1) {
           this.state.finishedPrompts.push(this.state.prompts[5].key);
           this.state.activePrompts.splice(0, 1);
         }
