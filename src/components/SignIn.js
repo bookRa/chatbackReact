@@ -6,6 +6,7 @@ import "./App.css";
 import FormField from "./FormField";
 
 import { auth } from "../firebase";
+import { SignInScreen } from "../firebase/fbui";
 import * as routes from "../constants/routes";
 
 const SignInPage = ({ history }) => {
@@ -15,6 +16,7 @@ const SignInPage = ({ history }) => {
       <SignInForm history={history} />
       <PasswordForgetLink />
       <SignUpLink />
+      <SignInScreen />
     </div>
   );
 };

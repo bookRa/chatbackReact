@@ -40,8 +40,8 @@ const HomePage = ({ match }) => {
               id="enterChatInner"
               className="signBtn"
               to={{
-                pathname: routes.CHAT,
-                state: { convoId: "dev_chat_02" }
+                pathname: '/chat',//routes.CHAT,
+                state: { convoId: "dev_chat_02", partner: 'developer' }
               }}
             >
               Enter Dev Chat

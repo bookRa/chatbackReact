@@ -23,7 +23,7 @@ class Chat extends Component {
       activeResponses: [],
       finishedResponses: [],
       convoId: myConvId || "dev_chat_02",
-      partner: props.location.state.partner,
+      partner: props.location.state.partner || "unknown",
       messages: {},
       user: {},
       selectedButtons: []
