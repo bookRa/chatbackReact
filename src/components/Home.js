@@ -3,7 +3,6 @@ import "./Home.css";
 import "./App.css";
 import "./Navigation.css";
 
-// import withAuthorization from "./withAuthorization";
 import withAuthorization from "./withAuthorization";
 
 import { Link, Redirect } from "react-router-dom";

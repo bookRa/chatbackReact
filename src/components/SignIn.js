@@ -16,7 +16,7 @@ const SignInPage = ({ history }) => {
       <SignInForm history={history} />
       <PasswordForgetLink />
       <SignUpLink />
-      <SignInScreen />
+      <SignInScreen history = {history}/>
     </div>
   );
 };
