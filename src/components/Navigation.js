@@ -64,7 +64,7 @@ const NavigationAuth = props => (
           <Link className="menu-item" to={routes.ACCOUNT}>
             My account
           </Link>
-          <SignOutButton />
+          <SignOutButton user= {props.user}/>
         </div>
       </div>
     </div>

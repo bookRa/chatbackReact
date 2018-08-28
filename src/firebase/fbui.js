@@ -23,7 +23,7 @@ export class SignInScreen extends React.Component {
     },
       // We will display Email and Phone as auth providers.
       signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        // firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.PhoneAuthProvider.PROVIDER_ID
       ],
       signInSuccessUrl: '/account'
@@ -45,9 +45,11 @@ export class SignInScreen extends React.Component {
     const {history} = this.props; 
     return (
       <div>
-        <h3>OBLAH in with phone </h3>
+        <h3>Or Sign in with a phone number </h3>
         <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
       </div>
     );
   }
 }
+
+// Todo: Implement this on the Signup Screen. Unify the two.
