@@ -1,16 +1,69 @@
 export const PROMPTS = [
+  /*
   {
     key: "concerns",
-    keyword: "concern",
     mainBtn: {
       key: "I'm concerned...",
       value: "I'm concerned that ",
-      tooltip: "Share a concern that's causing stress, worry, or low mood"
+      tooltip: "Share a concern causing stress, worry, or low mood. (They’re going to share with you, too)"
+    },
+    response: {
+      key: "concernsResponse",
+      btn: {
+        key: "You're concerned...",
+        value: "You're concerned that ",
+        tooltip: "Summarize their concern in your own words"
+      }
     }
   },
   {
+    key: "wants",
+    mainBtn: {
+      key: "I want to feel...",
+      value: "I want to feel ",
+      tooltip: "Describe the one feeling you most want in this situation. (You can add more later)"
+    },
+    btns: [
+      { key: "amused", value: "amused " },
+      { key: "appreciated", value: "appreciated " },
+      { key: "aware", value: "aware " },
+      { key: "cheerful", value: "cheerful " },
+      { key: "confident", value: "confident " },
+      { key: "content", value: "content " },
+      { key: "creative", value: "creative " },
+      { key: "daring", value: "daring " },
+      { key: "discerning", value: "discerning " },
+      { key: "energetic", value: "energetic " },
+      { key: "excited", value: "excited " },
+      { key: "fascinated", value: "fascinated " },
+      { key: "hopeful", value: "hopeful " },
+      { key: "important", value: "important " },
+      { key: "intimate", value: "intimate " },
+      { key: "joyful", value: "joyful " },
+      { key: "loving", value: "loving " },
+      { key: "nurturing", value: "nurturing " },
+      { key: "optimistic", value: "optimistic " },
+      { key: "peaceful", value: "peaceful " },
+      { key: "pensive", value: "pensive " },
+      { key: "playful", value: "playful " },
+      { key: "powerful", value: "powerful " },
+      { key: "proud", value: "proud " },
+      { key: "relaxed", value: "relaxed " },
+      { key: "respected", value: "respected " },
+      { key: "responsive", value: "responsive " },
+      { key: "secure", value: "secure " },
+      { key: "sensuous", value: "sensuous " },
+      { key: "serene", value: "serene " },
+      { key: "successful", value: "successful " },
+      { key: "thankful", value: "thankful " },
+      { key: "thoughtful", value: "thoughtful " },
+      { key: "trusting", value: "trusting " },
+      { key: "valuable", value: "valuable " },
+      { key: "worthwhile", value: "worthwhile " }
+    ]
+  },
+  {
     key: "thoughts",
-    keyword: "think",
     mainBtn: {
       key: "I'm thinking...",
       value: "I'm thinking ",
@@ -47,11 +100,18 @@ export const PROMPTS = [
         value: "a worst case scenario thought that ",
         tooltip: "Believing the worst is going to happen"
       }
-    ]
+    ],
+    response: {
+      key: "thoughtsResponse",
+      btn: {
+        key: "You're thinking...",
+        value: "You're thinking that ",
+        tooltip: "Summarize their thought in your own words"
+      }
+    }
   },
   {
     key: "feelings",
-    keyword: "feel",
     mainBtn: {
       key: "I'm feeling...",
       value: "I'm feeling ",
@@ -96,62 +156,22 @@ export const PROMPTS = [
       { key: "stupid", value: "stupid " },
       { key: "submissive", value: "submissive " },
       { key: "tired", value: "tired " }
-    ]
-  },
-  {
-    key: "wants",
-    keyword: "feel",
-    mainBtn: {
-      key: "I want to feel...",
-      value: "I want to feel ",
-      tooltip: "Find the feelings that you want your thoughts to cause"
-    },
-    btns: [
-      { key: "amused", value: "amused " },
-      { key: "appreciated", value: "appreciated " },
-      { key: "aware", value: "aware " },
-      { key: "cheerful", value: "cheerful " },
-      { key: "confident", value: "confident " },
-      { key: "content", value: "content " },
-      { key: "creative", value: "creative " },
-      { key: "daring", value: "daring " },
-      { key: "discerning", value: "discerning " },
-      { key: "energetic", value: "energetic " },
-      { key: "excited", value: "excited " },
-      { key: "fascinated", value: "fascinated " },
-      { key: "hopeful", value: "hopeful " },
-      { key: "important", value: "important " },
-      { key: "intimate", value: "intimate " },
-      { key: "joyful", value: "joyful " },
-      { key: "loving", value: "loving " },
-      { key: "nurturing", value: "nurturing " },
-      { key: "optimistic", value: "optimistic " },
-      { key: "peaceful", value: "peaceful " },
-      { key: "pensive", value: "pensive " },
-      { key: "playful", value: "playful " },
-      { key: "powerful", value: "powerful " },
-      { key: "proud", value: "proud " },
-      { key: "relaxed", value: "relaxed " },
-      { key: "respected", value: "respected " },
-      { key: "responsive", value: "responsive " },
-      { key: "secure", value: "secure " },
-      { key: "sensuous", value: "sensuous " },
-      { key: "serene", value: "serene " },
-      { key: "successful", value: "successful " },
-      { key: "thankful", value: "thankful " },
-      { key: "thoughtful", value: "thoughtful " },
-      { key: "trusting", value: "trusting " },
-      { key: "valuable", value: "valuable " },
-      { key: "worthwhile", value: "worthwhile " }
-    ]
+    ],
+    response: {
+      key: "feelingsResponse",
+      btn: {
+        key: "You're feeling...",
+        value: "You're feeling like ",
+        tooltip: "Summarize their feelings in your own words"
+      }
+    }
   },
   {
     key: "strategies",
-    keyword: "try",
     mainBtn: {
       key: "I'll try...",
       value: "I'll try ",
-      tooltip: "Share one thing you'll try"
+      tooltip: "Choose a strategy to try as a next step."
     },
     btns: [
       {
@@ -167,8 +187,7 @@ export const PROMPTS = [
       {
         key: "A social strategy",
         value: "a social strategy of ",
-        tooltip:
-          "Reaching out to supportive people, or changing your social scene"
+        tooltip: "Reaching out to supportive people, or changing your social scene"
       }
     ]
   },
@@ -178,6 +197,437 @@ export const PROMPTS = [
       key: "Thank you!",
       value: "Thank you! ",
       tooltip: "Thank your partner in your own words"
+    }
+  }
+  */
+  {
+    key: "concerns",
+    mainBtn: {
+      key: "I'm concerned...",
+      value: "I'm concerned that ",
+      tooltip: "Share a concern causing stress, worry, or low mood. (They’re going to share with you, too)"
+    },
+    response: {
+      key: "concernsResponse",
+      mainBtn: {
+        key: "Respond to concerns...",
+        value: "",
+        tooltip: "Summarize your chat buddy's concerns in your own words"
+      },
+      btns: [
+        {key: "I hear...", value: "I hear that "},
+        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "You're saying...", value: "You're saying that "},
+        {key: "I wish...", value: "I wish that "}
+      ]
+    }
+  },
+  {
+    key: "wants",
+    mainBtn: {
+      key: "I want to feel...",
+      value: "I want to feel ",
+      tooltip: "Describe the one feeling you most want in this situation. (You can add more later)",
+      tail: "because "
+    },
+    btns: [
+      { key: "Add my own:", value: "", editable: ""},
+      { key: "Amused", value: "amused " },
+      { key: "Appreciated", value: "appreciated " },
+      { key: "Aware", value: "aware " },
+      { key: "Cheerful", value: "cheerful " },
+      { key: "Confident", value: "confident " },
+      { key: "Content", value: "content " },
+      { key: "Creative", value: "creative " },
+      { key: "Daring", value: "daring " },
+      { key: "Discerning", value: "discerning " },
+      { key: "Energetic", value: "energetic " },
+      { key: "Excited", value: "excited " },
+      { key: "Fascinated", value: "fascinated " },
+      { key: "Hopeful", value: "hopeful " },
+      { key: "Important", value: "important " },
+      { key: "Intimate", value: "intimate " },
+      { key: "Joyful", value: "joyful " },
+      { key: "Loving", value: "loving " },
+      { key: "Nurturing", value: "nurturing " },
+      { key: "Optimistic", value: "optimistic " },
+      { key: "Peaceful", value: "peaceful " },
+      { key: "Pensive", value: "pensive " },
+      { key: "Playful", value: "playful " },
+      { key: "Powerful", value: "powerful " },
+      { key: "Proud", value: "proud " },
+      { key: "Relaxed", value: "relaxed " },
+      { key: "Respected", value: "respected " },
+      { key: "Responsive", value: "responsive " },
+      { key: "Secure", value: "secure " },
+      { key: "Sensuous", value: "sensuous " },
+      { key: "Serene", value: "serene " },
+      { key: "Successful", value: "successful " },
+      { key: "Thankful", value: "thankful " },
+      { key: "Thoughtful", value: "thoughtful " },
+      { key: "Trusting", value: "trusting " },
+      { key: "Valuable", value: "valuable " },
+      { key: "Worthwhile", value: "worthwhile " }
+    ],
+    double: {
+      key: "wantsDouble",
+      mainBtn: {
+        key: "Add a feeling",
+        value: "I also want to feel ",
+        tooltip: "Add feelings you want to have."
+      },
+      btns: [
+        { key: "Add my own:", value: "", editable: ""},
+        { key: "Amused", value: "amused " },
+        { key: "Appreciated", value: "appreciated " },
+        { key: "Aware", value: "aware " },
+        { key: "Cheerful", value: "cheerful " },
+        { key: "Confident", value: "confident " },
+        { key: "Content", value: "content " },
+        { key: "Creative", value: "creative " },
+        { key: "Daring", value: "daring " },
+        { key: "Discerning", value: "discerning " },
+        { key: "Energetic", value: "energetic " },
+        { key: "Excited", value: "excited " },
+        { key: "Fascinated", value: "fascinated " },
+        { key: "Hopeful", value: "hopeful " },
+        { key: "Important", value: "important " },
+        { key: "Intimate", value: "intimate " },
+        { key: "Joyful", value: "joyful " },
+        { key: "Loving", value: "loving " },
+        { key: "Nurturing", value: "nurturing " },
+        { key: "Optimistic", value: "optimistic " },
+        { key: "Peaceful", value: "peaceful " },
+        { key: "Pensive", value: "pensive " },
+        { key: "Playful", value: "playful " },
+        { key: "Powerful", value: "powerful " },
+        { key: "Proud", value: "proud " },
+        { key: "Relaxed", value: "relaxed " },
+        { key: "Respected", value: "respected " },
+        { key: "Responsive", value: "responsive " },
+        { key: "Secure", value: "secure " },
+        { key: "Sensuous", value: "sensuous " },
+        { key: "Serene", value: "serene " },
+        { key: "Successful", value: "successful " },
+        { key: "Thankful", value: "thankful " },
+        { key: "Thoughtful", value: "thoughtful " },
+        { key: "Trusting", value: "trusting " },
+        { key: "Valuable", value: "valuable " },
+        { key: "Worthwhile", value: "worthwhile " }
+      ]
+    },
+    response: {
+      key: "wantsResponse",
+      mainBtn: {
+        key: "Respond to wants...",
+        value: "",
+        tooltip: "Summarize your chat buddy's wants in your own words"
+      },
+      btns: [
+        {key: "I hear...", value: "I hear that "},
+        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "You're saying...", value: "You're saying that "},
+        {key: "I wish...", value: "I wish that "}
+      ]
+    }
+  },
+  {
+    key: "thinking",
+    mainBtn: {
+      key: "I'm thinking...",
+      value: "I'm thinking ",
+      tooltip: "Describe your thoughts--the things you’re telling yourself--about the situation."
+    }
+  },
+  { 
+    key: "thoughts",
+    mainBtn: {
+      key: "My thought is...",
+      tooltip: "Choose a type of thought that fits for your state of mind.",
+      tail: "fits my thought because "
+    },
+    btns: [
+      {
+        key: "Add my own",
+        value: "",
+        tooltip: "",
+        editable: ""
+      },
+      {
+        key: "An all or nothing thought",
+        value: "an all or nothing thought ",
+        tooltip: "Simplifying into two extremes (e.g. either all good/all bad)"
+      },
+      {
+        key: "A blaming thought",
+        value: "a blaming thought ",
+        tooltip: "Faulting a single source for all the trouble"
+      },
+      {
+        key: "A mind reading thought",
+        value: "a mind reading thought ",
+        tooltip: "Assuming you know people’s reasons or judgments"
+      },
+      {
+        key: "An overgeneralizing thought",
+        value: "an overgeneralizing thought ",
+        tooltip: "Thinking all incidents will be exactly like the one incident"
+      },
+      {
+        key: "A personalizing thought",
+        value: "a personalizing thought ",
+        tooltip: "Thinking a bad outcome results from a bad in you"
+      },
+      {
+        key: "A worst case scenario thought",
+        value: "a worst case scenario thought ",
+        tooltip: "Believing the worst is going to happen"
+      }
+    ],
+    double: {
+      key: "thoughtsDouble",
+      mainBtn: {
+        key: "Add a thought",
+        value: "I’m also having ",
+        tooltip: "Add types of thoughts that fit.",
+        tail: "because "
+      },
+      btns: [
+        {
+          key: "Add my own",
+          value: "",
+          tooltip: "",
+          editable: ""
+        },
+        {
+          key: "An all or nothing thought",
+          value: "an all or nothing thought ",
+          tooltip: "Simplifying into two extremes (e.g. either all good/all bad)"
+        },
+        {
+          key: "A blaming thought",
+          value: "a blaming thought ",
+          tooltip: "Faulting a single source for all the trouble"
+        },
+        {
+          key: "A mind reading thought",
+          value: "a mind reading thought ",
+          tooltip: "Assuming you know people’s reasons or judgments"
+        },
+        {
+          key: "An overgeneralizing thought",
+          value: "an overgeneralizing thought ",
+          tooltip: "Thinking all incidents will be exactly like the one incident"
+        },
+        {
+          key: "A personalizing thought",
+          value: "a personalizing thought ",
+          tooltip: "Thinking a bad outcome results from a bad in you"
+        },
+        {
+          key: "A worst case scenario thought",
+          value: "a worst case scenario thought ",
+          tooltip: "Believing the worst is going to happen"
+        }
+      ]
+    },
+    response: {
+      key: "thoughtsResponse",
+      mainBtn: {
+        key: "Respond to thoughts...",
+        value: "",
+        tooltip: "Summarize your chat buddy's thoughts in your own words"
+      },
+      btns: [
+        {key: "I hear...", value: "I hear that "},
+        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "You're saying...", value: "You're saying that "},
+        {key: "I wish...", value: "I wish that "}
+      ]
+    }
+  },
+  {
+    key: "feelings",
+    mainBtn: {
+      key: "My feeling is...",
+      tooltip: "Choose your biggest feeling right now. (You can add more later)",
+      tail: "is my biggest feeling because ",
+      tailPlural: "are my biggest feelings because "
+    },
+    btns: [
+      { key: "Add my own:", value: "", editable: ""},
+      { key: "Angry", value: "angry " },
+      { key: "Anxious", value: "anxious " },
+      { key: "Apathetic", value: "apathetic " },
+      { key: "Ashamed", value: "ashamed " },
+      { key: "Bewildered", value: "bewildered " },
+      { key: "Bored", value: "bored " },
+      { key: "Confused", value: "confused " },
+      { key: "Critical", value: "critical " },
+      { key: "Depressed", value: "depressed " },
+      { key: "Discouraged", value: "discouraged " },
+      { key: "Distant", value: "distant " },
+      { key: "Embarrassed", value: "embarrassed " },
+      { key: "Frustrated", value: "frustrated " },
+      { key: "Guilty", value: "guilty " },
+      { key: "Hateful", value: "hateful " },
+      { key: "Helpless", value: "helpless " },
+      { key: "Hostile", value: "hostile " },
+      { key: "Hurt", value: "hurt " },
+      { key: "Inadequate", value: "inadequate " },
+      { key: "Inferior", value: "inferior " },
+      { key: "Insecure", value: "insecure " },
+      { key: "Insignificant", value: "insignificant " },
+      { key: "Irritated", value: "irritated " },
+      { key: "Isolated", value: "isolated " },
+      { key: "Jealous", value: "jealous " },
+      { key: "Lonely", value: "lonely " },
+      { key: "Mad", value: "mad " },
+      { key: "Overwhelmed", value: "overwhelmed " },
+      { key: "Rejected", value: "rejected " },
+      { key: "Remorseful", value: "remorseful " },
+      { key: "Sad", value: "sad " },
+      { key: "Sarcastic", value: "sarcastic " },
+      { key: "Scared", value: "scared " },
+      { key: "Selfish", value: "selfish " },
+      { key: "Sleepy", value: "sleepy " },
+      { key: "Stupid", value: "stupid " },
+      { key: "Submissive", value: "submissive " },
+      { key: "Tired", value: "tired " }
+    ],
+    double: {
+      key: "feelingsDouble",
+      mainBtn: {
+        key: "Add a feeling",
+        value: "I'm also feeling ",
+        tooltip: "Add feelings you're having"
+      },
+      btns: [
+        { key: "Add my own:", value: "", editable: ""},
+        { key: "Angry", value: "angry " },
+        { key: "Anxious", value: "anxious " },
+        { key: "Apathetic", value: "apathetic " },
+        { key: "Ashamed", value: "ashamed " },
+        { key: "Bewildered", value: "bewildered " },
+        { key: "Bored", value: "bored " },
+        { key: "Confused", value: "confused " },
+        { key: "Critical", value: "critical " },
+        { key: "Depressed", value: "depressed " },
+        { key: "Discouraged", value: "discouraged " },
+        { key: "Distant", value: "distant " },
+        { key: "Embarrassed", value: "embarrassed " },
+        { key: "Frustrated", value: "frustrated " },
+        { key: "Guilty", value: "guilty " },
+        { key: "Hateful", value: "hateful " },
+        { key: "Helpless", value: "helpless " },
+        { key: "Hostile", value: "hostile " },
+        { key: "Hurt", value: "hurt " },
+        { key: "Inadequate", value: "inadequate " },
+        { key: "Inferior", value: "inferior " },
+        { key: "Insecure", value: "insecure " },
+        { key: "Insignificant", value: "insignificant " },
+        { key: "Irritated", value: "irritated " },
+        { key: "Isolated", value: "isolated " },
+        { key: "Jealous", value: "jealous " },
+        { key: "Lonely", value: "lonely " },
+        { key: "Mad", value: "mad " },
+        { key: "Overwhelmed", value: "overwhelmed " },
+        { key: "Rejected", value: "rejected " },
+        { key: "Remorseful", value: "remorseful " },
+        { key: "Sad", value: "sad " },
+        { key: "Sarcastic", value: "sarcastic " },
+        { key: "Scared", value: "scared " },
+        { key: "Selfish", value: "selfish " },
+        { key: "Sleepy", value: "sleepy " },
+        { key: "Stupid", value: "stupid " },
+        { key: "Submissive", value: "submissive " },
+        { key: "Tired", value: "tired " }
+      ] 
+    },
+    response: {
+      key: "feelingsResponse",
+      mainBtn: {
+        key: "Respond to feelings...",
+        value: "",
+        tooltip: "Summarize your chat buddy's feelings in your own words"
+      },
+      btns: [
+        {key: "I hear...", value: "I hear that "},
+        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "You're saying...", value: "You're saying that "},
+        {key: "I wish...", value: "I wish that "}
+      ]
+    }
+  },
+  {
+    key: "suggestions",
+    mainBtn: {
+      key: "I'd try...",
+      value: "I'd try (in your situation) ",
+      tooltip: "Share some ideas with your chat partner"
+    },
+    btns: [
+      {
+        key: "Add my own",
+        value: "",
+        tooltip: "",
+        editable: ""
+      },
+      {
+        key: "Reaching out to allies",
+        value: "reaching out to allies ",
+        tooltip: ""
+      },
+      {
+        key: "A new action",
+        value: "a new action ",
+        tooltip: ""
+      },
+      {
+        key: "Self-care",
+        value: "self-care ",
+        tooltip: ""
+      }
+    ]
+  },
+  {
+    key: "strategies",
+    mainBtn: {
+      key: "I'll try...",
+      value: "I'll try ",
+      tooltip: "Choose a strategy to try as a next step",
+      tail: "My next step is to "
+    },
+    btns: [
+      {
+        key: "Add my own",
+        value: "",
+        tooltip: "",
+        editable: ""
+      },
+      {
+        key: "An action strategy",
+        value: "an action strategy ",
+        tooltip: "A plan, behavior, timeline, or difference in your body"
+      },
+      {
+        key: "A mindful strategy",
+        value: "a mindful strategy ",
+        tooltip: "A new thought, reflection, or state of mind"
+      },
+      {
+        key: "A social strategy",
+        value: "a social strategy ",
+        tooltip: "Reaching out to supportive people, or changing your social scene"
+      }
+    ]
+  },
+  {
+    key: "closer",
+    mainBtn: {
+      key: "Thank you!",
+      value: "Thank you! ",
+      tooltip: "Thank your chat buddy and encourage them :)"
     }
   }
 ];

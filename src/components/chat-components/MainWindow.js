@@ -1,14 +1,20 @@
 import React from "react";
 import Ribbon from "./Ribbon";
 import ChatBubble from "./ChatBubble";
+import IndexCard from "./IndexCard";
 //import Slider from "./Slider";
 
 
 const mainWindow = props => {
-  console.log(props.activeResponses);
   return (
     <div className="mainWindow">
       <div id="chatWindow">
+        <IndexCard
+          id="welcome"
+          classes="indexCard"
+          title="Welcome! Say hello to your chat buddy. Then, share your concern by selecting that button."
+          submit={props.submit}
+        />
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
             if (props.user.displayName === props.messages[key].senderName) {
@@ -33,9 +39,9 @@ const mainWindow = props => {
           prompts={props.prompts}
           activePrompts={props.activePrompts}
           finishedPrompts={props.finishedPrompts}
-          responses={props.responses}
-          activeResponses={props.activeResponses}
-          finishedResponses={props.finishedResponses}
+          //responses={props.responses}
+          //activeResponses={props.activeResponses}
+          //finishedResponses={props.finishedResponses}
           clicked={e => props.clicked(e)}
         />
       </div>

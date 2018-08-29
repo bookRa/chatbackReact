@@ -12,7 +12,8 @@ const buttonContainer = props =>
 			key={props.btns[index].key}
 			value={props.btns[index].value}
 			title={props.btns[index].tooltip}
-			clickfunc={(e) => props.clicked(e)}
+			editable={props.btns[index].editable}
+			clicked={props.clicked}
 		/>
     );
   });

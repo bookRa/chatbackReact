@@ -5,7 +5,7 @@ import "./IndexCard.css"
 
 const indexCard = (props) => {
 	return (
-		<div id={props.id + "Card"} className="indexCard hidden">
+		<div id={props.id + "Card"} className={props.classes}>
 			<button className="exitBtn btn" onClick={props.submit}>Exit</button>
 			{props.btns !== undefined ? (
 				<div className="indexContainer">

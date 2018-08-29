@@ -8,37 +8,68 @@ const ribbon = (props) => {
 	var prompts = props.prompts;
 	var activePrompts = props.activePrompts;
 	var finishedPrompts = props.finishedPrompts;
-	var responses = props.responses;
-
-	var activeResponses = props.activeResponses;
-	console.log(props.activeResponses)
-	var finishedResponses = props.finishedResponses;
+	//var responses = props.responses;
+	//var activeResponses = props.activeResponses;
+	//var finishedResponses = props.finishedResponses;
 	for (var i = 0; i < activePrompts.length; i++) {
 		var activePrompt = activePrompts[i];
-		var keyFound = false;
-		var index = 0;
-		while (!keyFound && !finishedPrompts.includes(activePrompt)) {
-			var key = prompts[index].key;
-			if (key === activePrompt) {
-				keyFound = true;
-				promptContainers.push(
-					<RibbonButton
-						activePrompt={activePrompt}
-						classes="promptButton ribbonButton btn"
-						name={prompts[index].mainBtn.key}
-						key={prompts[index].mainBtn.key}
-						value={prompts[index].mainBtn.value}
-						title={prompts[index].mainBtn.tooltip}
-						clicked={props.clicked}
-						clickfunc={(e) => props.clicked(e)}
-						submit={props.submit}
-						btns={prompts[index].btns}
-					/>
-				);
+		for (var j = 0; j < prompts.length; j++) {
+			if (!finishedPrompts.includes(activePrompt)) {
+				if (prompts[j].key === activePrompt) {
+					promptContainers.push(
+						<RibbonButton
+							activePrompt={activePrompt}
+							classes="promptButton ribbonButton btn"
+							name={prompts[j].mainBtn.key}
+							key={prompts[j].mainBtn.key}
+							value={prompts[j].mainBtn.value}
+							title={prompts[j].mainBtn.tooltip}
+							clicked={props.clicked}
+							clickfunc={(e) => props.clicked(e)}
+							submit={props.submit}
+							btns={prompts[j].btns}
+						/>
+					);
+				}
+				if (prompts[j].response !== undefined) {
+					if (prompts[j].response.key === activePrompt) {
+						promptContainers.push(
+							<RibbonButton
+								activePrompt={activePrompt}
+								classes="responseButton ribbonButton btn"
+								name={prompts[j].response.mainBtn.key}
+								key={prompts[j].response.key}
+								value={prompts[j].response.mainBtn.value}
+								title={prompts[j].response.mainBtn.tooltip}
+								btns={prompts[j].response.btns}
+								clicked={props.clicked}
+								clickfunc={(e) => props.clicked(e)}
+								submit={props.submit}
+							/>
+						);
+					}
+				}
+				if (prompts[j].double !== undefined) {
+					if (prompts[j].double.key === activePrompt) {
+						promptContainers.push(
+							<RibbonButton
+								activePrompt={activePrompt}
+								classes="doubleButton ribbonButton btn"
+								name={prompts[j].double.mainBtn.key}
+								key={prompts[j].double.key}
+								value={prompts[j].double.mainBtn.value}
+								title={prompts[j].double.mainBtn.tooltip}
+								btns={prompts[j].double.btns}
+								clicked={props.clicked}
+								clickfunc={(e) => props.clicked(e)}
+								submit={props.submit}
+							/>
+						);
+					}
+				}
 			}
-			index++;
 		}
-	}
+	}/*
 	for (var j = 0; j < activeResponses.length; j++) {
 		var activeResponse = activeResponses[j];
 		var responseKeyFound = false;
@@ -62,7 +93,7 @@ const ribbon = (props) => {
 			}
 			responseIndex++;
 		}
-	}
+	}*/
   	return promptContainers;
 };
 

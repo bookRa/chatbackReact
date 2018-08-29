@@ -3,7 +3,7 @@ import MainWindow from "./chat-components/MainWindow";
 //import StageHandler from "./chat-components/StageHandler";
 import { withRouter } from "react-router-dom";
 import { PROMPTS } from "../constants/prompts";
-import { RESPONSES } from "../constants/responses";
+//import { RESPONSES } from "../constants/responses";
 import "./Chat.css";
 import AuthUserContext from "./AuthUserContext";
 import { db } from "../firebase";
@@ -17,242 +17,16 @@ class Chat extends Component {
     let myConvId = props.location.state.convoId;
     this.state = {
       prompts: PROMPTS,
-      activePrompts: ["concerns"],
+      activePrompts: ["concerns", "concernsResponse"],
       finishedPrompts: [],
-      responses: RESPONSES,
-      activeResponses: [],
-      finishedResponses: [],
       convoId: myConvId || "dev_chat_02",
       partner: props.location.state.partner,
       messages: {},
       user: {},
+      pushedButtons: [],
       selectedButtons: []
-      };
+    };
   }
-  /* Kyler: This prompts collection has to be stored in a seperate file, in ./constants for now */
-  state = {
-    prompts: [
-      {
-        key: "concerns",
-        keyword: "concern",
-        mainBtn: {
-          key: "I'm concerned...",
-          value: "I'm concerned that ",
-          tooltip: "Share a concern that's causing stress, worry, or low mood"
-        }
-      },
-      {
-        key: "thoughts",
-        keyword: "think",
-        mainBtn: {
-            key: "I'm thinking...",
-            value: "I'm thinking ",
-            tooltip: "Find a type of thought that fits your state of mind"
-        },
-        btns: [
-          {
-            key: "An all or nothing thought",
-            value: "an all or nothing thought that ",
-            tooltip:
-              "Simplifying into two extremes (e.g. either all good/all bad)"
-          },
-          {
-            key: "A blaming thought",
-            value: "a blaming thought that ",
-            tooltip: "Faulting a single source for all the trouble"
-          },
-          {
-            key: "A mind reading thought",
-            value: "a mind reading thought that ",
-            tooltip: "Assuming you know people’s reasons or judgments"
-          },
-          {
-            key: "An overgeneralizing thought",
-            value: "an overgeneralizing thought that ",
-            tooltip:
-              "Thinking all incidents will be exactly like the one incident"
-          },
-          {
-            key: "A personalizing thought",
-            value: "a personalizing thought that ",
-            tooltip: "Thinking a bad outcome results from a bad in you"
-          },
-          {
-            key: "A worst case scenario thought",
-            value: "a worst case scenario thought that ",
-            tooltip: "Believing the worst is going to happen"
-          }
-        ]
-      },
-      {
-        key: "feelings",
-        keyword: "feel",
-        mainBtn: {
-          key: "I'm feeling...",
-          value: "I'm feeling ",
-          tooltip: "Find the feelings caused by your thoughts"
-        },
-        btns: [
-          { key: "angry", value: "angry " },
-          { key: "anxious", value: "anxious " },
-          { key: "apathetic", value: "apathetic " },
-          { key: "ashamed", value: "ashamed " },
-          { key: "bewildered", value: "bewildered " },
-          { key: "bored", value: "bored " },
-          { key: "confused", value: "confused " },
-          { key: "critical", value: "critical " },
-          { key: "depressed", value: "depressed " },
-          { key: "discouraged", value: "discouraged " },
-          { key: "distant", value: "distant " },
-          { key: "embarrassed", value: "embarrassed " },
-          { key: "frustrated", value: "frustrated " },
-          { key: "guilty", value: "guilty " },
-          { key: "hateful", value: "hateful " },
-          { key: "helpless", value: "helpless " },
-          { key: "hostile", value: "hostile " },
-          { key: "hurt", value: "hurt " },
-          { key: "inadequate", value: "inadequate " },
-          { key: "inferior", value: "inferior " },
-          { key: "insecure", value: "insecure " },
-          { key: "insignificant", value: "insignificant " },
-          { key: "irritated", value: "irritated " },
-          { key: "isolated", value: "isolated " },
-          { key: "jealous", value: "jealous " },
-          { key: "lonely", value: "lonely " },
-          { key: "mad", value: "mad " },
-          { key: "overwhelmed", value: "overwhelmed " },
-          { key: "rejected", value: "rejected " },
-          { key: "remorseful", value: "remorseful " },
-          { key: "sad", value: "sad " },
-          { key: "sarcastic", value: "sarcastic " },
-          { key: "scared", value: "scared " },
-          { key: "selfish", value: "selfish " },
-          { key: "sleepy", value: "sleepy " },
-          { key: "stupid", value: "stupid " },
-          { key: "submissive", value: "submissive " },
-          { key: "tired", value: "tired " }
-        ]
-      },
-      {
-        key: "wants",
-        keyword: "feel",
-        mainBtn: {
-          key: "I want to feel...",
-          value: "I want to feel ",
-          tooltip: "Find the feelings that you want your thoughts to cause"
-        },
-        btns: [
-          { key: "amused", value: "amused " },
-          { key: "appreciated", value: "appreciated " },
-          { key: "aware", value: "aware " },
-          { key: "cheerful", value: "cheerful " },
-          { key: "confident", value: "confident " },
-          { key: "content", value: "content " },
-          { key: "creative", value: "creative " },
-          { key: "daring", value: "daring " },
-          { key: "discerning", value: "discerning " },
-          { key: "energetic", value: "energetic " },
-          { key: "excited", value: "excited " },
-          { key: "fascinated", value: "fascinated " },
-          { key: "hopeful", value: "hopeful " },
-          { key: "important", value: "important " },
-          { key: "intimate", value: "intimate " },
-          { key: "joyful", value: "joyful " },
-          { key: "loving", value: "loving " },
-          { key: "nurturing", value: "nurturing " },
-          { key: "optimistic", value: "optimistic " },
-          { key: "peaceful", value: "peaceful " },
-          { key: "pensive", value: "pensive " },
-          { key: "playful", value: "playful " },
-          { key: "powerful", value: "powerful " },
-          { key: "proud", value: "proud " },
-          { key: "relaxed", value: "relaxed " },
-          { key: "respected", value: "respected " },
-          { key: "responsive", value: "responsive " },
-          { key: "secure", value: "secure " },
-          { key: "sensuous", value: "sensuous " },
-          { key: "serene", value: "serene " },
-          { key: "successful", value: "successful " },
-          { key: "thankful", value: "thankful " },
-          { key: "thoughtful", value: "thoughtful " },
-          { key: "trusting", value: "trusting " },
-          { key: "valuable", value: "valuable " },
-          { key: "worthwhile", value: "worthwhile " }
-        ]
-      },
-      {
-        key: "strategies",
-        keyword: "try",
-        mainBtn: {
-          key: "I'll try...",
-          value: "I'll try ",
-          tooltip: "Share one thing you'll try"
-        },
-        btns: [
-          {
-            key: "An action strategy",
-            value: "an action strategy of ",
-            tooltip: "A plan, behavior, timeline, or difference in your body"
-          },
-          {
-            key: "A mindful strategy",
-            value: "a mindful strategy of ",
-            tooltip: "A new thought, reflection, or state of mind"
-          },
-          {
-            key: "A social strategy",
-            value: "a social strategy of ",
-            tooltip:
-              "Reaching out to supportive people, or changing your social scene"
-          }
-        ]
-      },
-      {
-        key: "closer",
-        mainBtn: {
-          key: "Thank you!",
-          value: "Thank you! ",
-          tooltip: "Thank your partner in your own words"
-        }
-      }
-    ],
-    responses: [
-      {
-        key: "concernsResponse",
-        keyword: "concern",
-        btn: {
-          key: "You're concerned...",
-          value: "You're concerned that ",
-          tooltip: "Summarize their concern in your own words"
-        }
-      },
-      {
-        key: "thoughtsResponse",
-        keyword: "think",
-        btn: {
-          key: "You're thinking...",
-          value: "You're thinking that ",
-          tooltip: "Summarize their thought in your own words"
-        }
-      },
-      {
-        key: "feelingsResponse",
-        keyword: "feel",
-        btn: {
-          key: "You're feeling...",
-          value: "You're feeling like ",
-          tooltip: "Summarize their feelings in your own words"
-        }
-      }
-    ],
-    messages: {},
-    user: {},
-    activePrompts: ["concerns"],
-    finishedPrompts: [],
-    activeResponses: [],
-    finishedResponses: [],
-    selectedButtons: []
-  };
 
   //subscribes to the firebase convoid upon loading **ID HARDCODED FOR NOW**
   componentDidMount() {
@@ -267,20 +41,22 @@ class Chat extends Component {
     db.convoSubscribe(this.state.convoId, storeMsgsAsState);
   }
 
-  addText = event => {
-    var button = event.target;
+  addText(e) {
+    var button = e.target;
     var textarea = document.getElementById("chatText");
     if (button.tagName === "B") {
-      button = event.target.parentElement;
+      button = button.parentElement;
+    } else if (button.tagName === "INPUT") {
+      button = button.parentElement.parentElement;
     }
     if (button.classList.contains("cardButton")) {
       if (button.classList.contains("pressed")) {
         button.classList.remove("pressed");
-        var index = this.state.selectedButtons.indexOf(button.value);
+        var index = this.state.selectedButtons.indexOf(button);
         this.state.selectedButtons.splice(index, 1);
       } else {
         button.classList.add("pressed");
-        this.state.selectedButtons.push(button.value);
+        this.state.selectedButtons.push(button);
       }
     } else {
       var card = document.getElementById(button.id + "Card");
@@ -288,23 +64,10 @@ class Chat extends Component {
         card.classList.remove("hidden");
       }
       button.classList.add("hidden");
+      this.state.pushedButtons.push(button.id);
       textarea.value += button.value;
     }
   };
-  /*
-  enterChat() {
-    var moodHelper = document.getElementById("moodHelper");
-    var preMoodSlider = document.getElementById("preMoodSlider");
-    var textarea = document.getElementById("chatText");
-    var ribbon = document.getElementById("ribbon");
-    if (!moodHelper.classList.contains("hidden")) {
-      moodHelper.classList.add("hidden");
-      preMoodSlider.classList.add("hidden");
-      event.target.classList.add("hidden");
-      textarea.classList.remove("hidden");
-      ribbon.classList.remove("hidden");
-    }
-  };*/
 
   exitIndexCard(e) {
     var selectedButtons = document.querySelectorAll(".pressed");
@@ -319,107 +82,174 @@ class Chat extends Component {
       card = e.target.parentElement;
     }
     card.classList.add("hidden");
+    var prompt = card.id.substr(0, card.id.length - 4);
+    for (var i = 0; i < this.state.prompts.length; i++) {
+      var double = this.state.prompts[i].double;
+      if (double !== undefined) {
+        if (double.key === (prompt + "Double")) {
+          this.state.activePrompts.push(double.key);
+        }
+      }
+    }
   }
 
   submitIndexCard(e) {
     this.exitIndexCard(e);
-    var textarea = document.getElementById("chatText")
-    for (var j = 0; j < this.state.selectedButtons.length; j++) {
-      var value = this.state.selectedButtons[j];
-      if (this.state.selectedButtons.length === 1) {
-        textarea.value += value.toLowerCase();
-      } else if (this.state.selectedButtons.length === 2) {
-        if (j === 0) {
-          textarea.value += value.toLowerCase() + "and ";
-        } else {
-          textarea.value += value.toLowerCase();
-        }
-      } else {
-        if (j < this.state.selectedButtons.length - 2) {
-          textarea.value +=
-            value.toLowerCase().substring(0, value.length - 1) + ", ";
-        } else if (j === this.state.selectedButtons.length - 2) {
-          textarea.value +=
-            value.toLowerCase().substring(0, value.length - 1) + ", and ";
-        } else {
-          textarea.value += value.toLowerCase();
+    var textarea = document.getElementById("chatText");
+    var selectedButtons = this.state.selectedButtons;
+    if (selectedButtons.length > 0) {
+      var prompt = selectedButtons[0].parentElement.parentElement.parentElement.parentElement;
+      prompt = prompt.id.substr(0, prompt.id.length - 4);
+      var string = "";
+      var tail = undefined;
+      var tailPlural = undefined;
+      for (var i = 0; i < this.state.prompts.length; i++) {
+        var key = this.state.prompts[i].key;
+        if (key === prompt) {
+          tail = this.state.prompts[i].mainBtn.tail;
+          tailPlural = this.state.prompts[i].mainBtn.tailPlural;
         }
       }
+      for (var j = 0; j < selectedButtons.length; j++) {
+        var value = selectedButtons[j].value;
+        if (value === "") {
+          if (selectedButtons[j].childNodes[4] !== undefined) {
+            value = selectedButtons[j].childNodes[4].childNodes[0].value + " ";
+          } else {
+            value = selectedButtons[j].childNodes[2].childNodes[0].value + " ";
+          }
+        }
+        if (selectedButtons.length === 1) {
+          if (tail !== undefined) {
+            if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
+              string += value.substr(0, value.length - 1) + ". ";
+            } else {
+              string += value;
+            }
+          } else {
+            string += value;
+          }
+        } else if (selectedButtons.length === 2) {
+          if (j === 0) {
+            string += value + "and ";
+          } else {
+            if (tail !== undefined) {
+              if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
+                string += value.substr(0, value.length - 1) + ". ";
+              } else {
+                string += value;
+              }
+            } else {
+              string += value;
+            }
+          }
+        } else {
+          if (j < selectedButtons.length - 2) {
+            string += value.substring(0, value.length - 1) + ", ";
+          } else if (j === selectedButtons.length - 2) {
+            string += value.substring(0, value.length - 1) + ", and ";
+          } else {
+            if (tail !== undefined) {
+              if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
+                string += value.substr(0, value.length - 1) + ". ";
+              } else {
+                string += value;
+              }
+            } else {
+              string += value;
+            }
+          }
+        }
+      }
+      if (tail !== undefined) {
+        if (tailPlural !== undefined) {
+          if (selectedButtons.length === 1) {
+            string += tail;
+          } else {
+            string += tailPlural;
+          }
+        } else {
+          string += tail;
+        }
+      }
+      if (textarea.value === "" || textarea.value.slice(-2) === ". ") {
+        textarea.value += string.charAt(0).toUpperCase() + string.slice(1);
+      } else if (textarea.value.slice(-1) === ".") {
+        textarea.value += " " + string.charAt(0).toUpperCase() + string.slice(1);
+      } else {
+        textarea.value += string;
+      }
+      this.setState({ selectedButtons: [] });
     }
-    this.setState({ selectedButtons: [] });
   }
 
   sendMessage = event => {
+    var cards = document.querySelectorAll(".indexCard");
+    for (var i = 0; i < cards.length; i++) {
+      var card = cards[i];
+      if (!card.classList.contains("hidden")) {
+        card.classList.add("hidden");
+      }
+    }
     var textarea = document.getElementById("chatText");
     if (event.which === 13 && event.shiftKey === false) {
       event.preventDefault();
       var msg = textarea.value;
       if (msg !== "") {
+        // checks if a prompt-button has been clicked then updates activePrompts/finishedPrompts
+        // to progress to next prompt
+        var prompts = this.state.prompts;
+        var activePrompts = this.state.activePrompts;
+        var finishedPrompts = this.state.finishedPrompts;
+        for (var i = 0; i < this.state.pushedButtons.length; i++) {
+          var id = this.state.pushedButtons[i];
+          for (var j = 0; j < prompts.length; j++) {
+            var prompt = prompts[j];
+            var double = prompt.double;
+            if (prompt.key === id) {
+              finishedPrompts.push(prompt.key);
+              activePrompts.splice(activePrompts.indexOf(prompt.key), 1);
+              if (double !== undefined) {
+                if (!finishedPrompts.includes(double.key)) {
+                  finishedPrompts.push(double.key);
+                  activePrompts.splice(activePrompts.indexOf(double.key), 1);
+                }
+              }
+              // edge case that does not execute for the last prompt
+              if (j !== prompts.length - 1) {
+                activePrompts.push(prompts[j+1].key);
+              }
+            }
+            if (prompt.response !== undefined) {
+              if (prompt.response.key === id) {
+                finishedPrompts.push(id);
+                activePrompts.splice(activePrompts.indexOf(id), 1);
+              }
+            }
+            if (double !== undefined) {
+              if (double.key === id) {
+                if (!finishedPrompts.includes(double.key)) {
+                  if (!finishedPrompts.includes(prompt.key)) {
+                    finishedPrompts.push(prompt.key);
+                    activePrompts.splice(activePrompts.indexOf(prompt.key), 1);
+                    if (j !== prompts.length - 1) {
+                      activePrompts.push(prompts[j+1].key);
+                    }
+                  }
+                  finishedPrompts.push(double.key);
+                  activePrompts.splice(activePrompts.indexOf(double.key), 1);
+                } 
+              }
+            }
+          }
+        }
         db.postMsg(
           this.state.convoId,
           msg,
           this.state.user.uid,
           this.state.user.displayName
         );
-        //repetitive prompt progression logic below-- could be made more dynamic?
-        var text = msg.toLowerCase();
-        if (text.includes(this.state.prompts[0].keyword) &&
-            !text.includes("you") &&
-            !this.state.finishedPrompts.includes(this.state.prompts[0].key)) {
-          this.state.finishedPrompts.push(this.state.prompts[0].key);
-          this.state.activePrompts.splice(0, 1);
-          this.state.activePrompts.push(this.state.prompts[1].key);
-        } else if (text.includes(this.state.prompts[1].keyword) &&
-            !text.includes("you") &&
-            !this.state.finishedPrompts.includes(this.state.prompts[1].key)) {
-          this.state.finishedPrompts.push(this.state.prompts[1].key);
-          this.state.activePrompts.splice(0, 1);
-          this.state.activePrompts.push(this.state.prompts[2].key);
-        } else if (text.includes(this.state.prompts[2].keyword) &&
-            !text.includes("you") &&
-            !this.state.finishedPrompts.includes(this.state.prompts[2].key)) {
-          this.state.finishedPrompts.push(this.state.prompts[2].key);
-          this.state.activePrompts.splice(0, 1);
-          this.state.activePrompts.push(this.state.prompts[3].key);
-        } else if (text.includes(this.state.prompts[3].keyword) &&
-            !text.includes("you") &&
-            !this.state.finishedPrompts.includes(this.state.prompts[3].key)) {
-          this.state.finishedPrompts.push(this.state.prompts[3].key);
-          this.state.activePrompts.splice(0, 1);
-          this.state.activePrompts.push(this.state.prompts[4].key);
-        } else if (text.includes(this.state.prompts[4].keyword) &&
-            !this.state.finishedPrompts.includes(this.state.prompts[4].key)) {
-          this.state.finishedPrompts.push(this.state.prompts[4].key);
-          this.state.activePrompts.splice(0, 1);
-          this.state.activePrompts.push(this.state.prompts[5].key);
-        } else if (this.state.finishedPrompts.length === this.state.prompts.length - 1) {
-          this.state.finishedPrompts.push(this.state.prompts[5].key);
-          this.state.activePrompts.splice(0, 1);
-        }
-        // <------ BELOW IS FOR DEV / TESTING PURPOSES ONLY -------->
-        if (text.includes(this.state.responses[0].keyword) &&
-            text.includes("you") &&
-            !this.state.finishedResponses.includes(this.state.responses[0].key)) {
-          this.state.finishedResponses.push(this.state.responses[0].key);
-          this.state.activeResponses.splice(0, 1);
-          this.state.activeResponses.push(this.state.responses[1].key)
-        } else if (text.includes(this.state.responses[1].keyword) &&
-            text.includes("you") &&
-            !this.state.finishedResponses.includes(this.state.responses[1].key)) {
-          this.state.finishedResponses.push(this.state.responses[1].key);
-          this.state.activeResponses.splice(0, 1);
-          this.state.activeResponses.push(this.state.responses[2].key)
-        } else if (text.includes(this.state.responses[2].keyword) &&
-            text.includes("you") &&
-            !this.state.finishedResponses.includes(this.state.responses[2].key)) {
-          this.state.finishedResponses.push(this.state.responses[2].key);
-          this.state.activeResponses.splice(0, 1);
-        } 
-        console.log(this.state.activeResponses);
-        // append message to chat window (right side)
-        // this.appendMessage(msg);
-        // send message to server
-        // socket.emit("send message", msg);
+        this.setState({ pushedButtons: [] });
         textarea.value = "";
       }
     } else if (event.which === 8 || event.which === 46) {
@@ -428,6 +258,7 @@ class Chat extends Component {
         var button = buttons[i];
         button.classList.remove("hidden");
       }
+      this.setState({ pushedButtons: [] });
     }
   };
 
@@ -445,10 +276,10 @@ class Chat extends Component {
                 prompts={this.state.prompts}
                 activePrompts={this.state.activePrompts}
                 finishedPrompts={this.state.finishedPrompts}
-                responses={this.state.responses}
-                activeResponses={this.state.activeResponses}
-                finishedResponses={this.state.finishedResponses}
-                clicked={this.addText}
+                //responses={this.state.responses}
+                //activeResponses={this.state.activeResponses}
+                //finishedResponses={this.state.finishedResponses}
+                clicked={e => this.addText(e)}
                 submit={e => this.submitIndexCard(e)}
                 enter={e => this.sendMessage(e)}
                 user={this.state.user}
