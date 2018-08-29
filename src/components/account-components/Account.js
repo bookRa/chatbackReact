@@ -75,7 +75,7 @@ class UserNameForm extends React.Component {
           helper="You can use letters, numbers & symbols"
           req={true}
         />
-        <button className="form-button" disabled={this.state.newUName === ""}>
+        <button className="general-button" disabled={this.state.newUName === ""}>
           Submit Username
         </button>
       </form>

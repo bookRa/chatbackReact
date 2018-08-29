@@ -58,7 +58,7 @@ class PasswordChangeForm extends React.Component {
           req={true}
         /> 
         
-        <button className="form-button" disabled={!allowed} type="submit">
+        <button className="general-button" disabled={!allowed} type="submit">
           Submit Password
         </button>
         {error && <p>{error.message}</p>}

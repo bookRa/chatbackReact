@@ -35,7 +35,7 @@ const HomePage = ({ match }) => {
             </h4>
           </div>
           <ActiveUserList />
-          <button id="enterChat">
+          <button className="general-button">
             <Link
               id="enterChatInner"
               className="signBtn"
@@ -142,7 +142,7 @@ class NewConvo extends React.Component {
     }
     return (
       <div>
-        <button id="startConvo" className="signBtn" onClick={this.goToConvo}>
+        <button id="startConvo" className="general-button" onClick={this.goToConvo}>
           Start Convo
         </button>
       </div>

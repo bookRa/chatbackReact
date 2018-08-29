@@ -99,7 +99,7 @@ class SignUpForm extends Component {
           focus={true}
           req={true}
         />
-        <button className="form-button" onClick={this.genFakeName}>
+        <button className="general-button" onClick={this.genFakeName}>
           Or Generate a Random Username!
         </button>
         <FormField
@@ -125,7 +125,7 @@ class SignUpForm extends Component {
           label="Confirm Password"
           req={true}
         />
-        <button className="form-button" disabled={isInvalid} type="submit">
+        <button className="general-button" disabled={isInvalid} type="submit">
           Sign Up
         </button>
         <h6>{error && <p>{error.message}</p>}</h6>

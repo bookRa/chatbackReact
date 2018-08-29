@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from 'react-bootstrap';
 import "./SplashPage.css";
 import FormField from './FormField';
 
@@ -28,7 +27,7 @@ const splashPage = () => {
       />
 	  </form>
 
-		<Button id="subscribe">Subscribe</Button>
+		<button id="subscribe" className="general-button">Subscribe</button>
     </div>
   );
 };

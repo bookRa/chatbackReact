@@ -17,7 +17,7 @@ class Chat extends Component {
     let myConvId = props.location.state.convoId;
     this.state = {
       prompts: PROMPTS,
-      activePrompts: ["concerns", "concernsResponse"],
+      activePrompts: ["concerns"],
       finishedPrompts: [],
       convoId: myConvId || "dev_chat_02",
       partner: props.location.state.partner,
