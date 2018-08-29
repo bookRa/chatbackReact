@@ -574,18 +574,23 @@ export const PROMPTS = [
         editable: ""
       },
       {
+        key: "Positive/hopeful thought",
+        value: "positive/hopeful thought of ",
+        tooltip: ""
+      },
+      {
         key: "Reaching out to allies",
-        value: "reaching out to allies ",
+        value: "reaching out to allies who ",
         tooltip: ""
       },
       {
         key: "A new action",
-        value: "a new action ",
+        value: "a new action of ",
         tooltip: ""
       },
       {
         key: "Self-care",
-        value: "self-care ",
+        value: "self-care of ",
         tooltip: ""
       }
     ]
