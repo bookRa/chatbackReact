@@ -338,7 +338,7 @@ export const PROMPTS = [
     mainBtn: {
       key: "I'm thinking...",
       value: "I'm thinking ",
-      tooltip: "Describe your thoughts--the things you’re telling yourself--about the situation."
+      tooltip: "Describe your thoughts - the things you’re telling yourself - about the situation."
     }
   },
   { 
