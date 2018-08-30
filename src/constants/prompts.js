@@ -228,7 +228,8 @@ export const PROMPTS = [
       key: "I want to feel...",
       value: "I want to feel ",
       tooltip: "Describe the one feeling you most want in this situation. (You can add more later)",
-      tail: "because "
+      tail: "because ",
+      search: ""
     },
     btns: [
       { key: "Add my own:", value: "", editable: ""},
@@ -274,7 +275,8 @@ export const PROMPTS = [
       mainBtn: {
         key: "Add a feeling",
         value: "I also want to feel ",
-        tooltip: "Add feelings you want to have."
+        tooltip: "Add feelings you want to have.",
+        search: ""
       },
       btns: [
         { key: "Add my own:", value: "", editable: ""},
@@ -344,7 +346,7 @@ export const PROMPTS = [
     mainBtn: {
       key: "My thought is...",
       tooltip: "Choose a type of thought that fits for your state of mind.",
-      tail: "fits my thought because "
+      tail: "fits my thought because I think that "
     },
     btns: [
       {
@@ -450,9 +452,10 @@ export const PROMPTS = [
     key: "feelings",
     mainBtn: {
       key: "My feeling is...",
-      tooltip: "Choose your biggest feeling right now. (You can add more later)",
-      tail: "is my biggest feeling because ",
-      tailPlural: "are my biggest feelings because "
+      value: "Feeling ", 
+      tooltip: "Choose the feeling that's troubling you most. (You can add more later)",
+      tail: "troubles me most because ",
+      search: ""
     },
     btns: [
       { key: "Add my own:", value: "", editable: ""},
@@ -500,7 +503,8 @@ export const PROMPTS = [
       mainBtn: {
         key: "Add a feeling",
         value: "I'm also feeling ",
-        tooltip: "Add feelings you're having"
+        tooltip: "Add feelings you're having",
+        search: ""
       },
       btns: [
         { key: "Add my own:", value: "", editable: ""},
@@ -586,7 +590,7 @@ export const PROMPTS = [
       },
       {
         key: "Self-care",
-        value: "self-care of ",
+        value: "self-care by ",
       }
     ]
   },
@@ -595,8 +599,7 @@ export const PROMPTS = [
     mainBtn: {
       key: "I'll try...",
       value: "I'll try ",
-      tooltip: "Choose a strategy to try as a next step",
-      tail: "My next step is to "
+      tooltip: "Choose a strategy to try as a next step"
     },
     btns: [
       {
@@ -607,17 +610,17 @@ export const PROMPTS = [
       },
       {
         key: "An action strategy",
-        value: "an action strategy ",
+        value: "an action strategy of ",
         tooltip: "A plan, behavior, timeline, or difference in your body"
       },
       {
         key: "A mindful strategy",
-        value: "a mindful strategy ",
+        value: "a mindful strategy of ",
         tooltip: "A new thought, reflection, or state of mind"
       },
       {
         key: "A social strategy",
-        value: "a social strategy ",
+        value: "a social strategy of ",
         tooltip: "Reaching out to supportive people, or changing your social scene"
       }
     ]

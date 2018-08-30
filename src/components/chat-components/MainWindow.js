@@ -12,19 +12,29 @@ const mainWindow = props => {
         <IndexCard
           id="welcome"
           classes="indexCard"
-          title="Welcome! Say hello to your chat buddy. Then, share your concern by selecting that button."
+          title="Welcome. You and your chat buddy will share your concerns with each other. Use the “I'm concerned” button to begin."
           submit={props.submit}
         />
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
             if (props.user.displayName === props.messages[key].senderName) {
               return (
-                <ChatBubble time={props.messages[key].time} username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
+                <ChatBubble
+                  time={props.messages[key].time}
+                  username={props.messages[key].senderName}
+                  message={props.messages[key].msg}
+                  key={key}
+                  class="message">
                 </ChatBubble>
               );
             } else {
               return (
-                <ChatBubble time={props.messages[key].time} username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="partnerMessage">
+                <ChatBubble
+                  time={props.messages[key].time}
+                  username={props.messages[key].senderName}
+                  message={props.messages[key].msg}
+                  key={key} 
+                  class="partnerMessage">
                 </ChatBubble>
               );
             }

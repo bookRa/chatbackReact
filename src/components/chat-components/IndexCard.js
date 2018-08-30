@@ -6,11 +6,16 @@ import "./IndexCard.css"
 const indexCard = (props) => {
 	return (
 		<div id={props.id + "Card"} className={props.classes}>
-			<button className="exitBtn btn" onClick={props.submit}>Exit</button>
+			<button className="exitBtn btn" onClick={props.submit}>X</button>
 			{props.btns !== undefined ? (
 				<div className="indexContainer">
 					<h3>{props.title}</h3>
-					<SearchBar />
+					{props.search !== undefined ? (
+        				<SearchBar />
+      				) : (
+        				<div></div>
+      				)}
+					
 					<div className="buttonContainer">
 		    			<ButtonContainer title={props.title} clicked={props.clicked} btns={props.btns} />
 		    		</div>
