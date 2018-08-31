@@ -2,11 +2,18 @@ import React from 'react';
 import ButtonContainer from './ButtonContainer';
 import SearchBar from './SearchBar';
 import "./IndexCard.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 const indexCard = (props) => {
 	return (
 		<div id={props.id + "Card"} className={props.classes}>
-			<button className="exitBtn btn" onClick={props.submit}>X</button>
+			<FontAwesomeIcon
+          		icon={faTimesCircle}
+         		className="exitBtn"
+          		tabIndex="0"
+          		onClick={props.submit}
+        	/>
 			{props.btns !== undefined ? (
 				<div className="indexContainer">
 					<h3>{props.title}</h3>

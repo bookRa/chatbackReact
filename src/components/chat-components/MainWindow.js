@@ -5,6 +5,7 @@ import IndexCard from "./IndexCard";
 //import Slider from "./Slider";
 
 
+
 const mainWindow = props => {
   return (
     <div className="mainWindow">
