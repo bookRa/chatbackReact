@@ -338,19 +338,39 @@ export const PROMPTS = [
     mainBtn: {
       key: "I'm thinking...",
       value: "I'm thinking ",
-      tooltip: "Describe your thoughts - the things you’re telling yourself - about the situation."
-    }
+      tooltip: "Share a thought or worry you have about your situation.",
+      tail: "that "
+    },
+    btns: [
+      {
+        key: "Add my own",
+        value: "",
+        editable: ""
+      },
+      {
+        key: "About me",
+        value: "(about me) ",
+      },
+      {
+        key: "About the situation",
+        value: "(about the situation) ",
+      },
+      {
+        key: "About them",
+        value: "(about them) ",
+      }
+    ]
   },
   { 
     key: "thoughts",
     mainBtn: {
       key: "My thought is...",
       tooltip: "Choose a type of thought that fits for your state of mind.",
-      tail: "fits my thought because I think that "
+      tail: "fits because "
     },
     btns: [
       {
-        key: "Add my own",
+        key: "Add my own:",
         value: "",
         tooltip: "",
         editable: ""

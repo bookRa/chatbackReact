@@ -205,10 +205,14 @@ class Chat extends Component {
           var id = this.state.pushedButtons[i];
           for (var j = 0; j < prompts.length; j++) {
             var prompt = prompts[j];
+            var response = prompt.response;
             var double = prompt.double;
             if (prompt.key === id) {
               finishedPrompts.push(prompt.key);
               activePrompts.splice(activePrompts.indexOf(prompt.key), 1);
+              if (response !== undefined) {
+                console.log(response.key);
+              }
               if (double !== undefined) {
                 if (!finishedPrompts.includes(double.key)) {
                   finishedPrompts.push(double.key);
