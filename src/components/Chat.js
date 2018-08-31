@@ -35,10 +35,46 @@ class Chat extends Component {
     // console.log(this.state.convoId);
     // console.log(this.props);
     let storeMsgsAsState = snap => {
+      let messageList = snap.val();
+      let lastMsg =
+        messageList[
+          Object.keys(messageList)[Object.keys(messageList).length - 1]
+        ];
+      // console.log(lastMsg);
+      this.appendResponses(lastMsg);
+
       this.setState({ messages: snap.val() });
       //   console.log(snap.val());
     };
     db.convoSubscribe(this.state.convoId, storeMsgsAsState);
+  }
+  // appendResponses(msgObj) {
+  //   console.log(msgObj);
+  // }
+  appendResponses(msgObj) {
+    // this function is being called before user is fully mounted into State
+    // if (msgObj.sender === this.state.user.uid || msgObj.prompts.length === 0) {
+    //   return;
+    // }
+    console.log(this.state.user);
+    let prompts = msgObj.prompt.filter(p => !p.includes("Double")); //array of prompts from prev message
+    console.log(prompts);
+    //Do some logic on prompts to call up appropriate Responses, and append to this.state.activePrompts
+    for (let p of prompts) {
+      console.log(p);
+      let ourPrompt;
+      for (let lookup of PROMPTS) {
+        if (lookup.key === p) {
+          ourPrompt = lookup;
+          break;
+        }
+      }
+      let currPrompts = this.state.activePrompts;
+      if (ourPrompt.response) {
+        currPrompts.push(ourPrompt.response.key);
+        this.setState({ activePrompt: currPrompts });
+      }
+    }
   }
 
   addText(e) {
@@ -67,7 +103,7 @@ class Chat extends Component {
       this.state.pushedButtons.push(button.id);
       textarea.value += button.value;
     }
-  };
+  }
 
   exitIndexCard(e) {
     var selectedButtons = document.querySelectorAll(".pressed");
@@ -86,7 +122,7 @@ class Chat extends Component {
     for (var i = 0; i < this.state.prompts.length; i++) {
       var double = this.state.prompts[i].double;
       if (double !== undefined) {
-        if (double.key === (prompt + "Double")) {
+        if (double.key === prompt + "Double") {
           this.state.activePrompts.push(double.key);
         }
       }
@@ -98,7 +134,9 @@ class Chat extends Component {
     var textarea = document.getElementById("chatText");
     var selectedButtons = this.state.selectedButtons;
     if (selectedButtons.length > 0) {
-      var prompt = selectedButtons[0].parentElement.parentElement.parentElement.parentElement;
+      var prompt =
+        selectedButtons[0].parentElement.parentElement.parentElement
+          .parentElement;
       prompt = prompt.id.substr(0, prompt.id.length - 4);
       var string = "";
       var tail = undefined;
@@ -175,7 +213,8 @@ class Chat extends Component {
       if (textarea.value === "" || textarea.value.slice(-2) === ". ") {
         textarea.value += string.charAt(0).toUpperCase() + string.slice(1);
       } else if (textarea.value.slice(-1) === ".") {
-        textarea.value += " " + string.charAt(0).toUpperCase() + string.slice(1);
+        textarea.value +=
+          " " + string.charAt(0).toUpperCase() + string.slice(1);
       } else {
         textarea.value += string;
       }
@@ -221,7 +260,7 @@ class Chat extends Component {
               }
               // edge case that does not execute for the last prompt
               if (j !== prompts.length - 1) {
-                activePrompts.push(prompts[j+1].key);
+                activePrompts.push(prompts[j + 1].key);
               }
             }
             if (prompt.response !== undefined) {
@@ -237,22 +276,23 @@ class Chat extends Component {
                     finishedPrompts.push(prompt.key);
                     activePrompts.splice(activePrompts.indexOf(prompt.key), 1);
                     if (j !== prompts.length - 1) {
-                      activePrompts.push(prompts[j+1].key);
+                      activePrompts.push(prompts[j + 1].key);
                     }
                   }
                   finishedPrompts.push(double.key);
                   activePrompts.splice(activePrompts.indexOf(double.key), 1);
-                } 
+                }
               }
             }
           }
         }
-        db.postMsg(
-          this.state.convoId,
-          msg,
-          this.state.user.uid,
-          this.state.user.displayName
-        );
+        db.postMsg(this.state.convoId, {
+          prompt: this.state.pushedButtons,
+          msg: msg,
+          sender: this.state.user.uid,
+          senderName: this.state.user.displayName,
+          time: Date.now()
+        });
         this.setState({ pushedButtons: [] });
         textarea.value = "";
       }
