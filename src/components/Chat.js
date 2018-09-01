@@ -30,7 +30,6 @@ class Chat extends Component {
 
   //subscribes to the firebase convoid upon loading **ID HARDCODED FOR NOW**
   componentDidMount() {
-    this.setState({ user: auth.currentUser });
     console.log("MountedChat");
     // console.log(this.state.convoId);
     // console.log(this.props);
@@ -41,8 +40,7 @@ class Chat extends Component {
           Object.keys(messageList)[Object.keys(messageList).length - 1]
         ];
       // console.log(lastMsg);
-      this.appendResponses(lastMsg);
-
+      this.setState({ user: auth.currentUser }, () => this.appendResponses(lastMsg));
       this.setState({ messages: snap.val() });
       //   console.log(snap.val());
     };
@@ -53,26 +51,30 @@ class Chat extends Component {
   // }
   appendResponses(msgObj) {
     // this function is being called before user is fully mounted into State
-    // if (msgObj.sender === this.state.user.uid || msgObj.prompts.length === 0) {
-    //   return;
-    // }
     console.log(this.state.user);
-    let prompts = msgObj.prompt.filter(p => !p.includes("Double")); //array of prompts from prev message
-    console.log(prompts);
-    //Do some logic on prompts to call up appropriate Responses, and append to this.state.activePrompts
-    for (let p of prompts) {
-      console.log(p);
-      let ourPrompt;
-      for (let lookup of PROMPTS) {
-        if (lookup.key === p) {
-          ourPrompt = lookup;
-          break;
-        }
+    if (msgObj.prompt !== undefined) {
+      if (msgObj.sender === this.state.user.uid || msgObj.prompt.length === 0) {
+       return;
       }
-      let currPrompts = this.state.activePrompts;
-      if (ourPrompt.response) {
-        currPrompts.push(ourPrompt.response.key);
-        this.setState({ activePrompt: currPrompts });
+      let prompts = msgObj.prompt.filter(p => !p.includes("Double")); //array of prompts from prev message
+      console.log(prompts);
+      //Do some logic on prompts to call up appropriate Responses, and append to this.state.activePrompts
+      for (let p of prompts) {
+        console.log(p);
+        let ourPrompt;
+        for (let lookup of PROMPTS) {
+          if (lookup.key === p) {
+            ourPrompt = lookup;
+            break;
+          }
+        }
+        let currPrompts = this.state.activePrompts;
+        if (ourPrompt) {
+          if (ourPrompt.response) {
+            currPrompts.push(ourPrompt.response.key);
+            this.setState({ activePrompt: currPrompts });
+          }
+        }   
       }
     }
   }
@@ -86,21 +88,25 @@ class Chat extends Component {
       button = button.parentElement.parentElement;
     }
     if (button.classList.contains("cardButton")) {
+      var currSelected = this.state.selectedButtons;
       if (button.classList.contains("pressed")) {
         button.classList.remove("pressed");
         var index = this.state.selectedButtons.indexOf(button);
-        this.state.selectedButtons.splice(index, 1);
+        currSelected.splice(index, 1);
       } else {
         button.classList.add("pressed");
-        this.state.selectedButtons.push(button);
+        currSelected.push(button);
       }
+      this.setState({ selectedButtons: currSelected });
     } else {
       var card = document.getElementById(button.id + "Card");
       if (card.classList.contains("hidden")) {
         card.classList.remove("hidden");
       }
       button.classList.add("hidden");
-      this.state.pushedButtons.push(button.id);
+      var currPushed = this.state.pushedButtons;
+      currPushed.push(button.id);
+      this.setState({ pushedButtons: currPushed });
       textarea.value += button.value;
     }
   }
@@ -122,9 +128,11 @@ class Chat extends Component {
     for (var i = 0; i < this.state.prompts.length; i++) {
       var double = this.state.prompts[i].double;
       if (double !== undefined) {
+        var currPrompts = this.state.activePrompts;
         if (double.key === prompt + "Double") {
-          this.state.activePrompts.push(double.key);
+          currPrompts.push(double.key);
         }
+        this.setState({ activePrompts : currPrompts});
       }
     }
   }
@@ -185,7 +193,7 @@ class Chat extends Component {
           if (j < selectedButtons.length - 2) {
             string += value.substring(0, value.length - 1) + ", ";
           } else if (j === selectedButtons.length - 2) {
-            string += value.substring(0, value.length - 1) + ", and ";
+            string += value.substring(0, value.length - 1) + " and ";
           } else {
             if (tail !== undefined) {
               if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
@@ -320,9 +328,6 @@ class Chat extends Component {
                 prompts={this.state.prompts}
                 activePrompts={this.state.activePrompts}
                 finishedPrompts={this.state.finishedPrompts}
-                //responses={this.state.responses}
-                //activeResponses={this.state.activeResponses}
-                //finishedResponses={this.state.finishedResponses}
                 clicked={e => this.addText(e)}
                 submit={e => this.submitIndexCard(e)}
                 enter={e => this.sendMessage(e)}

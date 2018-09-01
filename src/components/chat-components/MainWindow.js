@@ -4,8 +4,6 @@ import ChatBubble from "./ChatBubble";
 import IndexCard from "./IndexCard";
 //import Slider from "./Slider";
 
-
-
 const mainWindow = props => {
   return (
     <div className="mainWindow">
@@ -50,9 +48,6 @@ const mainWindow = props => {
           prompts={props.prompts}
           activePrompts={props.activePrompts}
           finishedPrompts={props.finishedPrompts}
-          //responses={props.responses}
-          //activeResponses={props.activeResponses}
-          //finishedResponses={props.finishedResponses}
           clicked={e => props.clicked(e)}
         />
       </div>
