@@ -11,6 +11,7 @@ const indexCard = (props) => {
 			<FontAwesomeIcon
           		icon={faTimesCircle}
          		className="exitBtn"
+         		title="exit"
           		tabIndex="0"
           		onClick={props.submit}
         	/>

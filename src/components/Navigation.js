@@ -39,7 +39,7 @@ const NavigationAuth = props => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img alt="CB logo" className="logo" src="logo.png" />
+        <img alt="CB logo" className="logo" src="logo.png" title="CB logo" />
       </Link>
     </div>
     <Link to={routes.LANDING}>
@@ -50,6 +50,7 @@ const NavigationAuth = props => (
         <FontAwesomeIcon
           icon={faBars}
           className="hamburger"
+          title="menu"
           tabIndex="0"
           onClick={showDropdown}
           onKeyDown={e => enterDropdown(e)}
@@ -74,7 +75,7 @@ const NavigationNonAuth = () => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img className="logo" alt="CB logo" src="logo.png" />
+        <img className="logo" alt="CB logo" title="CB logo" src="logo.png" />
       </Link>
     </div>
     <Link to={routes.LANDING}>
@@ -85,6 +86,7 @@ const NavigationNonAuth = () => (
         <FontAwesomeIcon
           icon={faBars}
           className="hamburger"
+          title="menu"
           tabIndex="0"
           onClick={showDropdown}
           onKeyDown={e => enterDropdown(e)}
