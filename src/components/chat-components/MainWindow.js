@@ -51,7 +51,7 @@ const mainWindow = props => {
           clicked={e => props.clicked(e)}
         />
       </div>
-      <textarea id="chatText" onKeyDown={props.enter} />
+      <textarea id="chatText" onKeyDown={props.enter}  onFocus={props.focus} />
     </div>
   );
 };

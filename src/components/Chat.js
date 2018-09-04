@@ -137,6 +137,16 @@ class Chat extends Component {
     }
   }
 
+  hideCard() {
+    var cards = document.querySelectorAll(".indexCard");
+    for (var i = 0; i < cards.length; i++) {
+      var card = cards[i];
+      if (!card.classList.contains("hidden")) {
+        card.classList.add("hidden");
+      }
+    }
+  }
+
   submitIndexCard(e) {
     this.exitIndexCard(e);
     var textarea = document.getElementById("chatText");
@@ -231,13 +241,6 @@ class Chat extends Component {
   }
 
   sendMessage = event => {
-    var cards = document.querySelectorAll(".indexCard");
-    for (var i = 0; i < cards.length; i++) {
-      var card = cards[i];
-      if (!card.classList.contains("hidden")) {
-        card.classList.add("hidden");
-      }
-    }
     var textarea = document.getElementById("chatText");
     if (event.which === 13 && event.shiftKey === false) {
       event.preventDefault();
@@ -330,6 +333,7 @@ class Chat extends Component {
                 finishedPrompts={this.state.finishedPrompts}
                 clicked={e => this.addText(e)}
                 submit={e => this.submitIndexCard(e)}
+                focus={() => this.hideCard()}
                 enter={e => this.sendMessage(e)}
                 user={this.state.user}
               />
