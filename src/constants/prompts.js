@@ -343,7 +343,7 @@ export const PROMPTS = [
     },
     btns: [
       {
-        key: "Add my own",
+        key: "Add my own:",
         value: "",
         editable: ""
       },
