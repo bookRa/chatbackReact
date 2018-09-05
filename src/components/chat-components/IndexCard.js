@@ -17,7 +17,7 @@ const indexCard = (props) => {
         	/>
 			{props.btns !== undefined ? (
 				<div className="indexContainer">
-					<h3>{props.title}</h3>
+					<h3>{props.tooltip}</h3>
 					{props.search !== undefined ? (
         				<SearchBar />
       				) : (
@@ -25,13 +25,13 @@ const indexCard = (props) => {
       				)}
 					
 					<div className="buttonContainer">
-		    			<ButtonContainer title={props.title} clicked={props.clicked} btns={props.btns} />
+		    			<ButtonContainer clicked={props.clicked} btns={props.btns} />
 		    		</div>
 		    		<button className="submitBtn btn" onClick={props.submit}>Submit</button>
 	    		</div>
 	  		) : (
 	    		<div className="indexContainer">
-	    			<h3>{props.title}</h3>
+	    			<h3>{props.tooltip}</h3>
 	    		</div>
 	  		)}
 		</div>

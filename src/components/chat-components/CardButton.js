@@ -5,15 +5,16 @@ import CardButtonInput from "./CardButtonInput"
 const cardButton = props => {
 	return (
 	  	<div className="prompt">
-  			{props.title !== undefined ? (
-	          <button onClick={(e) => props.clicked(e)} className="cardButton btn" value={props.value}>
-	          	<b>{props.name}:</b> {props.title} <CardButtonInput value={props.editable} />
+  			{props.tooltip !== undefined ? (
+	          <button onClick={(e) => props.clicked(e)} className="cardButton btn" value={props.value} title={props.editable}>
+	          	<b>{props.name}</b> {props.tooltip}
 	          </button>
 	        ) : (
-	          <button onClick={(e) => props.clicked(e)} className="cardButton btn" value={props.value}>
-	          	{props.name} <CardButtonInput value={props.editable} />
+	          <button onClick={(e) => props.clicked(e)} className="cardButton btn" value={props.value} title={props.editable}>
+	          	{props.name}
 	          </button>
 	        )}
+	        
 	    </div>
 	);
 };

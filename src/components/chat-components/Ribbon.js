@@ -20,7 +20,7 @@ const ribbon = (props) => {
 							name={prompts[j].mainBtn.key}
 							key={prompts[j].mainBtn.key}
 							value={prompts[j].mainBtn.value}
-							title={prompts[j].mainBtn.tooltip}
+							tooltip={prompts[j].mainBtn.tooltip}
 							search={prompts[j].mainBtn.search}
 							clicked={props.clicked}
 							clickfunc={(e) => props.clicked(e)}
@@ -39,7 +39,7 @@ const ribbon = (props) => {
 								name={prompts[j].response.mainBtn.key}
 								key={prompts[j].response.key}
 								value={prompts[j].response.mainBtn.value}
-								title={prompts[j].response.mainBtn.tooltip}
+								tooltip={prompts[j].response.mainBtn.tooltip}
 								btns={prompts[j].response.btns}
 								search={prompts[j].response.mainBtn.search}
 								clicked={props.clicked}
@@ -59,7 +59,7 @@ const ribbon = (props) => {
 								name={prompts[j].double.mainBtn.key}
 								key={prompts[j].double.key}
 								value={prompts[j].double.mainBtn.value}
-								title={prompts[j].double.mainBtn.tooltip}
+								tooltip={prompts[j].double.mainBtn.tooltip}
 								btns={prompts[j].double.btns}
 								search={prompts[j].double.mainBtn.search}
 								clicked={props.clicked}

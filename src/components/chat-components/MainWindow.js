@@ -11,7 +11,7 @@ const mainWindow = props => {
         <IndexCard
           id="welcome"
           classes="indexCard"
-          title="Welcome. You and your chat buddy will share your concerns with each other. Use the “I'm concerned” button to begin."
+          tooltip="Welcome. You and your chat buddy will share your concerns with each other. Use the “I'm concerned” button to begin."
           exit={props.exit}
         />
         {props.messages ? (

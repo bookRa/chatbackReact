@@ -84,20 +84,25 @@ class Chat extends Component {
     var textarea = document.getElementById("chatText");
     if (button.tagName === "B") {
       button = button.parentElement;
-    } else if (button.tagName === "INPUT") {
+    } /*else if (button.tagName === "INPUT") {
       button = button.parentElement.parentElement;
-    }
+    }*/
+    console.log(button.title)
     if (button.classList.contains("cardButton")) {
-      var currSelected = this.state.selectedButtons;
-      if (button.classList.contains("pressed")) {
-        button.classList.remove("pressed");
-        var index = this.state.selectedButtons.indexOf(button);
-        currSelected.splice(index, 1);
+      if (button.title === "custom") {
+        this.exitIndexCard(e);
       } else {
-        button.classList.add("pressed");
-        currSelected.push(button);
+        var currSelected = this.state.selectedButtons;
+        if (button.classList.contains("pressed")) {
+          button.classList.remove("pressed");
+          var index = this.state.selectedButtons.indexOf(button);
+          currSelected.splice(index, 1);
+        } else {
+          button.classList.add("pressed");
+          currSelected.push(button);
+        }
+        this.setState({ selectedButtons: currSelected });
       }
-      this.setState({ selectedButtons: currSelected });
     } else {
       var card = document.getElementById(button.id + "Card");
       if (card.classList.contains("hidden")) {
@@ -118,10 +123,16 @@ class Chat extends Component {
       button.classList.remove("pressed");
     }
     var card = null;
-    if (e.target.parentElement.classList.contains("indexCard")) {
-      card = e.target.parentElement;
+    var parent = e.target.parentElement;
+    console.log(e.target.parentElement.parentElement)
+    if (parent.classList.contains("indexCard")) {
+      card = parent;
+    } else if (parent.parentElement.classList.contains("indexCard")) {
+      card = parent.parentElement;
+    } else if (parent.parentElement.parentElement.classList.contains("indexCard")) {
+      card = parent.parentElement.parentElement;
     } else {
-      card = e.target.parentElement.parentElement;
+      card = parent.parentElement.parentElement.parentElement;
     }
     card.classList.add("hidden");
     var prompt = card.id.substr(0, card.id.length - 4);
@@ -129,12 +140,15 @@ class Chat extends Component {
       var double = this.state.prompts[i].double;
       if (double !== undefined) {
         var currPrompts = this.state.activePrompts;
-        if (double.key === prompt + "Double") {
+        if (double.key === prompt + "Double" && !currPrompts.includes(double.key)) {
           currPrompts.push(double.key);
         }
         this.setState({ activePrompts : currPrompts});
       }
     }
+    var textarea = document.getElementById("chatText");
+    textarea.focus();
+    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
   }
 
   hideCard() {
@@ -168,13 +182,13 @@ class Chat extends Component {
       }
       for (var j = 0; j < selectedButtons.length; j++) {
         var value = selectedButtons[j].value;
-        if (value === "") {
+        /*if (value === "") {
           if (selectedButtons[j].childNodes[4] !== undefined) {
             value = selectedButtons[j].childNodes[4].childNodes[0].value + " ";
           } else {
             value = selectedButtons[j].childNodes[2].childNodes[0].value + " ";
           }
-        }
+        }*/
         if (selectedButtons.length === 1) {
           if (tail !== undefined) {
             if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {

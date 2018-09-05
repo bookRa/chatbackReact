@@ -232,7 +232,7 @@ export const PROMPTS = [
       search: ""
     },
     btns: [
-      { key: "Add my own:", value: "", editable: ""},
+      { key: "Add my own", value: "", editable: "custom"},
       { key: "Amused", value: "amused " },
       { key: "Appreciated", value: "appreciated " },
       { key: "Aware", value: "aware " },
@@ -279,7 +279,7 @@ export const PROMPTS = [
         search: ""
       },
       btns: [
-        { key: "Add my own:", value: "", editable: ""},
+        { key: "Add my own", value: "", editable: "custom"},
         { key: "Amused", value: "amused " },
         { key: "Appreciated", value: "appreciated " },
         { key: "Aware", value: "aware " },
@@ -343,9 +343,9 @@ export const PROMPTS = [
     },
     btns: [
       {
-        key: "Add my own:",
+        key: "Add my own",
         value: "",
-        editable: ""
+        editable: "custom"
       },
       {
         key: "About me",
@@ -373,35 +373,35 @@ export const PROMPTS = [
         key: "Add my own",
         value: "",
         tooltip: "",
-        editable: ""
+        editable: "custom"
       },
       {
-        key: "An all or nothing thought",
+        key: "An all or nothing thought:",
         value: "an all or nothing thought ",
         tooltip: "Simplifying into two extremes (e.g. either all good/all bad)"
       },
       {
-        key: "A blaming thought",
+        key: "A blaming thought:",
         value: "a blaming thought ",
         tooltip: "Faulting a single source for all the trouble"
       },
       {
-        key: "A mind reading thought",
+        key: "A mind reading thought:",
         value: "a mind reading thought ",
         tooltip: "Assuming you know people’s reasons or judgments"
       },
       {
-        key: "An overgeneralizing thought",
+        key: "An overgeneralizing thought:",
         value: "an overgeneralizing thought ",
         tooltip: "Thinking all incidents will be exactly like the one incident"
       },
       {
-        key: "A personalizing thought",
+        key: "A personalizing thought:",
         value: "a personalizing thought ",
         tooltip: "Thinking a bad outcome results from a bad in you"
       },
       {
-        key: "A worst case scenario thought",
+        key: "A worst case scenario thought:",
         value: "a worst case scenario thought ",
         tooltip: "Believing the worst is going to happen"
       }
@@ -419,35 +419,35 @@ export const PROMPTS = [
           key: "Add my own",
           value: "",
           tooltip: "",
-          editable: ""
+          editable: "custom"
         },
         {
-          key: "An all or nothing thought",
+          key: "An all or nothing thought:",
           value: "an all or nothing thought ",
           tooltip: "Simplifying into two extremes (e.g. either all good/all bad)"
         },
         {
-          key: "A blaming thought",
+          key: "A blaming thought:",
           value: "a blaming thought ",
           tooltip: "Faulting a single source for all the trouble"
         },
         {
-          key: "A mind reading thought",
+          key: "A mind reading thought:",
           value: "a mind reading thought ",
           tooltip: "Assuming you know people’s reasons or judgments"
         },
         {
-          key: "An overgeneralizing thought",
+          key: "An overgeneralizing thought:",
           value: "an overgeneralizing thought ",
           tooltip: "Thinking all incidents will be exactly like the one incident"
         },
         {
-          key: "A personalizing thought",
+          key: "A personalizing thought:",
           value: "a personalizing thought ",
           tooltip: "Thinking a bad outcome results from a bad in you"
         },
         {
-          key: "A worst case scenario thought",
+          key: "A worst case scenario thought:",
           value: "a worst case scenario thought ",
           tooltip: "Believing the worst is going to happen"
         }
@@ -478,7 +478,7 @@ export const PROMPTS = [
       search: ""
     },
     btns: [
-      { key: "Add my own:", value: "", editable: ""},
+      { key: "Add my own", value: "", editable: "custom"},
       { key: "Angry", value: "angry " },
       { key: "Anxious", value: "anxious " },
       { key: "Apathetic", value: "apathetic " },
@@ -527,7 +527,7 @@ export const PROMPTS = [
         search: ""
       },
       btns: [
-        { key: "Add my own:", value: "", editable: ""},
+        { key: "Add my own", value: "", editable: "custom"},
         { key: "Angry", value: "angry " },
         { key: "Anxious", value: "anxious " },
         { key: "Apathetic", value: "apathetic " },
@@ -592,9 +592,9 @@ export const PROMPTS = [
     },
     btns: [
       {
-        key: "Add my own:",
+        key: "Add my own",
         value: "",
-        editable: ""
+        editable: "custom"
       },
       {
         key: "Positive/hopeful thought",
@@ -626,20 +626,20 @@ export const PROMPTS = [
         key: "Add my own",
         value: "",
         tooltip: "",
-        editable: ""
+        editable: "custom"
       },
       {
-        key: "An action strategy",
+        key: "An action strategy:",
         value: "an action strategy of ",
         tooltip: "A plan, behavior, timeline, or difference in your body"
       },
       {
-        key: "A mindful strategy",
+        key: "A mindful strategy:",
         value: "a mindful strategy of ",
         tooltip: "A new thought, reflection, or state of mind"
       },
       {
-        key: "A social strategy",
+        key: "A social strategy:",
         value: "a social strategy of ",
         tooltip: "Reaching out to supportive people, or changing your social scene"
       }
