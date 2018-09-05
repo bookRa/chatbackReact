@@ -118,10 +118,10 @@ class Chat extends Component {
       button.classList.remove("pressed");
     }
     var card = null;
-    if (e.target.classList.contains("submitBtn")) {
-      card = e.target.parentElement.parentElement;
-    } else {
+    if (e.target.parentElement.classList.contains("indexCard")) {
       card = e.target.parentElement;
+    } else {
+      card = e.target.parentElement.parentElement;
     }
     card.classList.add("hidden");
     var prompt = card.id.substr(0, card.id.length - 4);
@@ -333,6 +333,7 @@ class Chat extends Component {
                 finishedPrompts={this.state.finishedPrompts}
                 clicked={e => this.addText(e)}
                 submit={e => this.submitIndexCard(e)}
+                exit={e => this.exitIndexCard(e)}
                 focus={() => this.hideCard()}
                 enter={e => this.sendMessage(e)}
                 user={this.state.user}

@@ -25,6 +25,7 @@ const ribbon = (props) => {
 							clicked={props.clicked}
 							clickfunc={(e) => props.clicked(e)}
 							submit={props.submit}
+							exit={props.exit}
 							btns={prompts[j].btns}
 						/>
 					);
@@ -44,6 +45,7 @@ const ribbon = (props) => {
 								clicked={props.clicked}
 								clickfunc={(e) => props.clicked(e)}
 								submit={props.submit}
+								exit={props.exit}
 							/>
 						);
 					}
@@ -63,6 +65,7 @@ const ribbon = (props) => {
 								clicked={props.clicked}
 								clickfunc={(e) => props.clicked(e)}
 								submit={props.submit}
+								exit={props.exit}
 							/>
 						);
 					}

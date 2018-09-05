@@ -13,7 +13,7 @@ const indexCard = (props) => {
          		className="exitBtn"
          		title="exit"
           		tabIndex="0"
-          		onClick={props.submit}
+          		onClick={props.exit}
         	/>
 			{props.btns !== undefined ? (
 				<div className="indexContainer">

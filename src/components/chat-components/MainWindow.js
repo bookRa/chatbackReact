@@ -12,7 +12,7 @@ const mainWindow = props => {
           id="welcome"
           classes="indexCard"
           title="Welcome. You and your chat buddy will share your concerns with each other. Use the “I'm concerned” button to begin."
-          submit={props.submit}
+          exit={props.exit}
         />
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
@@ -48,6 +48,7 @@ const mainWindow = props => {
           prompts={props.prompts}
           activePrompts={props.activePrompts}
           finishedPrompts={props.finishedPrompts}
+          exit={props.exit}
           clicked={e => props.clicked(e)}
         />
       </div>
