@@ -17,7 +17,16 @@
 	margin: auto;
 }
 
-#enterChatInner {
-	background: transparent;
-	color: white;
+#enterChatBtn {
+	background-color: #264D4D;
+  border: transparent;
+  border-radius: 20px;
+  box-shadow: 0 2px 7px 0 #8D8A84;
+  color: #fff;
+  height: 40px;
+  font-size: 16px;
+  min-width: 200px;
+  margin-bottom: 20px;
+  padding: 7px;
+  margin-bottom: 17px;
 }

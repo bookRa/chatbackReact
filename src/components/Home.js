@@ -35,9 +35,9 @@ const HomePage = ({ match }) => {
             </h4>
           </div>
           <ActiveUserList />
-          <button id="enterChat">
+          {/* had to remove the button#enterChat b/c it wasn't linking to the dev_chat. Styling got messed up sorry */}
             <Link
-              id="enterChatInner"
+              id="enterChatBtn"
               className="signBtn"
               to={{
                 pathname: routes.CHAT,
@@ -46,7 +46,6 @@ const HomePage = ({ match }) => {
             >
               Enter Dev Chat
             </Link>{" "}
-          </button>
           <br />
           <NewConvo userName={authUser.displayName} />
           {/* <SpecificConvo /> //Don't need this now because matching is working!*/}
