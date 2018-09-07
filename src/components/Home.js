@@ -24,7 +24,7 @@ const HomePage = ({ match }) => {
             ) : (
               <h2>Hello!</h2>
             )}
-            <h3>This is the "Chat Lobby"</h3>
+            <h3>This is the "Chat Lobby" TESTETESTET</h3>
             <h4>
               We can ask here, "How are you feeling?" and begin connecting you
               to a partner

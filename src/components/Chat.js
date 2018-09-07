@@ -35,11 +35,13 @@ class Chat extends Component {
     // console.log(this.props);
     let storeMsgsAsState = snap => {
       let messageList = snap.val();
-      let lastMsg =
+      let lastMsg = messageList ? 
         messageList[
           Object.keys(messageList)[Object.keys(messageList).length - 1]
-        ];
-      // console.log(lastMsg);
+        ] 
+        :
+        undefined;
+      console.log(lastMsg);
       this.setState({ user: auth.currentUser }, () => this.appendResponses(lastMsg));
       this.setState({ messages: snap.val() });
       //   console.log(snap.val());
@@ -52,7 +54,7 @@ class Chat extends Component {
   appendResponses(msgObj) {
     // this function is being called before user is fully mounted into State
     console.log(this.state.user);
-    if (msgObj.prompt !== undefined) {
+    if (msgObj && msgObj.prompt !== undefined) {
       if (msgObj.sender === this.state.user.uid || msgObj.prompt.length === 0) {
        return;
       }
@@ -72,7 +74,7 @@ class Chat extends Component {
         if (ourPrompt) {
           if (ourPrompt.response) {
             currPrompts.push(ourPrompt.response.key);
-            this.setState({ activePrompt: currPrompts });
+            this.setState({ activePrompts: currPrompts });
           }
         }   
       }
