@@ -36,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/lockheedmartian/chatbackReact/issues"
   },
-  "homepage": "https://github.com/lockheedmartian/chatbackReact#readme"
+  "homepage": "https://github.com/lockheedmartian/chatbackReact#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
