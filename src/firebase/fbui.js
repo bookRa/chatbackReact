@@ -14,7 +14,7 @@ export class SignInScreen extends React.Component {
       // Popup signin flow rather than redirect flow.
       signInFlow: 'popup',
       // Redirect to /account after sign in is successful. 
-      // signInSuccessUrl: routes.ACCOUNT,
+      signInSuccessUrl: routes.ACCOUNT,
       callbacks:{
         signInSuccessWithAuthResult: (authResult) =>{
         console.log("wtf", authResult)

@@ -5,6 +5,7 @@ import { SignInLink } from "./SignIn";
 import { users } from "../api";
 import "./App.css";
 import FormField from "./FormField";
+import { SignInScreen } from "../firebase/fbui";
 
 import * as routes from "../constants/routes";
 import "../constants/userNames";
@@ -20,6 +21,7 @@ const SignUpPage = ({ history }) => {
       <SignUpForm history={history} />
       <SignInLink />
       <PolicyLink />
+      <SignInScreen history = {history}/>
     </div>
   );
 };
