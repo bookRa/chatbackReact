@@ -18,6 +18,7 @@ class Chat extends Component {
     this.state = {
       prompts: PROMPTS,
       activePrompts: ["concerns"],
+      queuedPrompts: [],
       finishedPrompts: [],
       convoId: myConvId || "dev_chat_02",
       partner: props.location.state.partner,
@@ -41,7 +42,6 @@ class Chat extends Component {
         ] 
         :
         undefined;
-      console.log(lastMsg);
       this.setState({ user: auth.currentUser }, () => this.appendResponses(lastMsg));
       this.setState({ messages: snap.val() });
       //   console.log(snap.val());
@@ -53,31 +53,50 @@ class Chat extends Component {
   // }
   appendResponses(msgObj) {
     // this function is being called before user is fully mounted into State
-    console.log(this.state.user);
-    if (msgObj && msgObj.prompt !== undefined) {
+    if (msgObj && msgObj.prompt) {
       if (msgObj.sender === this.state.user.uid || msgObj.prompt.length === 0) {
        return;
       }
-      let prompts = msgObj.prompt.filter(p => !p.includes("Double")); //array of prompts from prev message
-      console.log(prompts);
+      let prompt = msgObj.prompt.filter(p => !p.includes("Double"))[0]; //array of prompts from prev message
       //Do some logic on prompts to call up appropriate Responses, and append to this.state.activePrompts
-      for (let p of prompts) {
-        console.log(p);
-        let ourPrompt;
-        for (let lookup of PROMPTS) {
-          if (lookup.key === p) {
-            ourPrompt = lookup;
+      let ourPrompt;
+      let ourResponse;
+      for (let lookup of PROMPTS) {
+        if (lookup.key === prompt) {
+          ourPrompt = lookup;
+          break;
+        } else if (lookup.response) {
+          if (lookup.response.key === prompt) {
+            ourResponse = lookup;
             break;
           }
         }
-        let currPrompts = this.state.activePrompts;
-        if (ourPrompt) {
-          if (ourPrompt.response) {
-            currPrompts.push(ourPrompt.response.key);
-            this.setState({ activePrompts: currPrompts });
-          }
-        }   
       }
+      let currPrompts = this.state.activePrompts;
+      let qPrompts = this.state.queuedPrompts;
+      let fPrompts = this.state.finishedPrompts;
+      if (ourPrompt) {
+        if (ourPrompt.response) {
+          if (fPrompts.includes(prompt)) {
+            currPrompts.push(ourPrompt.response.key);
+          } else {
+            qPrompts.push(ourPrompt.response.key);
+          }
+        }
+      }
+      if (ourResponse) {
+        if (qPrompts.length !== 0) {
+          currPrompts.push(qPrompts[0]);
+          qPrompts.splice(0, 1);
+        }
+        console.log(currPrompts)
+        console.log(this.state.activePrompts)
+      }
+      fPrompts.push(prompt + "Partner");
+      this.setState({ activePrompts: currPrompts });
+      this.setState({ queuedPrompts: qPrompts});
+      this.setState({ finishedPrompts: fPrompts});
+      console.log(this.state.finishedPrompts);
     }
   }
 
@@ -86,10 +105,7 @@ class Chat extends Component {
     var textarea = document.getElementById("chatText");
     if (button.tagName === "B") {
       button = button.parentElement;
-    } /*else if (button.tagName === "INPUT") {
-      button = button.parentElement.parentElement;
-    }*/
-    console.log(button.title)
+    }
     if (button.classList.contains("cardButton")) {
       if (button.title === "custom") {
         this.exitIndexCard(e);
@@ -126,7 +142,6 @@ class Chat extends Component {
     }
     var card = null;
     var parent = e.target.parentElement;
-    console.log(e.target.parentElement.parentElement)
     if (parent.classList.contains("indexCard")) {
       card = parent;
     } else if (parent.parentElement.classList.contains("indexCard")) {
@@ -140,7 +155,7 @@ class Chat extends Component {
     var prompt = card.id.substr(0, card.id.length - 4);
     for (var i = 0; i < this.state.prompts.length; i++) {
       var double = this.state.prompts[i].double;
-      if (double !== undefined) {
+      if (double) {
         var currPrompts = this.state.activePrompts;
         if (double.key === prompt + "Double" && !currPrompts.includes(double.key)) {
           currPrompts.push(double.key);
@@ -170,7 +185,7 @@ class Chat extends Component {
     if (selectedButtons.length > 0) {
       var prompt =
         selectedButtons[0].parentElement.parentElement.parentElement
-          .parentElement;
+            .parentElement;
       prompt = prompt.id.substr(0, prompt.id.length - 4);
       var string = "";
       var tail = undefined;
@@ -184,15 +199,8 @@ class Chat extends Component {
       }
       for (var j = 0; j < selectedButtons.length; j++) {
         var value = selectedButtons[j].value;
-        /*if (value === "") {
-          if (selectedButtons[j].childNodes[4] !== undefined) {
-            value = selectedButtons[j].childNodes[4].childNodes[0].value + " ";
-          } else {
-            value = selectedButtons[j].childNodes[2].childNodes[0].value + " ";
-          }
-        }*/
         if (selectedButtons.length === 1) {
-          if (tail !== undefined) {
+          if (tail) {
             if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
               string += value.substr(0, value.length - 1) + ". ";
             } else {
@@ -205,7 +213,7 @@ class Chat extends Component {
           if (j === 0) {
             string += value + "and ";
           } else {
-            if (tail !== undefined) {
+            if (tail) {
               if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
                 string += value.substr(0, value.length - 1) + ". ";
               } else {
@@ -221,7 +229,7 @@ class Chat extends Component {
           } else if (j === selectedButtons.length - 2) {
             string += value.substring(0, value.length - 1) + " and ";
           } else {
-            if (tail !== undefined) {
+            if (tail) {
               if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
                 string += value.substr(0, value.length - 1) + ". ";
               } else {
@@ -233,8 +241,8 @@ class Chat extends Component {
           }
         }
       }
-      if (tail !== undefined) {
-        if (tailPlural !== undefined) {
+      if (tail) {
+        if (tailPlural) {
           if (selectedButtons.length === 1) {
             string += tail;
           } else {
@@ -259,6 +267,7 @@ class Chat extends Component {
   sendMessage = event => {
     var textarea = document.getElementById("chatText");
     if (event.which === 13 && event.shiftKey === false) {
+      console.log(this.state.activePrompts);
       event.preventDefault();
       var msg = textarea.value;
       if (msg !== "") {
@@ -266,7 +275,11 @@ class Chat extends Component {
         // to progress to next prompt
         var prompts = this.state.prompts;
         var activePrompts = this.state.activePrompts;
-        var finishedPrompts = this.state.finishedPrompts;
+        var queuedPrompts = this.state.queuedPrompts;
+        let finishedPrompts = this.state.finishedPrompts.slice();
+        finishedPrompts.push("hello");
+        console.log(finishedPrompts);
+        console.log(this.state.finishedPrompts);
         for (var i = 0; i < this.state.pushedButtons.length; i++) {
           var id = this.state.pushedButtons[i];
           for (var j = 0; j < prompts.length; j++) {
@@ -275,28 +288,38 @@ class Chat extends Component {
             var double = prompt.double;
             if (prompt.key === id) {
               finishedPrompts.push(prompt.key);
-              activePrompts.splice(activePrompts.indexOf(prompt.key), 1);
-              if (response !== undefined) {
-                console.log(response.key);
-              }
-              if (double !== undefined) {
+              activePrompts.splice(0, 1);
+              console.log(activePrompts)
+              console.log(this.state.activePrompts)
+              if (double) {
                 if (!finishedPrompts.includes(double.key)) {
                   finishedPrompts.push(double.key);
-                  activePrompts.splice(activePrompts.indexOf(double.key), 1);
+                  activePrompts.splice(0, 1);
                 }
               }
               // edge case that does not execute for the last prompt
               if (j !== prompts.length - 1) {
-                activePrompts.push(prompts[j + 1].key);
+                if (!response) {
+                  activePrompts.push(prompts[j + 1].key);
+                } else {
+                  activePrompts.push(queuedPrompts[0]);
+                  queuedPrompts.splice(0, 1);
+                }
               }
             }
-            if (prompt.response !== undefined) {
+            if (prompt.response) {
               if (prompt.response.key === id) {
                 finishedPrompts.push(id);
                 activePrompts.splice(activePrompts.indexOf(id), 1);
+                if (!finishedPrompts.includes(id + "Partner")) {
+                  queuedPrompts.push(prompts[j + 1].key);
+                } else {
+                  activePrompts.push(prompts[j + 1].key);
+                }
               }
             }
-            if (double !== undefined) {
+            /*
+            if (double) {
               if (double.key === id) {
                 if (!finishedPrompts.includes(double.key)) {
                   if (!finishedPrompts.includes(prompt.key)) {
@@ -310,7 +333,7 @@ class Chat extends Component {
                   activePrompts.splice(activePrompts.indexOf(double.key), 1);
                 }
               }
-            }
+            }*/
           }
         }
         db.postMsg(this.state.convoId, {
@@ -320,6 +343,7 @@ class Chat extends Component {
           senderName: this.state.user.displayName,
           time: Date.now()
         });
+        this.setState({ selectedButtons: [] });
         this.setState({ pushedButtons: [] });
         textarea.value = "";
       }

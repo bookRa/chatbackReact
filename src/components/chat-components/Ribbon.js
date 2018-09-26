@@ -30,7 +30,7 @@ const ribbon = (props) => {
 						/>
 					);
 				}
-				if (prompts[j].response !== undefined) {
+				if (prompts[j].response) {
 					if (prompts[j].response.key === activePrompt) {
 						promptContainers.push(
 							<RibbonButton
@@ -50,7 +50,7 @@ const ribbon = (props) => {
 						);
 					}
 				}
-				if (prompts[j].double !== undefined) {
+				if (prompts[j].double) {
 					if (prompts[j].double.key === activePrompt) {
 						promptContainers.push(
 							<RibbonButton

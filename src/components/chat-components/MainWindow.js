@@ -32,7 +32,7 @@ const mainWindow = props => {
                   time={props.messages[key].time}
                   username={props.messages[key].senderName}
                   message={props.messages[key].msg}
-                  key={key} 
+                  key={key}
                   class="partnerMessage">
                 </ChatBubble>
               );
