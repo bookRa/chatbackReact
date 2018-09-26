@@ -276,10 +276,8 @@ class Chat extends Component {
         var prompts = this.state.prompts;
         var activePrompts = this.state.activePrompts;
         var queuedPrompts = this.state.queuedPrompts;
-        let finishedPrompts = this.state.finishedPrompts.slice();
-        finishedPrompts.push("hello");
-        console.log(finishedPrompts);
-        console.log(this.state.finishedPrompts);
+        //let finishedPrompts = this.state.finishedPrompts.slice();
+        finishedPrompts = this.state.finishedPrompts;
         for (var i = 0; i < this.state.pushedButtons.length; i++) {
           var id = this.state.pushedButtons[i];
           for (var j = 0; j < prompts.length; j++) {
