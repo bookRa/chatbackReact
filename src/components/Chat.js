@@ -16,7 +16,6 @@ class Chat extends Component {
     // console.log(props);
     let myConvId = props.location.state.convoId;
     this.state = {
-      prompts: PROMPTS,
       activePrompts: ["concerns"],
       queuedPrompts: [],
       finishedPrompts: [],
@@ -59,50 +58,49 @@ class Chat extends Component {
       }
       let prompt = msgObj.prompt.filter(p => !p.includes("Double"))[0]; //array of prompts from prev message
       //Do some logic on prompts to call up appropriate Responses, and append to this.state.activePrompts
-      let ourPrompt;
-      let ourResponse;
-      for (let lookup of PROMPTS) {
-        if (lookup.key === prompt) {
-          ourPrompt = lookup;
-          break;
-        } else if (lookup.response) {
-          if (lookup.response.key === prompt) {
-            ourResponse = lookup;
+      if (prompt) {
+        let ourPrompt;
+        let ourResponse;
+        for (let lookup of PROMPTS) {
+          if (lookup.key === prompt) {
+            ourPrompt = lookup;
             break;
+          } else if (lookup.response) {
+            if (lookup.response.key === prompt) {
+              ourResponse = lookup;
+              break;
+            }
           }
         }
-      }
-      let currPrompts = this.state.activePrompts;
-      let qPrompts = this.state.queuedPrompts;
-      let fPrompts = this.state.finishedPrompts;
-      if (ourPrompt) {
-        if (ourPrompt.response) {
-          if (fPrompts.includes(prompt)) {
-            currPrompts.push(ourPrompt.response.key);
-          } else {
-            qPrompts.push(ourPrompt.response.key);
+        let currPrompts = this.state.activePrompts.slice();
+        let qPrompts = this.state.queuedPrompts.slice();
+        let fPrompts = this.state.finishedPrompts.slice();
+        if (ourPrompt) {
+          if (ourPrompt.response) {
+            if (fPrompts.includes(prompt)) {
+              currPrompts.push(ourPrompt.response.key);
+            } else {
+              qPrompts.push(ourPrompt.response.key);
+            }
           }
         }
-      }
-      if (ourResponse) {
-        if (qPrompts.length !== 0) {
-          currPrompts.push(qPrompts[0]);
-          qPrompts.splice(0, 1);
+        if (ourResponse) {
+          if (qPrompts.length !== 0) {
+            currPrompts.push(qPrompts[0]);
+            qPrompts.splice(0, 1);
+          }
         }
-        console.log(currPrompts)
-        console.log(this.state.activePrompts)
+        fPrompts.push(prompt + "Partner");
+        this.setState({ activePrompts: currPrompts });
+        this.setState({ queuedPrompts: qPrompts });
+        this.setState({ finishedPrompts: fPrompts });
       }
-      fPrompts.push(prompt + "Partner");
-      this.setState({ activePrompts: currPrompts });
-      this.setState({ queuedPrompts: qPrompts});
-      this.setState({ finishedPrompts: fPrompts});
-      console.log(this.state.finishedPrompts);
     }
   }
 
   addText(e) {
-    var button = e.target;
-    var textarea = document.getElementById("chatText");
+    let button = e.target;
+    let textarea = document.getElementById("chatText");
     if (button.tagName === "B") {
       button = button.parentElement;
     }
@@ -110,10 +108,10 @@ class Chat extends Component {
       if (button.title === "custom") {
         this.exitIndexCard(e);
       } else {
-        var currSelected = this.state.selectedButtons;
+        let currSelected = this.state.selectedButtons.slice();
         if (button.classList.contains("pressed")) {
           button.classList.remove("pressed");
-          var index = this.state.selectedButtons.indexOf(button);
+          let index = this.state.selectedButtons.indexOf(button);
           currSelected.splice(index, 1);
         } else {
           button.classList.add("pressed");
@@ -122,197 +120,191 @@ class Chat extends Component {
         this.setState({ selectedButtons: currSelected });
       }
     } else {
-      var card = document.getElementById(button.id + "Card");
+      let card = document.getElementById(button.id + "Card");
       if (card.classList.contains("hidden")) {
         card.classList.remove("hidden");
       }
       button.classList.add("hidden");
-      var currPushed = this.state.pushedButtons;
+      let currPushed = this.state.pushedButtons.slice();
       currPushed.push(button.id);
       this.setState({ pushedButtons: currPushed });
       textarea.value += button.value;
     }
   }
 
-  exitIndexCard(e) {
-    var selectedButtons = document.querySelectorAll(".pressed");
-    for (var i = 0; i < selectedButtons.length; i++) {
-      var button = selectedButtons[i];
-      button.classList.remove("pressed");
-    }
-    var card = null;
-    var parent = e.target.parentElement;
-    if (parent.classList.contains("indexCard")) {
-      card = parent;
-    } else if (parent.parentElement.classList.contains("indexCard")) {
-      card = parent.parentElement;
-    } else if (parent.parentElement.parentElement.classList.contains("indexCard")) {
-      card = parent.parentElement.parentElement;
-    } else {
-      card = parent.parentElement.parentElement.parentElement;
-    }
-    card.classList.add("hidden");
-    var prompt = card.id.substr(0, card.id.length - 4);
-    for (var i = 0; i < this.state.prompts.length; i++) {
-      var double = this.state.prompts[i].double;
-      if (double) {
-        var currPrompts = this.state.activePrompts;
-        if (double.key === prompt + "Double" && !currPrompts.includes(double.key)) {
-          currPrompts.push(double.key);
-        }
-        this.setState({ activePrompts : currPrompts});
-      }
-    }
-    var textarea = document.getElementById("chatText");
-    textarea.focus();
-    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+  exitIndexCard() {
+    this.setState({ selectedButtons: [] });
+    this.hideCards();
+    this.focusText();
   }
 
-  hideCard() {
-    var cards = document.querySelectorAll(".indexCard");
-    for (var i = 0; i < cards.length; i++) {
-      var card = cards[i];
+  hideCards() {
+    let selectedButtons = document.querySelectorAll(".pressed");
+    for (let i = 0; i < selectedButtons.length; i++) {
+      let button = selectedButtons[i];
+      button.classList.remove("pressed");
+    }
+    let cards = document.querySelectorAll(".indexCard");
+    for (let i = 0; i < cards.length; i++) {
+      let card = cards[i];
       if (!card.classList.contains("hidden")) {
         card.classList.add("hidden");
       }
     }
   }
 
+  focusText() {
+    let textarea = document.getElementById("chatText");
+    textarea.focus();
+    textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+  }
+
   submitIndexCard(e) {
-    this.exitIndexCard(e);
-    var textarea = document.getElementById("chatText");
-    var selectedButtons = this.state.selectedButtons;
-    if (selectedButtons.length > 0) {
-      var prompt =
-        selectedButtons[0].parentElement.parentElement.parentElement
-            .parentElement;
-      prompt = prompt.id.substr(0, prompt.id.length - 4);
-      var string = "";
-      var tail = undefined;
-      var tailPlural = undefined;
-      for (var i = 0; i < this.state.prompts.length; i++) {
-        var key = this.state.prompts[i].key;
-        if (key === prompt) {
-          tail = this.state.prompts[i].mainBtn.tail;
-          tailPlural = this.state.prompts[i].mainBtn.tailPlural;
-        }
-      }
-      for (var j = 0; j < selectedButtons.length; j++) {
-        var value = selectedButtons[j].value;
-        if (selectedButtons.length === 1) {
-          if (tail) {
-            if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
-              string += value.substr(0, value.length - 1) + ". ";
-            } else {
-              string += value;
-            }
-          } else {
-            string += value;
-          }
-        } else if (selectedButtons.length === 2) {
-          if (j === 0) {
-            string += value + "and ";
-          } else {
-            if (tail) {
-              if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
-                string += value.substr(0, value.length - 1) + ". ";
-              } else {
-                string += value;
-              }
-            } else {
-              string += value;
-            }
-          }
-        } else {
-          if (j < selectedButtons.length - 2) {
-            string += value.substring(0, value.length - 1) + ", ";
-          } else if (j === selectedButtons.length - 2) {
-            string += value.substring(0, value.length - 1) + " and ";
-          } else {
-            if (tail) {
-              if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
-                string += value.substr(0, value.length - 1) + ". ";
-              } else {
-                string += value;
-              }
-            } else {
-              string += value;
-            }
+    let prompt = this.state.pushedButtons[this.state.pushedButtons.length - 1];
+    let textarea = document.getElementById("chatText");
+    let selectedButtons = this.state.selectedButtons.slice();
+    this.hideCards();
+    this.focusText();
+    console.log("prompt: " + prompt);
+    if (prompt) {
+      for (let i = 0; i < PROMPTS.length; i++) {
+        let double = PROMPTS[i].double;
+        if (double) {
+          let currPrompts = this.state.activePrompts.slice();
+          if (double.key === prompt + "Double" && !currPrompts.includes(double.key)) {
+            currPrompts.push(double.key);
+            this.setState({ activePrompts : currPrompts });
+            break;
           }
         }
       }
-      if (tail) {
-        if (tailPlural) {
+      if (selectedButtons.length > 0) {
+        let string = "";
+        let tail = undefined;
+        let tailPlural = undefined;
+        for (let i = 0; i < PROMPTS.length; i++) {
+          let key = PROMPTS[i].key;
+          if (key === prompt) {
+            tail = PROMPTS[i].mainBtn.tail;
+            tailPlural = PROMPTS[i].mainBtn.tailPlural;
+          }
+        }
+        for (let j = 0; j < selectedButtons.length; j++) {
+          let value = selectedButtons[j].value;
           if (selectedButtons.length === 1) {
-            string += tail;
+            if (tail) {
+              if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
+                string += value.substr(0, value.length - 1) + ". ";
+              } else {
+                string += value;
+              }
+            } else {
+              string += value;
+            }
+          } else if (selectedButtons.length === 2) {
+            if (j === 0) {
+              string += value + "and ";
+            } else {
+              if (tail) {
+                if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
+                  string += value.substr(0, value.length - 1) + ". ";
+                } else {
+                  string += value;
+                }
+              } else {
+                string += value;
+              }
+            }
           } else {
-            string += tailPlural;
+            if (j < selectedButtons.length - 2) {
+              string += value.substring(0, value.length - 1) + ", ";
+            } else if (j === selectedButtons.length - 2) {
+              string += value.substring(0, value.length - 1) + " and ";
+            } else {
+              if (tail) {
+                if (tail.charAt(0) === tail.charAt(0).toUpperCase()) {
+                  string += value.substr(0, value.length - 1) + ". ";
+                } else {
+                  string += value;
+                }
+              } else {
+                string += value;
+              }
+            }
           }
-        } else {
-          string += tail;
         }
+        if (tail) {
+          if (tailPlural) {
+            if (selectedButtons.length === 1) {
+              string += tail;
+            } else {
+              string += tailPlural;
+            }
+          } else {
+            string += tail;
+          }
+        }
+        if (textarea.value === "" || textarea.value.slice(-2) === ". ") {
+          textarea.value += string.charAt(0).toUpperCase() + string.slice(1);
+        } else if (textarea.value.slice(-1) === ".") {
+          textarea.value +=
+            " " + string.charAt(0).toUpperCase() + string.slice(1);
+        } else {
+          textarea.value += string;
+        }
+        this.setState({ selectedButtons: [] });
       }
-      if (textarea.value === "" || textarea.value.slice(-2) === ". ") {
-        textarea.value += string.charAt(0).toUpperCase() + string.slice(1);
-      } else if (textarea.value.slice(-1) === ".") {
-        textarea.value +=
-          " " + string.charAt(0).toUpperCase() + string.slice(1);
-      } else {
-        textarea.value += string;
-      }
-      this.setState({ selectedButtons: [] });
     }
   }
 
   sendMessage = event => {
-    var textarea = document.getElementById("chatText");
+    let textarea = document.getElementById("chatText");
     if (event.which === 13 && event.shiftKey === false) {
       console.log(this.state.activePrompts);
       event.preventDefault();
-      var msg = textarea.value;
+      let msg = textarea.value;
       if (msg !== "") {
         // checks if a prompt-button has been clicked then updates activePrompts/finishedPrompts
         // to progress to next prompt
-        var prompts = this.state.prompts;
-        var activePrompts = this.state.activePrompts;
-        var queuedPrompts = this.state.queuedPrompts;
+        let currPrompts = this.state.activePrompts.slice();
+        let qPrompts = this.state.queuedPrompts.slice();
         //let finishedPrompts = this.state.finishedPrompts.slice();
-        let finishedPrompts = this.state.finishedPrompts;
-        for (var i = 0; i < this.state.pushedButtons.length; i++) {
-          var id = this.state.pushedButtons[i];
-          for (var j = 0; j < prompts.length; j++) {
-            var prompt = prompts[j];
-            var response = prompt.response;
-            var double = prompt.double;
+        let fPrompts = this.state.finishedPrompts.slice();
+        for (let i = 0; i < this.state.pushedButtons.length; i++) {
+          let id = this.state.pushedButtons[i];
+          for (let j = 0; j < PROMPTS.length; j++) {
+            let prompt = PROMPTS[j];
+            let response = prompt.response;
+            let double = prompt.double;
             if (prompt.key === id) {
-              finishedPrompts.push(prompt.key);
-              activePrompts.splice(0, 1);
-              console.log(activePrompts)
-              console.log(this.state.activePrompts)
+              fPrompts.push(prompt.key);
+              currPrompts.splice(0, 1);
               if (double) {
-                if (!finishedPrompts.includes(double.key)) {
-                  finishedPrompts.push(double.key);
-                  activePrompts.splice(0, 1);
+                if (!fPrompts.includes(double.key)) {
+                  fPrompts.push(double.key);
+                  currPrompts.splice(0, 1);
                 }
               }
               // edge case that does not execute for the last prompt
-              if (j !== prompts.length - 1) {
+              if (j !== PROMPTS.length - 1) {
                 if (!response) {
-                  activePrompts.push(prompts[j + 1].key);
+                  currPrompts.push(PROMPTS[j + 1].key);
                 } else {
-                  activePrompts.push(queuedPrompts[0]);
-                  queuedPrompts.splice(0, 1);
+                  if (qPrompts.length !== 0) {
+                    currPrompts.push(qPrompts[0]);
+                    qPrompts.splice(0, 1);
+                  }
                 }
               }
             }
             if (prompt.response) {
               if (prompt.response.key === id) {
-                finishedPrompts.push(id);
-                activePrompts.splice(activePrompts.indexOf(id), 1);
-                if (!finishedPrompts.includes(id + "Partner")) {
-                  queuedPrompts.push(prompts[j + 1].key);
+                fPrompts.push(id);
+                currPrompts.splice(0, 1);
+                if (!fPrompts.includes(id + "Partner")) {
+                  qPrompts.push(PROMPTS[j + 1].key);
                 } else {
-                  activePrompts.push(prompts[j + 1].key);
+                  currPrompts.push(PROMPTS[j + 1].key);
                 }
               }
             }
@@ -341,14 +333,17 @@ class Chat extends Component {
           senderName: this.state.user.displayName,
           time: Date.now()
         });
+        this.setState({ activePrompts: currPrompts });
+        this.setState({ queuedPrompts: qPrompts });
+        this.setState({ finishedPrompts: fPrompts});
         this.setState({ selectedButtons: [] });
         this.setState({ pushedButtons: [] });
         textarea.value = "";
       }
-    } else if (event.which === 8 || event.which === 46) {
-      var buttons = document.querySelectorAll(".ribbonButton.hidden");
-      for (var i = 0; i < buttons.length; i++) {
-        var button = buttons[i];
+    } else if (event.which === 8 || event.which === 46 && this.state.pushedButtons.length > 0) {
+      let buttons = document.querySelectorAll(".ribbonButton.hidden");
+      for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i];
         button.classList.remove("hidden");
       }
       this.setState({ pushedButtons: [] });
@@ -366,13 +361,13 @@ class Chat extends Component {
               <MainWindow
                 partnerName={this.state.partner}
                 messages={this.state.messages}
-                prompts={this.state.prompts}
+                prompts={PROMPTS}
                 activePrompts={this.state.activePrompts}
                 finishedPrompts={this.state.finishedPrompts}
                 clicked={e => this.addText(e)}
                 submit={e => this.submitIndexCard(e)}
-                exit={e => this.exitIndexCard(e)}
-                focus={() => this.hideCard()}
+                exit={() => this.exitIndexCard()}
+                focus={() => this.hideCards()}
                 enter={e => this.sendMessage(e)}
                 user={this.state.user}
               />
