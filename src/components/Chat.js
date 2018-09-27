@@ -82,6 +82,11 @@ class Chat extends Component {
             } else {
               qPrompts.push(ourPrompt.response.key);
             }
+          } else {
+            if (qPrompts.length !== 0) {
+              currPrompts.push(qPrompts[0]);
+              qPrompts.splice(0, 1);
+            }
           }
         }
         if (ourResponse) {
@@ -91,6 +96,7 @@ class Chat extends Component {
           }
         }
         fPrompts.push(prompt + "Partner");
+        console.log(fPrompts)
         this.setState({ activePrompts: currPrompts });
         this.setState({ queuedPrompts: qPrompts });
         this.setState({ finishedPrompts: fPrompts });
@@ -287,8 +293,10 @@ class Chat extends Component {
               }
               // edge case that does not execute for the last prompt
               if (j !== PROMPTS.length - 1) {
-                if (!response) {
+                if (!response && fPrompts.includes(PROMPTS[j].key + "Partner")) {
                   currPrompts.push(PROMPTS[j + 1].key);
+                } else if (!response) {
+                  qPrompts.push(PROMPTS[j + 1].key);
                 } else {
                   if (qPrompts.length !== 0) {
                     currPrompts.push(qPrompts[0]);
