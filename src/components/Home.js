@@ -24,7 +24,7 @@ const HomePage = ({ match }) => {
             ) : (
               <h2>Hello!</h2>
             )}
-            <h3>This is the "Chat Lobby"</h3>
+            <h3>This is the "Chat Lobby" TESTETESTET</h3>
             <h4>
               We can ask here, "How are you feeling?" and begin connecting you
               to a partner
@@ -36,16 +36,17 @@ const HomePage = ({ match }) => {
           </div>
           <ActiveUserList />
           {/* had to remove the button#enterChat b/c it wasn't linking to the dev_chat. Styling got messed up sorry */}
-            <Link
-              id="enterChatBtn"
-              className="signBtn"
-              to={{
-                pathname: routes.CHAT,
-                state: { convoId: "dev_chat_02" }
-              }}
-            >
-              Enter Dev Chat
-            </Link>{" "}
+            <div>
+              <Link
+                id="enterChatBtn"
+                to={{
+                  pathname: routes.CHAT,
+                  state: { convoId: "dev_chat_02" }
+                }}
+              >
+                Enter Dev Chat
+              </Link>{" "}
+            </div>
           <br />
           <NewConvo userName={authUser.displayName} />
           {/* <SpecificConvo /> //Don't need this now because matching is working!*/}
@@ -141,7 +142,7 @@ class NewConvo extends React.Component {
     }
     return (
       <div>
-        <button id="startConvo" className="signBtn" onClick={this.goToConvo}>
+        <button id="startConvo" className="general-button" onClick={this.goToConvo}>
           Start Convo
         </button>
       </div>

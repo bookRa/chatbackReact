@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import withAuthentication from "./withAuthentication";
-
 import Navigation from "./Navigation";
 import LandingPage from "./Landing";
 import SignUpPage from "./SignUp";

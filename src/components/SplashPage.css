@@ -43,7 +43,6 @@
   margin-bottom: 60px;
 }
 
-
 #splashPage > h1, #color-bar, #splashPage > h2, #splashPage > form, #splashPage > button {
   margin-bottom: 30px;
 }
@@ -56,19 +55,21 @@
   width: 70%;
 }
 
-#subscribe, #enterChatBtn, #startConvo, .form-button {
+.general-button {
   background-color: #264D4D;
   border: transparent;
   border-radius: 20px;
   box-shadow: 0 2px 7px 0 #8D8A84;
   color: #fff;
+  padding-left: 30px;
+  padding-right: 30px;
   height: 40px;
   font-size: 16px;
   min-width: 200px;
   margin-bottom: 20px;
 }
 
-#subscribe:hover, #startConvo:hover, .form-button:hover, #enterChat:hover {
+.general-button:hover {
   cursor: pointer;
   background-color: #3BAF82;
   text-decoration: underline;

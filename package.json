@@ -4,17 +4,12 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
-    "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
     "@fortawesome/free-regular-svg-icons": "^5.1.0-11",
     "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
     "@fortawesome/react-fontawesome": "0.1.0-11",
     "axios": "^0.18.0",
-    "bootstrap": "^4.1.3",
-    "jQuery": "^1.7.4",
-    "jquery": "^3.3.1",
-    "radium": "^0.24.1",
+    "modclean": "^3.0.0-beta.1",
     "react": "^16.4.1",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
@@ -36,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/lockheedmartian/chatbackReact/issues"
   },
-  "homepage": "https://github.com/lockheedmartian/chatbackReact#readme"
+  "homepage": "https://github.com/lockheedmartian/chatbackReact#readme",
+  "devDependencies": {
+    "compression-webpack-plugin": "^2.0.0"
+  }
 }

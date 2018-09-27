@@ -76,7 +76,7 @@ class SignInForm extends Component {
           label="Password"
           req={true}
         />
-        <button className="form-button" disabled={isInvalid} type="submit">
+        <button className="general-button" disabled={isInvalid} type="submit">
           {" "}
           Sign In{" "}
         </button>

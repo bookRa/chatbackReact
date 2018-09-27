@@ -1,24 +1,39 @@
 import React from "react";
 import Ribbon from "./Ribbon";
 import ChatBubble from "./ChatBubble";
+import IndexCard from "./IndexCard";
 //import Slider from "./Slider";
 
-
 const mainWindow = props => {
-  console.log(props.activeResponses);
   return (
     <div className="mainWindow">
       <div id="chatWindow">
+        <IndexCard
+          id="welcome"
+          classes="indexCard"
+          tooltip="Welcome. You and your chat buddy will share your concerns with each other. Use the “I'm concerned” button to begin."
+          exit={props.exit}
+        />
         {props.messages ? (
           Object.keys(props.messages).map((key, index) => {
             if (props.user.displayName === props.messages[key].senderName) {
               return (
-                <ChatBubble time={props.messages[key].time} username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="message">
+                <ChatBubble
+                  time={props.messages[key].time}
+                  username={props.messages[key].senderName}
+                  message={props.messages[key].msg}
+                  key={key}
+                  class="message">
                 </ChatBubble>
               );
             } else {
               return (
-                <ChatBubble time={props.messages[key].time} username={props.messages[key].senderName} message={props.messages[key].msg} key={key} class="partnerMessage">
+                <ChatBubble
+                  time={props.messages[key].time}
+                  username={props.messages[key].senderName}
+                  message={props.messages[key].msg}
+                  key={key}
+                  class="partnerMessage">
                 </ChatBubble>
               );
             }
@@ -33,13 +48,11 @@ const mainWindow = props => {
           prompts={props.prompts}
           activePrompts={props.activePrompts}
           finishedPrompts={props.finishedPrompts}
-          responses={props.responses}
-          activeResponses={props.activeResponses}
-          finishedResponses={props.finishedResponses}
+          exit={props.exit}
           clicked={e => props.clicked(e)}
         />
       </div>
-      <textarea id="chatText" onKeyDown={props.enter} />
+      <textarea id="chatText" onKeyDown={props.enter}  onFocus={props.focus} />
     </div>
   );
 };

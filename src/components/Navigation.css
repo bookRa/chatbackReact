@@ -104,7 +104,7 @@ a.menu-item {
   text-decoration: underline;
 }
 
-.dropdown-divider {
+.divider {
   height: 1px;
-  background-color: #86FFC8;
+  background-color: lightgray;
 }

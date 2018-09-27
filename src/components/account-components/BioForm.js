@@ -131,7 +131,7 @@ export default class BioForm extends React.Component {
             />
           </fieldset>
           <br />
-          <button id="profileUpdate" className="form-button">Update Profile</button>
+          <button id="profileUpdate" className="general-button">Update Profile</button>
         </form>
       </div>
     );

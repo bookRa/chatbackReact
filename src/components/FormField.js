@@ -37,6 +37,7 @@ const formField = (props) => {
 					autoFocus={props.focus}
 					required={props.req}
 					onKeyUp={e => detectPwStrength(e)}
+					aria-label={props.label}
 				/>
       		) : (
         		<input
@@ -45,11 +46,12 @@ const formField = (props) => {
 					type={props.type}
 					autoFocus={props.focus}
 					required={props.req}
+					aria-label={props.label}
 				/>
-      		)}	
+      		)}
+      		<label className="form-label">{props.label}</label>
 			<span className="highlight"></span>
 			<span className="bar"></span>
-			<label className="form-label">{props.label}</label>
 			{props.bar ? (
         		<PwStrength />
       		) : (
