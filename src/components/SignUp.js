@@ -5,7 +5,6 @@ import { SignInLink } from "./SignIn";
 import { users } from "../api";
 import "./App.css";
 import FormField from "./FormField";
-
 import * as routes from "../constants/routes";
 import "../constants/userNames";
 import { fakeNames } from "../constants/userNames";
@@ -14,8 +13,7 @@ const SignUpPage = ({ history }) => {
   return (
     <div className="pageWrapper">
       <h2>
-        Facing troubles together is better, <br /> create an account for chats
-        that actually bring relief{" "}
+        Facing troubles together brings relief.
       </h2>
       <SignUpForm history={history} />
       <SignInLink />
@@ -95,12 +93,12 @@ class SignUpForm extends Component {
           value={username}
           onChange={event => this.setState({ username: event.target.value })}
           label="Choose a Display Name"
-          helper="You can use letters, numbers & symbols"
+          helper="Keep chats anonymous. Avoid your first/last names, birthdate, and other personal info."
           focus={true}
           req={true}
         />
         <button className="general-button" onClick={this.genFakeName}>
-          Or Generate a Random Username!
+          Generate a Random Username!
         </button>
         <FormField
           type="text"
@@ -115,6 +113,7 @@ class SignUpForm extends Component {
           onChange={event => this.setState({ passwordOne: event.target.value })}
           label="Password"
           helper="Use 6 or more characters with a mix of letters, numbers & symbols"
+          eye={true}
           bar={true}
           req={true}
         />
@@ -123,10 +122,21 @@ class SignUpForm extends Component {
           value={passwordTwo}
           onChange={event => this.setState({ passwordTwo: event.target.value })}
           label="Confirm Password"
+          eye={true}
           req={true}
         />
+        <label className="container">          
+          <input type="checkbox" />
+          <span className="checkmark"></span>
+          Agree to <a>Terms and Conditions</a>
+        </label>
+        <label className="container">
+          <input type="checkbox" />
+          <span className="checkmark"></span>
+          I've read the <a>Safety Statement</a>
+        </label>
         <button className="general-button" disabled={isInvalid} type="submit">
-          Sign Up
+          Start Chatting
         </button>
         <h6>{error && <p>{error.message}</p>}</h6>
       </form>

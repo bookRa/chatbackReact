@@ -1,0 +1,281 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"show",
+				"showDropdown"
+			],
+			[
+				"parent",
+				"parentElement"
+			],
+			[
+				"append",
+				"appendResponses"
+			],
+			[
+				"Chat",
+				"ChatBubble"
+			],
+			[
+				"get",
+				"getElementById"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/FormField.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/account-components/Account.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/SignUp.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Navigation.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/SplashPage.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/App.js",
+		"/C/Users/felondafa/Documents/chatbackReactBackup2/package.json",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Home.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/index.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/SplashPage.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Navigation.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Chat.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Chat.js",
+		"/C/Users/felondafa/Documents/chatbackReactBackup2/src/components/Chat.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/constants/prompts.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/MainWindow.js",
+		"/C/Users/felondafa/Documents/chatbackReact/node_modules/express/lib/middleware/init.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/CardButton.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/ButtonContainer.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Ribbon.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/IndexCard.js",
+		"/C/Users/felondafa/Documents/chatbackReact/node_modules/unique-filename/coverage/prettify.css",
+		"/C/Users/felondafa/Documents/chatbackReact/node_modules/webpack-dev-server/client/webpack.config.js",
+		"/C/Users/felondafa/Documents/chatbackReact/node_modules/react-scripts/config/webpack.config.prod.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/RibbonButton.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/account-components/PasswordChange.js",
+		"/C/Users/felondafa/Documents/chatbackReact/package.json",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Home.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Landing.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/Chat.test.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Chat.test.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/index.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/CardButtonInput.js",
+		"/C/Users/felondafa/Downloads/webfontkit-20180905-143942/nimbussanl-boldcondital-demo.html",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/IndexCard.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/SignIn.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/account-components/BioForm.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/account-components/BioForm.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/constants/responses.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/ChatBubble.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Ribbon.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/SearchBar.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/SearchBar",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/SignOut.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/PasswordStrength.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/PasswordStrength.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/App.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/PasswordForget.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/SignOut.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Slider.css",
+		"/D/chatbackVer2/bower_components/index.js",
+		"/D/chatbackVer2/sass/_custom.scss",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/StageHandler.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Slider.js",
+		"/C/Users/felondafa/react-app/src/Ribbon/Ribbon.js",
+		"/C/Users/felondafa/react-app/src/Prompts/Prompts.js",
+		"/C/Users/felondafa/react-app/src/Cockpit/Cockpit.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Navbar.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/MainWindow.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Navbar.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/StageHandler.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/Chat.css",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/SplashPage.css",
+		"/C/Users/felondafa/react-app/src/App.js",
+		"/D/chatbackVer2/index.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage4.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage8.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage1.html",
+		"/D/chatbackVer2/splashpage.html",
+		"/D/chatbackVer2/sass/_customVariables.scss",
+		"/D/chatbackVer2/bower_components/html-pages/stage6.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage9.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage10.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage11.html",
+		"/D/chatbackVer2/bower_components/html-pages/stage13.html",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/chat-components/StageHandler",
+		"/C/Users/felondafa/Documents/chatbackReact/src/constants/routes.js",
+		"/C/Users/felondafa/Documents/chatbackReact/src/components/withAuthentication.js",
+		"/C/Users/felondafa/react-app/src/Ribbon/Ribbon.css",
+		"/C/Users/felondafa/react-app/src/App.css",
+		"/C/Users/felondafa/react-app/src/Cockpit/Cockpit.css",
+		"/C/Users/felondafa/react-app/package.json",
+		"/C/Users/felondafa/react-app/config/webpack.config.prod.js",
+		"/C/Users/felondafa/react-app/config/webpack.config.dev.js",
+		"/C/Users/felondafa/chatback-react/src/Ribbon/Ribbon.css",
+		"/C/Users/felondafa/chatback-react/src/App.css",
+		"/C/Users/felondafa/chatback-react/src/Ribbon/Ribbon.js",
+		"/C/Users/felondafa/chatback-react/src/index.js",
+		"/C/Users/felondafa/chatback-react/src/App.js",
+		"/C/Users/felondafa/chatback-react/package.json",
+		"/C/Users/felondafa/chatback-react/src/Ribbon/Ribbon-button/Ribbon-button.js",
+		"/C/Users/felondafa/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/felondafa/chatback-react/package-lock.json"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "App.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 408.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

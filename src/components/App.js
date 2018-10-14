@@ -11,13 +11,12 @@ import PasswordForgetPage from "./PasswordForget";
 import HomePage from "./Home";
 import { AccountPage } from "./account-components";
 import { Convo } from "./Convo";
-
 import * as routes from "../constants/routes";
 // import { firebase } from "../firebase";
 
 const App = () => (
   <Router>
-    <div>
+    <div id="body">
       <Navigation />
 
       <Route exact path={routes.LANDING} component={() => <LandingPage />} />

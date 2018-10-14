@@ -27,7 +27,8 @@ function enterDropdown(e) {
 }
 
 window.onclick = function(event) {
-  if (!event.target.matches(".hamburger") && event.target.tagName !== "path") {
+  var hamburger = document.querySelector(".hamburger");
+  if (hamburger && !event.target.matches(".hamburger") && event.target.tagName !== "path") {
     var content = document.querySelector(".dropdown-content");
     if (content.classList.contains("show")) {
       content.classList.remove("show");
@@ -39,7 +40,7 @@ const NavigationAuth = props => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img alt="CB logo" className="logo" src="logo-arimo-bold.png" title="CB logo" />
+        <img alt="CB logo" className="logo" src="logo-arimo-bold-2.png" title="CB logo" />
       </Link>
     </div>
     <div className="rightSection">
@@ -72,28 +73,13 @@ const NavigationNonAuth = () => (
   <div className="navBar">
     <div className="leftSection">
       <Link to={routes.LANDING}>
-        <img className="logo" alt="CB logo" title="CB logo" src="logo-arimo-bold.png" />
+        <img className="logo" alt="CB logo" title="CB logo" src="logo-arimo-bold-2.png" />
       </Link>
     </div>
     <div id="rightSection" className="rightSection">
-      <div className="dropdown">
-        <FontAwesomeIcon
-          icon={faBars}
-          className="hamburger"
-          title="menu"
-          tabIndex="0"
-          onClick={showDropdown}
-          onKeyDown={e => enterDropdown(e)}
-        />
-        <div className="dropdown-content">
-          <Link className="menu-item" to={routes.SIGN_IN}>
-            Sign in
-          </Link>
-          <Link className="menu-item" to={routes.SIGN_UP}>
-            Sign up
-          </Link>
-        </div>
-      </div>
+        <Link className="hiddenLink btn-default btn" to={routes.SIGN_IN}>
+          Login
+        </Link>
     </div>
   </div>
 );

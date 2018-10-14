@@ -40,7 +40,8 @@ a:hover {
 }
 
 .logo {
-  height: 70px;
+  height: 4rem;
+  margin-top: 0.25rem;
 }
 
 .leftSection {
@@ -88,7 +89,7 @@ a {
   color: #0275d8;
 }
 
-.dropdown, .hamburger {
+.dropdown, .hamburger, .btn-default {
   float: right;
 }
 
@@ -107,4 +108,26 @@ a.menu-item {
 .divider {
   height: 1px;
   background-color: lightgray;
+}
+
+.btn-default {
+  background-color: #fff;
+  border-color: #adadad;
+  color: #333;
+  font-size: 16px;
+  margin-right: 14px;
+  padding: 0;
+}
+
+.btn-default:hover {
+  background-color: #e6e6e6;
+}
+
+.hiddenLink {
+  font-family: inherit;
+}
+
+.hiddenLink, .hiddenLink:active, .hiddenLink:hover, .hiddenLink:visited {
+  color: #000;
+  text-decoration: none;
 }

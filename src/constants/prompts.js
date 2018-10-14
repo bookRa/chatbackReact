@@ -15,7 +15,7 @@ export const PROMPTS = [
       },
       btns: [
         {key: "I hear...", value: "I hear that "},
-        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "I feel (about your situation)...", value: "I feel (about your situation) "},
         {key: "You're saying...", value: "You're saying that "},
         {key: "I wish...", value: "I wish that "}
       ]
@@ -126,7 +126,7 @@ export const PROMPTS = [
       },
       btns: [
         {key: "I hear...", value: "I hear that "},
-        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "I feel (about your situation)...", value: "I feel (about your situation) "},
         {key: "You're saying...", value: "You're saying that "},
         {key: "I wish...", value: "I wish that "}
       ]
@@ -261,7 +261,7 @@ export const PROMPTS = [
       },
       btns: [
         {key: "I hear...", value: "I hear that "},
-        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "I feel (about your situation)...", value: "I feel (about your situation) "},
         {key: "You're saying...", value: "You're saying that "},
         {key: "I wish...", value: "I wish that "}
       ]
@@ -376,7 +376,7 @@ export const PROMPTS = [
       },
       btns: [
         {key: "I hear...", value: "I hear that "},
-        {key: "I feel (about your situation)...", value: "I feel "},
+        {key: "I feel (about your situation)...", value: "I feel (about your situation) "},
         {key: "You're saying...", value: "You're saying that "},
         {key: "I wish...", value: "I wish that "}
       ]
